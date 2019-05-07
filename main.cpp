@@ -696,7 +696,7 @@ int main() {
                                             if(megtelt == false){
                                                 if(simbesor1 < 99 || simbeoszlop1 < 99){
                                                     
-                                                    if(simbesor1 <= 0 || simbeoszlop1 <= 0){
+                                                    if(simbesor1 < 0 || simbeoszlop1 < 0){
                                                         cout << "Csak -1 iranyba fog lerakodni a lap!\n";
                                                         if(simbesor1 < 0){
                                                             //Lefele toljuk a komplett palyat
@@ -705,6 +705,7 @@ int main() {
                                                                     if(*&lapvaltozo[i][a].elet == true && *&lapvaltozo[i][a].mozgatva == false){
                                                                         for(int s = 0; s<=4; s++){
                                                                             *&lapvaltozo[i+1][a].jel[s] = *&lapvaltozo[i][a].jel[s];
+                                                                            *&lapvaltozo[i][a].jel[s] = 0;
                                                                         }
                                                                         *&lapvaltozo[i+1][a].elet = true;
                                                                         *&lapvaltozo[i+1][a].mozgatva = true;
@@ -729,6 +730,7 @@ int main() {
                                                                     if(*&lapvaltozo[i][a].elet == true && *&lapvaltozo[i][a].mozgatva == false){
                                                                         for(int s = 0; s<=4; s++){
                                                                             *&lapvaltozo[i][a+1].jel[s] = *&lapvaltozo[i][a].jel[s];
+                                                                            *&lapvaltozo[i][a].jel[s] = 0;
                                                                         }
                                                                         *&lapvaltozo[i][a+1].elet = true;
                                                                         *&lapvaltozo[i][a+1].mozgatva = true;
@@ -1386,7 +1388,7 @@ int main() {
                                             if(megtelt == false){
                                                 if(simbesor1 < 99 || simbeoszlop1 < 99){
                                                     
-                                                    if(simbesor1 <= 0 || simbeoszlop1 <= 0){
+                                                    if(simbesor1 < 0 || simbeoszlop1 < 0){
                                                         cout << "Csak -1 iranyba fog lerakodni a lap!\n";
                                                         if(simbesor1 < 0){
                                                             //Lefele toljuk a komplett palyat
@@ -1395,6 +1397,7 @@ int main() {
                                                                     if(*&lapvaltozo[i][a].elet == true && *&lapvaltozo[i][a].mozgatva == false){
                                                                         for(int s = 0; s<=4; s++){
                                                                             *&lapvaltozo[i+1][a].jel[s] = *&lapvaltozo[i][a].jel[s];
+                                                                            *&lapvaltozo[i][a].jel[s] = 0;
                                                                         }
                                                                         *&lapvaltozo[i+1][a].elet = true;
                                                                         *&lapvaltozo[i+1][a].mozgatva = true;
@@ -1419,6 +1422,7 @@ int main() {
                                                                     if(*&lapvaltozo[i][a].elet == true && *&lapvaltozo[i][a].mozgatva == false){
                                                                         for(int s = 0; s<=4; s++){
                                                                             *&lapvaltozo[i][a+1].jel[s] = *&lapvaltozo[i][a].jel[s];
+                                                                            *&lapvaltozo[i][a].jel[s] = 0;
                                                                         }
                                                                         *&lapvaltozo[i][a+1].elet = true;
                                                                         *&lapvaltozo[i][a+1].mozgatva = true;
