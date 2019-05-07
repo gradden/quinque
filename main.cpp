@@ -49,7 +49,7 @@ void vizsgalat(lap* lapvaltozo[]){
         cout << "Mindket jatekos jelolesi szama elfogyott, ezaltal a jatek dontetlen lett!";
     }
     
-    //Függőleges lap és szimbólumvizsgálás
+    //Függőleges lap és szimbólumvizsgálás PLAYER 1NEK!!!!!!
     for(int i=0; i<=99; i++){
         for (int a=0; a<=99; a++) {
             //PLAYER1
@@ -213,6 +213,177 @@ void vizsgalat(lap* lapvaltozo[]){
                             }
                         }else{
                             atlopont1_1 = 0;
+                        }
+                    }
+                }
+                
+            }
+        }
+    }
+    
+    
+    //Függőleges lap és szimbólumvizsgálás PLAYER2NEK!!!!!!
+    for(int i=0; i<=99; i++){
+        for (int a=0; a<=99; a++) {
+            //PLAYER1
+            //Függőleges bal
+            if(*&lapvaltozo[a][i].jel[0] == 2){
+                fuggpontszam2bal +=1;
+                if(fuggpontszam2bal >= 5){
+                    cout << "Nyert a 2. jatekos, fuggoleges szimbolumkirakassal!\n";
+                    jatekvege = 1;
+                }
+            }else{
+                fuggpontszam2bal = 0;
+            }
+            if(*&lapvaltozo[a][i].jel[2] == 2){
+                fuggpontszam2bal +=1;
+                if(fuggpontszam2bal >= 5){
+                    cout << "Nyert a 2. jatekos, fuggoleges szimbolumkirakassal!\n";
+                    jatekvege = 1;
+                }
+            }else{
+                fuggpontszam2bal = 0;
+            }
+            
+            //Függőleges jobb
+            if(*&lapvaltozo[a][i].jel[1] == 2){
+                fuggpontszam2jobb +=1;
+                if(fuggpontszam2jobb >= 5){
+                    cout << "Nyert a 2. jatekos, fuggoleges szimbolumkirakassal!\n";
+                    jatekvege = 1;
+                }
+            }else{
+                fuggpontszam2jobb = 0;
+            }
+            if(*&lapvaltozo[a][i].jel[3] == 2){
+                fuggpontszam2jobb +=1;
+                if(fuggpontszam2jobb >= 5){
+                    cout << "Nyert a 2. jatekos, fuggoleges szimbolumkirakassal!\n";
+                    jatekvege = 1;
+                }
+            }else{
+                fuggpontszam2jobb = 0;
+            }
+            
+            //Vízszintes fent
+            if(*&lapvaltozo[i][a].jel[0] == 2){
+                vizpontszam2fent +=1;
+                if(vizpontszam2fent >= 5){
+                    cout << "Nyert a 2. jatekos, vizszintes szimbolumkirakassal!\n";
+                    jatekvege = 1;
+                }
+            }else{
+                vizpontszam2fent = 0;
+            }
+            if(*&lapvaltozo[i][a].jel[1] == 2){
+                vizpontszam2fent +=1;
+                if(vizpontszam2fent >= 5){
+                    cout << "Nyert a 2. jatekos, vizszintes szimbolumkirakassal!\n";
+                    jatekvege = 1;
+                }
+            }else{
+                vizpontszam2fent = 0;
+            }
+            
+            //Vízszintes lent
+            if(*&lapvaltozo[i][a].jel[2] == 2){
+                vizpontszam2lent +=1;
+                if(vizpontszam2lent >= 5){
+                    cout << "Nyert a 2. jatekos, vizszintes szimbolumkirakassal!\n";
+                    jatekvege = 1;
+                }
+            }else{
+                vizpontszam2lent = 0;
+            }
+            if(*&lapvaltozo[i][a].jel[3] == 2){
+                vizpontszam2lent +=1;
+                if(vizpontszam2lent >= 5){
+                    cout << "Nyert a 2. jatekos, vizszintes szimbolumkirakassal!\n";
+                    jatekvege = 1;
+                }
+            }else{
+                vizpontszam2lent = 0;
+            }
+        }
+    }
+    
+    //Átlós vizsgálat
+    for(int a = 0; a<=99; a++){
+        for(int i =0; i<=99; i++) {
+            if(*&lapvaltozo[a][i].jel[0] == 2 || *&lapvaltozo[a][i].jel[3] == 2 ){
+                if(pos1ures == false){
+                    atlopont2_1 = 0;
+                }
+                pos1 = i;
+                pos1ures = false;
+                
+                //cout << "pos: "<< pos1 << "\n";
+                for(int j=0; j<=99; j++){
+                    if((j+pos1) < 99 && (j+pos1) < 99){
+                        if(*&lapvaltozo[(j+pos1)][(j+pos1)].jel[0] == 2) {
+                            atlopont2_1 +=1;
+                            if(atlopont2_1 == 5){
+                                if(j==pos1){
+                                    cout << "Nyert a 2. jatekos!";
+                                }
+                                jatekvege = 1;
+                            }
+                        }else{
+                            atlopont2_1 = 0;
+                        }
+                        if(*&lapvaltozo[(j+pos1)][(j+pos1)].jel[3] == 2) {
+                            atlopont2_1 +=1;
+                            if(atlopont2_1 == 5){
+                                if(j==pos1){
+                                    cout << "Nyert a 2. jatekos!";
+                                }
+                                jatekvege = 1;
+                            }
+                        }else{
+                            atlopont2_1 = 0;
+                        }
+                    }
+                }
+                
+            }
+        }
+    }
+    
+    //Átlós vizsgálat
+    for(int a = 0; a<=99; a++){
+        for(int i =0; i<=99; i++) {
+            if(*&lapvaltozo[a][i].jel[1] == 2 || *&lapvaltozo[a][i].jel[2] == 2 ){
+                if(pos1ures == false){
+                    atlopont2_1 = 0;
+                }
+                pos1 = i;
+                pos1ures = false;
+                
+                //cout << "pos: "<< pos1 << "\n";
+                for(int j=0; j<=99; j++){
+                    if((pos1-j) >=0){
+                        if(*&lapvaltozo[j][(pos1-j)].jel[1] == 2) {
+                            atlopont2_1 +=1;
+                            if(atlopont2_1 == 5){
+                                if(j==pos1){
+                                    cout << "Nyert a 2. jatekos!";
+                                }
+                                jatekvege = 1;
+                            }
+                        }else{
+                            atlopont2_1 = 0;
+                        }
+                        if(*&lapvaltozo[j][(pos1-j)].jel[2] == 2) {
+                            atlopont2_1 +=1;
+                            if(atlopont2_1 == 5){
+                                if(j==pos1){
+                                    cout << "Nyert a 2. jatekos!";
+                                }
+                                jatekvege = 1;
+                            }
+                        }else{
+                            atlopont2_1 = 0;
                         }
                     }
                 }
@@ -437,15 +608,15 @@ int main() {
     
     
     
-    lapvaltozo[0][2].elet = true;
-    for (int i = 0; i<=3; i++) {
+    lapvaltozo[0][0].elet = true;
+    /*for (int i = 0; i<=3; i++) {
         lapvaltozo[0][2].jel[i] = 1;
     }
     lapvaltozo[1][1].elet = true;
     for (int i = 0; i<=3; i++) {
         lapvaltozo[1][1].jel[i] = 1;
     }
-    /*lapvaltozo[2][0].elet = true;
+    lapvaltozo[2][0].elet = true;
      lapvaltozo[2][0].jel[0] = 1;
      lapvaltozo[2][0].jel[2] = 1;
      lapvaltozo[3][0].elet = true;
