@@ -902,7 +902,9 @@ int main() {
                                                         if(simbesor1 == 0 || simbeoszlop1 == 0){
                                                             if(*&lapvaltozo[simbesor1][simbeoszlop1].elet == false){
                                                                 if(*&lapvaltozo[simbesor1+1][simbeoszlop1].elet == true ||
-                                                                   *&lapvaltozo[simbesor1][simbeoszlop1+1].elet == true) {
+                                                                   *&lapvaltozo[simbesor1][simbeoszlop1+1].elet == true ||
+                                                                   *&lapvaltozo[simbesor1][simbeoszlop1-1].elet == true ||
+                                                                   *&lapvaltozo[simbesor1-1][simbeoszlop1].elet == true) {
                                                                     
                                                                     *&lapvaltozo[simbesor1][simbeoszlop1].elet = true;
                                                                     szomszedos = true;
@@ -1060,26 +1062,88 @@ int main() {
                                             }while(!cin);
                                             
                                             
+                                            //Szimuláció, hogy összefüggő marad-e a pálya!
+                                            bool szimulacioteszt = true;
+                                            *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
+                                            *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
+                                            if(hovasor1 > 0 && hovaoszlop1 > 0){
+                                                if(hovasor1 < 99 && hovaoszlop1 < 99){
+                                                    for(int i = 0; i<=99; i++){
+                                                        for (int a = 0; a<=99; a++) {
+                                                            if(*&lapvaltozo[i][a].elet == true){
+                                                                if(szimulacioteszt == true){
+                                                                    if(a == 0 && i != 0){
+                                                                        if(*&lapvaltozo[i+1][a].elet == true ||
+                                                                           *&lapvaltozo[i][a+1].elet == true ||
+                                                                           *&lapvaltozo[i-1][a].elet == true) {
+                                                                            szimulacioteszt = true;
+                                                                        }else{
+                                                                            szimulacioteszt = false;
+                                                                        }
+                                                                    }
+                                                                    if(i == 0 && a != 0){
+                                                                        if(*&lapvaltozo[i][a-1].elet == true ||
+                                                                           *&lapvaltozo[i+1][a].elet == true ||
+                                                                           *&lapvaltozo[i][a+1].elet == true) {
+                                                                            szimulacioteszt = true;
+                                                                        }else{
+                                                                            szimulacioteszt = false;
+                                                                        }
+                                                                    }
+                                                                    if(i == 0 && a==0){
+                                                                        if(*&lapvaltozo[i+1][a].elet == true ||
+                                                                           *&lapvaltozo[i][a+1].elet == true) {
+                                                                            szimulacioteszt = true;
+                                                                        }else{
+                                                                            szimulacioteszt = false;
+                                                                        }
+                                                                    }
+                                                                    if(i > 0 && a > 0){
+                                                                        if(*&lapvaltozo[i+1][a].elet == true ||
+                                                                           *&lapvaltozo[i][a-1].elet == true ||
+                                                                           *&lapvaltozo[i-1][a].elet == true ||
+                                                                           *&lapvaltozo[i][a+1].elet == true) {
+                                                                            szimulacioteszt = true;
+                                                                        }else{
+                                                                            szimulacioteszt = false;
+                                                                        }
+                                                                    }
+                                                                }
+
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            *&lapvaltozo[hovasor1][hovaoszlop1].elet = false;
+                                            *&lapvaltozo[mitsor1][mitoszlop1].elet = true;
+                                            
                                             
                                             //HA POZITÍV IRÁNYBA TÖRTÉNIK A MOZGATÁS
                                             if(hovasor1 > 0 && hovaoszlop1 > 0){
                                                 if(hovasor1 < 99 && hovaoszlop1 < 99){
-                                                    if(*&lapvaltozo[hovasor1-1][hovaoszlop1].elet == true ||
-                                                       *&lapvaltozo[hovasor1][hovaoszlop1-1].elet == true ||
-                                                       *&lapvaltozo[hovasor1+1][hovaoszlop1].elet == true ||
-                                                       *&lapvaltozo[hovasor1][hovaoszlop1+1].elet == true) {
-                                                        
-                                                        szomszedos = true;
-                                                        for(int i = 0; i<=3; i++){
-                                                            *&lapvaltozo[hovasor1][hovaoszlop1].jel[i] = *&lapvaltozo[mitsor1][mitoszlop1].jel[i];
-                                                            *&lapvaltozo[mitsor1][mitoszlop1].jel[i] = 0;
+                                                    if(szimulacioteszt == true){
+                                                        if(*&lapvaltozo[hovasor1-1][hovaoszlop1].elet == true ||
+                                                           *&lapvaltozo[hovasor1][hovaoszlop1-1].elet == true ||
+                                                           *&lapvaltozo[hovasor1+1][hovaoszlop1].elet == true ||
+                                                           *&lapvaltozo[hovasor1][hovaoszlop1+1].elet == true) {
+                                                            
+                                                            szomszedos = true;
+                                                            for(int i = 0; i<=3; i++){
+                                                                *&lapvaltozo[hovasor1][hovaoszlop1].jel[i] = *&lapvaltozo[mitsor1][mitoszlop1].jel[i];
+                                                                *&lapvaltozo[mitsor1][mitoszlop1].jel[i] = 0;
+                                                            }
+                                                            *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
+                                                            *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
+                                                            
+                                                        }else{
+                                                            cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n\n";
+                                                            szomszedos = false;
                                                         }
-                                                        *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
-                                                        *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
-                                                        
                                                     }else{
-                                                        cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n\n";
+                                                        cout << "Sajnos igy nem lenne osszefuggo a palya. Probald ujra!\n";
                                                         szomszedos = false;
+                                                        
                                                     }
                                                 }else{
                                                     szomszedos = false;
@@ -1165,72 +1229,132 @@ int main() {
                                                     mitoszlop1 += 1;
                                                     
                                                 }
-                                                //3. 4. 5.
-                                                //-  X  -
-                                                //   -
-                                                //Vizsgálat az X körül (szomszédkeresés), ha stimmel minden, mozgathatjuk
-                                                if(hovasor1 == 0 && hovaoszlop1 != 0){
-                                                    if(*&lapvaltozo[hovasor1][hovaoszlop1+1].elet == true ||
-                                                       *&lapvaltozo[hovasor1+1][hovaoszlop1].elet == true ||
-                                                       *&lapvaltozo[hovasor1][hovaoszlop1-1].elet == true) {
-                                                        
-                                                        szomszedos = true;
-                                                        for(int i = 0; i<=3; i++){
-                                                            *&lapvaltozo[hovasor1][hovaoszlop1].jel[i] = *&lapvaltozo[mitsor1][mitoszlop1].jel[i];
-                                                            *&lapvaltozo[mitsor1][mitoszlop1].jel[i] = 0;
-                                                        }
-                                                        *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
-                                                        *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
-                                                    }else{
-                                                        cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n\n";
-                                                        szomszedos = false;
-                                                    }
-                                                    
-                                                }
                                                 
-                                                //5. |- -
-                                                //6. |X -
-                                                //7. |- -
-                                                //Vizsgálat az X körül (szomszédkeresés), ha stimmel minden, mozgathatjuk
-                                                if(hovaoszlop1 == 0 && hovasor1 != 0){
-                                                    if(*&lapvaltozo[hovasor1][hovaoszlop1+1].elet == true ||
-                                                       *&lapvaltozo[hovasor1+1][hovaoszlop1].elet == true ||
-                                                       *&lapvaltozo[hovasor1-1][hovaoszlop1].elet == true ) {
-                                                        
-                                                        szomszedos = true;
-                                                        for(int i = 0; i<=3; i++){
-                                                            *&lapvaltozo[hovasor1][hovaoszlop1].jel[i] = *&lapvaltozo[mitsor1][mitoszlop1].jel[i];
-                                                            *&lapvaltozo[mitsor1][mitoszlop1].jel[i] = 0;
+                                                
+                                                bool szimulacioteszt = true;
+                                                *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
+                                                *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
+                                                for(int i = 0; i<=99; i++){
+                                                    for (int a = 0; a<=99; a++) {
+                                                        if(*&lapvaltozo[i][a].elet == true){
+                                                            if(szimulacioteszt == true){
+                                                                if(a == 0 && i != 0){
+                                                                    if(*&lapvaltozo[i+1][a].elet == true ||
+                                                                       *&lapvaltozo[i][a+1].elet == true ||
+                                                                       *&lapvaltozo[i-1][a].elet == true) {
+                                                                        szimulacioteszt = true;
+                                                                    }else{
+                                                                        szimulacioteszt = false;
+                                                                    }
+                                                                }
+                                                                if(i == 0 && a != 0){
+                                                                    if(*&lapvaltozo[i][a-1].elet == true ||
+                                                                       *&lapvaltozo[i+1][a].elet == true ||
+                                                                       *&lapvaltozo[i][a+1].elet == true) {
+                                                                        szimulacioteszt = true;
+                                                                    }else{
+                                                                        szimulacioteszt = false;
+                                                                    }
+                                                                }
+                                                                if(i == 0 && a==0){
+                                                                    if(*&lapvaltozo[i+1][a].elet == true ||
+                                                                       *&lapvaltozo[i][a+1].elet == true) {
+                                                                        szimulacioteszt = true;
+                                                                    }else{
+                                                                        szimulacioteszt = false;
+                                                                    }
+                                                                }
+                                                                if(i > 0 && a > 0){
+                                                                    if(*&lapvaltozo[i+1][a].elet == true ||
+                                                                       *&lapvaltozo[i][a-1].elet == true ||
+                                                                       *&lapvaltozo[i-1][a].elet == true ||
+                                                                       *&lapvaltozo[i][a+1].elet == true) {
+                                                                        szimulacioteszt = true;
+                                                                    }else{
+                                                                        szimulacioteszt = false;
+                                                                    }
+                                                                }
+                                                            }
+                                                            
                                                         }
-                                                        *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
-                                                        *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
-                                                    }else{
-                                                        cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n\n";
-                                                        szomszedos = false;
                                                     }
-                                                    
-                                                    
                                                 }
-                                                //    0. 1.
-                                                //0. |X  -
-                                                //1. |-  -
-                                                //
-                                                //Vizsgálat az X körül (szomszédkeresés), ha stimmel minden, mozgathatjuk
-                                                if(hovaoszlop1 == 0 && hovasor1 == 0){
-                                                    if(*&lapvaltozo[hovasor1][hovaoszlop1+1].elet == true ||
-                                                       *&lapvaltozo[hovasor1+1][hovaoszlop1].elet == true) {
-                                                        
-                                                        szomszedos = true;
-                                                        for(int i = 0; i<=3; i++){
-                                                            *&lapvaltozo[hovasor1][hovaoszlop1].jel[i] = *&lapvaltozo[mitsor1][mitoszlop1].jel[i];
-                                                            *&lapvaltozo[mitsor1][mitoszlop1].jel[i] = 0;
+                                                *&lapvaltozo[hovasor1][hovaoszlop1].elet = false;
+                                                *&lapvaltozo[mitsor1][mitoszlop1].elet = true;
+                                                
+                                                
+                                                if(szimulacioteszt == true){
+                                                    //3. 4. 5.
+                                                    //-  X  -
+                                                    //   -
+                                                    //Vizsgálat az X körül (szomszédkeresés), ha stimmel minden, mozgathatjuk
+                                                    if(hovasor1 == 0 && hovaoszlop1 != 0){
+                                                        if(*&lapvaltozo[hovasor1][hovaoszlop1+1].elet == true ||
+                                                           *&lapvaltozo[hovasor1+1][hovaoszlop1].elet == true ||
+                                                           *&lapvaltozo[hovasor1][hovaoszlop1-1].elet == true) {
+                                                            
+                                                            szomszedos = true;
+                                                            for(int i = 0; i<=3; i++){
+                                                                *&lapvaltozo[hovasor1][hovaoszlop1].jel[i] = *&lapvaltozo[mitsor1][mitoszlop1].jel[i];
+                                                                *&lapvaltozo[mitsor1][mitoszlop1].jel[i] = 0;
+                                                            }
+                                                            *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
+                                                            *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
+                                                        }else{
+                                                            cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n\n";
+                                                            szomszedos = false;
                                                         }
-                                                        *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
-                                                        *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
-                                                    }else{
-                                                        cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n\n";
-                                                        szomszedos = false;
+                                                        
                                                     }
+                                                    
+                                                    //5. |- -
+                                                    //6. |X -
+                                                    //7. |- -
+                                                    //Vizsgálat az X körül (szomszédkeresés), ha stimmel minden, mozgathatjuk
+                                                    if(hovaoszlop1 == 0 && hovasor1 != 0){
+                                                        if(*&lapvaltozo[hovasor1][hovaoszlop1+1].elet == true ||
+                                                           *&lapvaltozo[hovasor1+1][hovaoszlop1].elet == true ||
+                                                           *&lapvaltozo[hovasor1-1][hovaoszlop1].elet == true ) {
+                                                            
+                                                            szomszedos = true;
+                                                            for(int i = 0; i<=3; i++){
+                                                                *&lapvaltozo[hovasor1][hovaoszlop1].jel[i] = *&lapvaltozo[mitsor1][mitoszlop1].jel[i];
+                                                                *&lapvaltozo[mitsor1][mitoszlop1].jel[i] = 0;
+                                                            }
+                                                            *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
+                                                            *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
+                                                        }else{
+                                                            cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n\n";
+                                                            szomszedos = false;
+                                                        }
+                                                        
+                                                        
+                                                    }
+                                                    //    0. 1.
+                                                    //0. |X  -
+                                                    //1. |-  -
+                                                    //
+                                                    //Vizsgálat az X körül (szomszédkeresés), ha stimmel minden, mozgathatjuk
+                                                    if(hovaoszlop1 == 0 && hovasor1 == 0){
+                                                        if(*&lapvaltozo[hovasor1][hovaoszlop1+1].elet == true ||
+                                                           *&lapvaltozo[hovasor1+1][hovaoszlop1].elet == true) {
+                                                            
+                                                            szomszedos = true;
+                                                            for(int i = 0; i<=3; i++){
+                                                                *&lapvaltozo[hovasor1][hovaoszlop1].jel[i] = *&lapvaltozo[mitsor1][mitoszlop1].jel[i];
+                                                                *&lapvaltozo[mitsor1][mitoszlop1].jel[i] = 0;
+                                                            }
+                                                            *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
+                                                            *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
+                                                        }else{
+                                                            cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n\n";
+                                                            szomszedos = false;
+                                                        }
+                                                    }
+                                                }else{
+                                                    cout << "Sajnos igy nem lenne osszefuggo a palya. Probald ujra!\n";
+                                                    szomszedos = false;
+                                                    koordinatalap(*&lapvaltozo);
                                                 }
                                                 
                                             }
@@ -1346,27 +1470,89 @@ int main() {
                                             }while(!cin);
                                             
                                             
+                                            //Szimuláció, hogy összefüggő marad-e a pálya!
+                                            bool szimulacioteszt = true;
+                                            *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
+                                            *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
+                                            if(hovasor1 > 0 && hovaoszlop1 > 0){
+                                                if(hovasor1 < 99 && hovaoszlop1 < 99){
+                                                    for(int i = 0; i<=99; i++){
+                                                        for (int a = 0; a<=99; a++) {
+                                                            if(*&lapvaltozo[i][a].elet == true){
+                                                                if(szimulacioteszt == true){
+                                                                    if(a == 0 && i != 0){
+                                                                        if(*&lapvaltozo[i+1][a].elet == true ||
+                                                                           *&lapvaltozo[i][a+1].elet == true ||
+                                                                           *&lapvaltozo[i-1][a].elet == true) {
+                                                                            szimulacioteszt = true;
+                                                                        }else{
+                                                                            szimulacioteszt = false;
+                                                                        }
+                                                                    }
+                                                                    if(i == 0 && a != 0){
+                                                                        if(*&lapvaltozo[i][a-1].elet == true ||
+                                                                           *&lapvaltozo[i+1][a].elet == true ||
+                                                                           *&lapvaltozo[i][a+1].elet == true) {
+                                                                            szimulacioteszt = true;
+                                                                        }else{
+                                                                            szimulacioteszt = false;
+                                                                        }
+                                                                    }
+                                                                    if(i == 0 && a==0){
+                                                                        if(*&lapvaltozo[i+1][a].elet == true ||
+                                                                           *&lapvaltozo[i][a+1].elet == true) {
+                                                                            szimulacioteszt = true;
+                                                                        }else{
+                                                                            szimulacioteszt = false;
+                                                                        }
+                                                                    }
+                                                                    if(i > 0 && a > 0){
+                                                                        if(*&lapvaltozo[i+1][a].elet == true ||
+                                                                           *&lapvaltozo[i][a-1].elet == true ||
+                                                                           *&lapvaltozo[i-1][a].elet == true ||
+                                                                           *&lapvaltozo[i][a+1].elet == true) {
+                                                                            szimulacioteszt = true;
+                                                                        }else{
+                                                                            szimulacioteszt = false;
+                                                                        }
+                                                                    }
+                                                                }
+                                                                
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            *&lapvaltozo[hovasor1][hovaoszlop1].elet = false;
+                                            *&lapvaltozo[mitsor1][mitoszlop1].elet = true;
+                                            
+                                            
                                             //HA POZITÍV IRÁNYBA TÖRTÉNIK A MOZGATÁS
                                             if(hovasor1 > 0 && hovaoszlop1 > 0){
                                                 if(hovasor1 < 99 && hovaoszlop1 < 99){
+                                                    if(szimulacioteszt == true){
                                                     *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
-                                                    if(*&lapvaltozo[hovasor1-1][hovaoszlop1].elet == true ||
-                                                       *&lapvaltozo[hovasor1][hovaoszlop1-1].elet == true ||
-                                                       *&lapvaltozo[hovasor1+1][hovaoszlop1].elet == true ||
-                                                       *&lapvaltozo[hovasor1][hovaoszlop1+1].elet == true) {
-                                                        
-                                                        szomszedos = true;
-                                                        for(int i = 0; i<=3; i++){
-                                                            *&lapvaltozo[hovasor1][hovaoszlop1].jel[i] = *&lapvaltozo[mitsor1][mitoszlop1].jel[i];
-                                                            *&lapvaltozo[mitsor1][mitoszlop1].jel[i] = 0;
+                                                        if(*&lapvaltozo[hovasor1-1][hovaoszlop1].elet == true ||
+                                                           *&lapvaltozo[hovasor1][hovaoszlop1-1].elet == true ||
+                                                           *&lapvaltozo[hovasor1+1][hovaoszlop1].elet == true ||
+                                                           *&lapvaltozo[hovasor1][hovaoszlop1+1].elet == true) {
+                                                            
+                                                            szomszedos = true;
+                                                            for(int i = 0; i<=3; i++){
+                                                                *&lapvaltozo[hovasor1][hovaoszlop1].jel[i] = *&lapvaltozo[mitsor1][mitoszlop1].jel[i];
+                                                                *&lapvaltozo[mitsor1][mitoszlop1].jel[i] = 0;
+                                                            }
+                                                            *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
+                                                            *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
+                                                            
+                                                        }else{
+                                                            cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n\n";
+                                                            szomszedos = false;
+                                                            *&lapvaltozo[mitsor1][mitoszlop1].elet = true;
                                                         }
-                                                        *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
-                                                        *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
-                                                        
                                                     }else{
-                                                        cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n\n";
+                                                        cout << "Sajnos igy nem lenne osszefuggo a palya. Probald ujra!\n";
                                                         szomszedos = false;
-                                                        *&lapvaltozo[mitsor1][mitoszlop1].elet = true;
                                                     }
                                                 }else{
                                                     cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n\n";
@@ -1458,66 +1644,123 @@ int main() {
                                                     
                                                 }
                                                 
-                                                if(hovasor1 == 0 && hovaoszlop1 != 0){
-                                                    *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
-                                                    if(*&lapvaltozo[hovasor1][hovaoszlop1+1].elet == true ||
-                                                       *&lapvaltozo[hovasor1+1][hovaoszlop1].elet == true ||
-                                                       *&lapvaltozo[hovasor1][hovaoszlop1-1].elet == true) {
-                                                        
-                                                        szomszedos = true;
-                                                        for(int i = 0; i<=3; i++){
-                                                            *&lapvaltozo[hovasor1][hovaoszlop1].jel[i] = *&lapvaltozo[mitsor1][mitoszlop1].jel[i];
-                                                            *&lapvaltozo[mitsor1][mitoszlop1].jel[i] = 0;
+                                                bool szimulacioteszt = true;
+                                                *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
+                                                *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
+                                                for(int i = 0; i<=99; i++){
+                                                    for (int a = 0; a<=99; a++) {
+                                                        if(*&lapvaltozo[i][a].elet == true){
+                                                            if(szimulacioteszt == true){
+                                                                if(a == 0 && i != 0){
+                                                                    if(*&lapvaltozo[i+1][a].elet == true ||
+                                                                       *&lapvaltozo[i][a+1].elet == true ||
+                                                                       *&lapvaltozo[i-1][a].elet == true) {
+                                                                        szimulacioteszt = true;
+                                                                    }else{
+                                                                        szimulacioteszt = false;
+                                                                    }
+                                                                }
+                                                                if(i == 0 && a != 0){
+                                                                    if(*&lapvaltozo[i][a-1].elet == true ||
+                                                                       *&lapvaltozo[i+1][a].elet == true ||
+                                                                       *&lapvaltozo[i][a+1].elet == true) {
+                                                                        szimulacioteszt = true;
+                                                                    }else{
+                                                                        szimulacioteszt = false;
+                                                                    }
+                                                                }
+                                                                if(i == 0 && a==0){
+                                                                    if(*&lapvaltozo[i+1][a].elet == true ||
+                                                                       *&lapvaltozo[i][a+1].elet == true) {
+                                                                        szimulacioteszt = true;
+                                                                    }else{
+                                                                        szimulacioteszt = false;
+                                                                    }
+                                                                }
+                                                                if(i > 0 && a > 0){
+                                                                    if(*&lapvaltozo[i+1][a].elet == true ||
+                                                                       *&lapvaltozo[i][a-1].elet == true ||
+                                                                       *&lapvaltozo[i-1][a].elet == true ||
+                                                                       *&lapvaltozo[i][a+1].elet == true) {
+                                                                        szimulacioteszt = true;
+                                                                    }else{
+                                                                        szimulacioteszt = false;
+                                                                    }
+                                                                }
+                                                            }
+                                                            
                                                         }
-                                                        *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
-                                                        *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
-                                                    }else{
-                                                        cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n\n";
-                                                        szomszedos = false;
-                                                        *&lapvaltozo[mitsor1][mitoszlop1].elet = true;
                                                     }
-                                                    
                                                 }
+                                                *&lapvaltozo[hovasor1][hovaoszlop1].elet = false;
+                                                *&lapvaltozo[mitsor1][mitoszlop1].elet = true;
                                                 
-                                                if(hovaoszlop1 == 0 && hovasor1 != 0){
-                                                    *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
-                                                    if(*&lapvaltozo[hovasor1][hovaoszlop1+1].elet == true ||
-                                                       *&lapvaltozo[hovasor1+1][hovaoszlop1].elet == true ||
-                                                       *&lapvaltozo[hovasor1-1][hovaoszlop1].elet == true) {
-                                                        
-                                                        szomszedos = true;
-                                                        for(int i = 0; i<=3; i++){
-                                                            *&lapvaltozo[hovasor1][hovaoszlop1].jel[i] = *&lapvaltozo[mitsor1][mitoszlop1].jel[i];
-                                                            *&lapvaltozo[mitsor1][mitoszlop1].jel[i] = 0;
-                                                        }
-                                                        *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
+                                                if(szimulacioteszt == true){
+                                                    if(hovasor1 == 0 && hovaoszlop1 != 0){
                                                         *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
-                                                    }else{
-                                                        cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n\n";
-                                                        szomszedos = false;
-                                                        *&lapvaltozo[mitsor1][mitoszlop1].elet = true;
+                                                        if(*&lapvaltozo[hovasor1][hovaoszlop1+1].elet == true ||
+                                                           *&lapvaltozo[hovasor1+1][hovaoszlop1].elet == true ||
+                                                           *&lapvaltozo[hovasor1][hovaoszlop1-1].elet == true) {
+                                                            
+                                                            szomszedos = true;
+                                                            for(int i = 0; i<=3; i++){
+                                                                *&lapvaltozo[hovasor1][hovaoszlop1].jel[i] = *&lapvaltozo[mitsor1][mitoszlop1].jel[i];
+                                                                *&lapvaltozo[mitsor1][mitoszlop1].jel[i] = 0;
+                                                            }
+                                                            *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
+                                                            *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
+                                                        }else{
+                                                            cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n\n";
+                                                            szomszedos = false;
+                                                            *&lapvaltozo[mitsor1][mitoszlop1].elet = true;
+                                                        }
+                                                        
                                                     }
                                                     
-                                                    
-                                                }
-                                                
-                                                if(hovaoszlop1 == 0 && hovasor1 == 0){
-                                                    *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
-                                                    if(*&lapvaltozo[hovasor1][hovaoszlop1+1].elet == true ||
-                                                       *&lapvaltozo[hovasor1+1][hovaoszlop1].elet == true) {
-                                                        
-                                                        szomszedos = true;
-                                                        for(int i = 0; i<=3; i++){
-                                                            *&lapvaltozo[hovasor1][hovaoszlop1].jel[i] = *&lapvaltozo[mitsor1][mitoszlop1].jel[i];
-                                                            *&lapvaltozo[mitsor1][mitoszlop1].jel[i] = 0;
-                                                        }
-                                                        *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
+                                                    if(hovaoszlop1 == 0 && hovasor1 != 0){
                                                         *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
-                                                    }else{
-                                                        cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n\n";
-                                                        szomszedos = false;
-                                                        *&lapvaltozo[mitsor1][mitoszlop1].elet = true;
+                                                        if(*&lapvaltozo[hovasor1][hovaoszlop1+1].elet == true ||
+                                                           *&lapvaltozo[hovasor1+1][hovaoszlop1].elet == true ||
+                                                           *&lapvaltozo[hovasor1-1][hovaoszlop1].elet == true) {
+                                                            
+                                                            szomszedos = true;
+                                                            for(int i = 0; i<=3; i++){
+                                                                *&lapvaltozo[hovasor1][hovaoszlop1].jel[i] = *&lapvaltozo[mitsor1][mitoszlop1].jel[i];
+                                                                *&lapvaltozo[mitsor1][mitoszlop1].jel[i] = 0;
+                                                            }
+                                                            *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
+                                                            *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
+                                                        }else{
+                                                            cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n\n";
+                                                            szomszedos = false;
+                                                            *&lapvaltozo[mitsor1][mitoszlop1].elet = true;
+                                                        }
+                                                        
+                                                        
                                                     }
+                                                    
+                                                    if(hovaoszlop1 == 0 && hovasor1 == 0){
+                                                        *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
+                                                        if(*&lapvaltozo[hovasor1][hovaoszlop1+1].elet == true ||
+                                                           *&lapvaltozo[hovasor1+1][hovaoszlop1].elet == true) {
+                                                            
+                                                            szomszedos = true;
+                                                            for(int i = 0; i<=3; i++){
+                                                                *&lapvaltozo[hovasor1][hovaoszlop1].jel[i] = *&lapvaltozo[mitsor1][mitoszlop1].jel[i];
+                                                                *&lapvaltozo[mitsor1][mitoszlop1].jel[i] = 0;
+                                                            }
+                                                            *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
+                                                            *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
+                                                        }else{
+                                                            cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n\n";
+                                                            szomszedos = false;
+                                                            *&lapvaltozo[mitsor1][mitoszlop1].elet = true;
+                                                        }
+                                                    }
+                                                }else{
+                                                    cout << "Sajnos igy nem lenne osszefuggo a palya. Probald ujra!";
+                                                    szomszedos = false;
+                                                    koordinatalap(*&lapvaltozo);
                                                 }
                                                 
                                             }
@@ -1799,7 +2042,9 @@ int main() {
                                                         if(simbesor1 == 0 || simbeoszlop1 == 0){
                                                             if(*&lapvaltozo[simbesor1][simbeoszlop1].elet == false){
                                                                 if(*&lapvaltozo[simbesor1+1][simbeoszlop1].elet == true ||
-                                                                   *&lapvaltozo[simbesor1][simbeoszlop1+1].elet == true) {
+                                                                   *&lapvaltozo[simbesor1][simbeoszlop1+1].elet == true ||
+                                                                   *&lapvaltozo[simbesor1][simbeoszlop1-1].elet == true ||
+                                                                   *&lapvaltozo[simbesor1-1][simbeoszlop1].elet == true) {
                                                                     
                                                                     *&lapvaltozo[simbesor1][simbeoszlop1].elet = true;
                                                                     szomszedos = true;
@@ -1950,27 +2195,89 @@ int main() {
                                             }while(!cin);
                                             
                                             
+                                            //Szimuláció, hogy összefüggő marad-e a pálya!
+                                            bool szimulacioteszt = true;
+                                            *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
+                                            *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
+                                            if(hovasor1 > 0 && hovaoszlop1 > 0){
+                                                if(hovasor1 < 99 && hovaoszlop1 < 99){
+                                                    for(int i = 0; i<=99; i++){
+                                                        for (int a = 0; a<=99; a++) {
+                                                            if(*&lapvaltozo[i][a].elet == true){
+                                                                if(szimulacioteszt == true){
+                                                                    if(a == 0 && i != 0){
+                                                                        if(*&lapvaltozo[i+1][a].elet == true ||
+                                                                           *&lapvaltozo[i][a+1].elet == true ||
+                                                                           *&lapvaltozo[i-1][a].elet == true) {
+                                                                            szimulacioteszt = true;
+                                                                        }else{
+                                                                            szimulacioteszt = false;
+                                                                        }
+                                                                    }
+                                                                    if(i == 0 && a != 0){
+                                                                        if(*&lapvaltozo[i][a-1].elet == true ||
+                                                                           *&lapvaltozo[i+1][a].elet == true ||
+                                                                           *&lapvaltozo[i][a+1].elet == true) {
+                                                                            szimulacioteszt = true;
+                                                                        }else{
+                                                                            szimulacioteszt = false;
+                                                                        }
+                                                                    }
+                                                                    if(i == 0 && a==0){
+                                                                        if(*&lapvaltozo[i+1][a].elet == true ||
+                                                                           *&lapvaltozo[i][a+1].elet == true) {
+                                                                            szimulacioteszt = true;
+                                                                        }else{
+                                                                            szimulacioteszt = false;
+                                                                        }
+                                                                    }
+                                                                    if(i > 0 && a > 0){
+                                                                        if(*&lapvaltozo[i+1][a].elet == true ||
+                                                                           *&lapvaltozo[i][a-1].elet == true ||
+                                                                           *&lapvaltozo[i-1][a].elet == true ||
+                                                                           *&lapvaltozo[i][a+1].elet == true) {
+                                                                            szimulacioteszt = true;
+                                                                        }else{
+                                                                            szimulacioteszt = false;
+                                                                        }
+                                                                    }
+                                                                }
+                                                                
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            *&lapvaltozo[hovasor1][hovaoszlop1].elet = false;
+                                            *&lapvaltozo[mitsor1][mitoszlop1].elet = true;
+                                            
+                                            
                                             //HA POZITÍV IRÁNYBA TÖRTÉNIK A MOZGATÁS
                                             if(hovasor1 > 0 && hovaoszlop1 > 0){
                                                 if(hovasor1 < 99 && hovaoszlop1 < 99){
+                                                    if(szomszedos == true){
                                                     *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
-                                                    if(*&lapvaltozo[hovasor1-1][hovaoszlop1].elet == true ||
-                                                       *&lapvaltozo[hovasor1][hovaoszlop1-1].elet == true ||
-                                                       *&lapvaltozo[hovasor1+1][hovaoszlop1].elet == true ||
-                                                       *&lapvaltozo[hovasor1][hovaoszlop1+1].elet == true) {
-                                                        
-                                                        szomszedos = true;
-                                                        for(int i = 0; i<=3; i++){
-                                                            *&lapvaltozo[hovasor1][hovaoszlop1].jel[i] = *&lapvaltozo[mitsor1][mitoszlop1].jel[i];
-                                                            *&lapvaltozo[mitsor1][mitoszlop1].jel[i] = 0;
+                                                        if(*&lapvaltozo[hovasor1-1][hovaoszlop1].elet == true ||
+                                                           *&lapvaltozo[hovasor1][hovaoszlop1-1].elet == true ||
+                                                           *&lapvaltozo[hovasor1+1][hovaoszlop1].elet == true ||
+                                                           *&lapvaltozo[hovasor1][hovaoszlop1+1].elet == true) {
+                                                            
+                                                            szomszedos = true;
+                                                            for(int i = 0; i<=3; i++){
+                                                                *&lapvaltozo[hovasor1][hovaoszlop1].jel[i] = *&lapvaltozo[mitsor1][mitoszlop1].jel[i];
+                                                                *&lapvaltozo[mitsor1][mitoszlop1].jel[i] = 0;
+                                                            }
+                                                            *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
+                                                            *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
+                                                            
+                                                        }else{
+                                                            cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n\n";
+                                                            szomszedos = false;
+                                                            *&lapvaltozo[mitsor1][mitoszlop1].elet = true;
                                                         }
-                                                        *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
-                                                        *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
-                                                        
                                                     }else{
-                                                        cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n\n";
+                                                        cout << "Sajnos igy nem lenne osszefuggo a palya. Probald ujra!\n";
                                                         szomszedos = false;
-                                                        *&lapvaltozo[mitsor1][mitoszlop1].elet = true;
                                                     }
                                                 }else{
                                                     szomszedos = false;
@@ -2028,78 +2335,136 @@ int main() {
                                                     mitoszlop1 += 1;
                                                     
                                                 }
-                                                //3. 4. 5.
-                                                //-  X  -
-                                                //-  -  -
-                                                //Vizsgálat az X körül (szomszédkeresés), ha stimmel minden, mozgathatjuk
-                                                if(hovasor1 == 0 && hovaoszlop1 != 0){
-                                                    *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
-                                                    if(*&lapvaltozo[hovasor1][hovaoszlop1+1].elet == true ||
-                                                       *&lapvaltozo[hovasor1+1][hovaoszlop1].elet == true ||
-                                                       *&lapvaltozo[hovasor1][hovaoszlop1-1].elet == true) {
-                                                        
-                                                        szomszedos = true;
-                                                        for(int i = 0; i<=3; i++){
-                                                            *&lapvaltozo[hovasor1][hovaoszlop1].jel[i] = *&lapvaltozo[mitsor1][mitoszlop1].jel[i];
-                                                            *&lapvaltozo[mitsor1][mitoszlop1].jel[i] = 0;
-                                                        }
-                                                        *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
-                                                        *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
-                                                    }else{
-                                                        cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n\n";
-                                                        szomszedos = false;
-                                                        *&lapvaltozo[mitsor1][mitoszlop1].elet = true;
-                                                    }
-                                                    
-                                                }
                                                 
-                                                //5. |- -
-                                                //6. |X -
-                                                //7. |- -
-                                                //Vizsgálat az X körül (szomszédkeresés), ha stimmel minden, mozgathatjuk
-                                                if(hovaoszlop1 == 0 && hovasor1 != 0){
-                                                    *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
-                                                    if(*&lapvaltozo[hovasor1][hovaoszlop1+1].elet == true ||
-                                                       *&lapvaltozo[hovasor1+1][hovaoszlop1].elet == true ||
-                                                       *&lapvaltozo[hovasor1-1][hovaoszlop1].elet == true) {
-                                                        
-                                                        szomszedos = true;
-                                                        for(int i = 0; i<=3; i++){
-                                                            *&lapvaltozo[hovasor1][hovaoszlop1].jel[i] = *&lapvaltozo[mitsor1][mitoszlop1].jel[i];
-                                                            *&lapvaltozo[mitsor1][mitoszlop1].jel[i] = 0;
+                                                bool szimulacioteszt = true;
+                                                *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
+                                                *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
+                                                for(int i = 0; i<=99; i++){
+                                                    for (int a = 0; a<=99; a++) {
+                                                        if(*&lapvaltozo[i][a].elet == true){
+                                                            if(szimulacioteszt == true){
+                                                                if(a == 0 && i != 0){
+                                                                    if(*&lapvaltozo[i+1][a].elet == true ||
+                                                                       *&lapvaltozo[i][a+1].elet == true ||
+                                                                       *&lapvaltozo[i-1][a].elet == true) {
+                                                                        szimulacioteszt = true;
+                                                                    }else{
+                                                                        szimulacioteszt = false;
+                                                                    }
+                                                                }
+                                                                if(i == 0 && a != 0){
+                                                                    if(*&lapvaltozo[i][a-1].elet == true ||
+                                                                       *&lapvaltozo[i+1][a].elet == true ||
+                                                                       *&lapvaltozo[i][a+1].elet == true) {
+                                                                        szimulacioteszt = true;
+                                                                    }else{
+                                                                        szimulacioteszt = false;
+                                                                    }
+                                                                }
+                                                                if(i == 0 && a==0){
+                                                                    if(*&lapvaltozo[i+1][a].elet == true ||
+                                                                       *&lapvaltozo[i][a+1].elet == true) {
+                                                                        szimulacioteszt = true;
+                                                                    }else{
+                                                                        szimulacioteszt = false;
+                                                                    }
+                                                                }
+                                                                if(i > 0 && a > 0){
+                                                                    if(*&lapvaltozo[i+1][a].elet == true ||
+                                                                       *&lapvaltozo[i][a-1].elet == true ||
+                                                                       *&lapvaltozo[i-1][a].elet == true ||
+                                                                       *&lapvaltozo[i][a+1].elet == true) {
+                                                                        szimulacioteszt = true;
+                                                                    }else{
+                                                                        szimulacioteszt = false;
+                                                                    }
+                                                                }
+                                                            }
+                                                            
                                                         }
-                                                        *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
-                                                        *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
-                                                    }else{
-                                                        cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n\n";
-                                                        szomszedos = false;
-                                                        *&lapvaltozo[mitsor1][mitoszlop1].elet = true;
                                                     }
-                                                    
-                                                    
                                                 }
-                                                //    0. 1.
-                                                //0. |X  -
-                                                //1. |-  -
-                                                //
-                                                //Vizsgálat az X körül (szomszédkeresés), ha stimmel minden, mozgathatjuk
-                                                if(hovaoszlop1 == 0 && hovasor1 == 0){
-                                                    *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
-                                                    if(*&lapvaltozo[hovasor1][hovaoszlop1+1].elet == true ||
-                                                       *&lapvaltozo[hovasor1+1][hovaoszlop1].elet == true) {
-                                                        
-                                                        szomszedos = true;
-                                                        for(int i = 0; i<=3; i++){
-                                                            *&lapvaltozo[hovasor1][hovaoszlop1].jel[i] = *&lapvaltozo[mitsor1][mitoszlop1].jel[i];
-                                                            *&lapvaltozo[mitsor1][mitoszlop1].jel[i] = 0;
-                                                        }
-                                                        *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
+                                                *&lapvaltozo[hovasor1][hovaoszlop1].elet = false;
+                                                *&lapvaltozo[mitsor1][mitoszlop1].elet = true;
+                                                
+                                                if(szimulacioteszt == true){
+                                                    //3. 4. 5.
+                                                    //-  X  -
+                                                    //-  -  -
+                                                    //Vizsgálat az X körül (szomszédkeresés), ha stimmel minden, mozgathatjuk
+                                                    if(hovasor1 == 0 && hovaoszlop1 != 0){
                                                         *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
-                                                    }else{
-                                                        cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n\n";
-                                                        szomszedos = false;
-                                                        *&lapvaltozo[mitsor1][mitoszlop1].elet = true;
+                                                        if(*&lapvaltozo[hovasor1][hovaoszlop1+1].elet == true ||
+                                                           *&lapvaltozo[hovasor1+1][hovaoszlop1].elet == true ||
+                                                           *&lapvaltozo[hovasor1][hovaoszlop1-1].elet == true) {
+                                                            
+                                                            szomszedos = true;
+                                                            for(int i = 0; i<=3; i++){
+                                                                *&lapvaltozo[hovasor1][hovaoszlop1].jel[i] = *&lapvaltozo[mitsor1][mitoszlop1].jel[i];
+                                                                *&lapvaltozo[mitsor1][mitoszlop1].jel[i] = 0;
+                                                            }
+                                                            *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
+                                                            *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
+                                                        }else{
+                                                            cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n\n";
+                                                            szomszedos = false;
+                                                            *&lapvaltozo[mitsor1][mitoszlop1].elet = true;
+                                                        }
+                                                        
                                                     }
+                                                    
+                                                    //5. |- -
+                                                    //6. |X -
+                                                    //7. |- -
+                                                    //Vizsgálat az X körül (szomszédkeresés), ha stimmel minden, mozgathatjuk
+                                                    if(hovaoszlop1 == 0 && hovasor1 != 0){
+                                                        *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
+                                                        if(*&lapvaltozo[hovasor1][hovaoszlop1+1].elet == true ||
+                                                           *&lapvaltozo[hovasor1+1][hovaoszlop1].elet == true ||
+                                                           *&lapvaltozo[hovasor1-1][hovaoszlop1].elet == true) {
+                                                            
+                                                            szomszedos = true;
+                                                            for(int i = 0; i<=3; i++){
+                                                                *&lapvaltozo[hovasor1][hovaoszlop1].jel[i] = *&lapvaltozo[mitsor1][mitoszlop1].jel[i];
+                                                                *&lapvaltozo[mitsor1][mitoszlop1].jel[i] = 0;
+                                                            }
+                                                            *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
+                                                            *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
+                                                        }else{
+                                                            cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n\n";
+                                                            szomszedos = false;
+                                                            *&lapvaltozo[mitsor1][mitoszlop1].elet = true;
+                                                        }
+                                                        
+                                                        
+                                                    }
+                                                    //    0. 1.
+                                                    //0. |X  -
+                                                    //1. |-  -
+                                                    //
+                                                    //Vizsgálat az X körül (szomszédkeresés), ha stimmel minden, mozgathatjuk
+                                                    if(hovaoszlop1 == 0 && hovasor1 == 0){
+                                                        *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
+                                                        if(*&lapvaltozo[hovasor1][hovaoszlop1+1].elet == true ||
+                                                           *&lapvaltozo[hovasor1+1][hovaoszlop1].elet == true) {
+                                                            
+                                                            szomszedos = true;
+                                                            for(int i = 0; i<=3; i++){
+                                                                *&lapvaltozo[hovasor1][hovaoszlop1].jel[i] = *&lapvaltozo[mitsor1][mitoszlop1].jel[i];
+                                                                *&lapvaltozo[mitsor1][mitoszlop1].jel[i] = 0;
+                                                            }
+                                                            *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
+                                                            *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
+                                                        }else{
+                                                            cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n\n";
+                                                            szomszedos = false;
+                                                            *&lapvaltozo[mitsor1][mitoszlop1].elet = true;
+                                                        }
+                                                    }
+                                                }else{
+                                                    cout << "Sajnos nem lenne osszefuggo a palya. Probald ujra!\n";
+                                                    szomszedos = false;
+                                                    koordinatalap(*&lapvaltozo);
                                                 }
                                                 
                                             }
@@ -2211,27 +2576,90 @@ int main() {
                                                 }
                                             }while(!cin);
                                             
+                                            
+                                            
+                                            //Szimuláció, hogy összefüggő marad-e a pálya!
+                                            bool szimulacioteszt = true;
+                                            *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
+                                            *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
+                                            if(hovasor1 > 0 && hovaoszlop1 > 0){
+                                                if(hovasor1 < 99 && hovaoszlop1 < 99){
+                                                    for(int i = 0; i<=99; i++){
+                                                        for (int a = 0; a<=99; a++) {
+                                                            if(*&lapvaltozo[i][a].elet == true){
+                                                                if(szimulacioteszt == true){
+                                                                    if(a == 0 && i != 0){
+                                                                        if(*&lapvaltozo[i+1][a].elet == true ||
+                                                                           *&lapvaltozo[i][a+1].elet == true ||
+                                                                           *&lapvaltozo[i-1][a].elet == true) {
+                                                                            szimulacioteszt = true;
+                                                                        }else{
+                                                                            szimulacioteszt = false;
+                                                                        }
+                                                                    }
+                                                                    if(i == 0 && a != 0){
+                                                                        if(*&lapvaltozo[i][a-1].elet == true ||
+                                                                           *&lapvaltozo[i+1][a].elet == true ||
+                                                                           *&lapvaltozo[i][a+1].elet == true) {
+                                                                            szimulacioteszt = true;
+                                                                        }else{
+                                                                            szimulacioteszt = false;
+                                                                        }
+                                                                    }
+                                                                    if(i == 0 && a==0){
+                                                                        if(*&lapvaltozo[i+1][a].elet == true ||
+                                                                           *&lapvaltozo[i][a+1].elet == true) {
+                                                                            szimulacioteszt = true;
+                                                                        }else{
+                                                                            szimulacioteszt = false;
+                                                                        }
+                                                                    }
+                                                                    if(i > 0 && a > 0){
+                                                                        if(*&lapvaltozo[i+1][a].elet == true ||
+                                                                           *&lapvaltozo[i][a-1].elet == true ||
+                                                                           *&lapvaltozo[i-1][a].elet == true ||
+                                                                           *&lapvaltozo[i][a+1].elet == true) {
+                                                                            szimulacioteszt = true;
+                                                                        }else{
+                                                                            szimulacioteszt = false;
+                                                                        }
+                                                                    }
+                                                                }
+                                                                
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            *&lapvaltozo[hovasor1][hovaoszlop1].elet = false;
+                                            *&lapvaltozo[mitsor1][mitoszlop1].elet = true;
+                                            
                                             //HA POZITÍV IRÁNYBA TÖRTÉNIK A MOZGATÁS
                                             if(hovasor1 > 0 && hovaoszlop1 > 0){
                                                 if(hovasor1 < 99 && hovaoszlop1 < 99){
-                                                    *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
-                                                    if(*&lapvaltozo[hovasor1-1][hovaoszlop1].elet == true ||
-                                                       *&lapvaltozo[hovasor1][hovaoszlop1-1].elet == true ||
-                                                       *&lapvaltozo[hovasor1+1][hovaoszlop1].elet == true ||
-                                                       *&lapvaltozo[hovasor1][hovaoszlop1+1].elet == true ) {
-                                                        
-                                                        szomszedos = true;
-                                                        for(int i = 0; i<=3; i++){
-                                                            *&lapvaltozo[hovasor1][hovaoszlop1].jel[i] = *&lapvaltozo[mitsor1][mitoszlop1].jel[i];
-                                                            *&lapvaltozo[mitsor1][mitoszlop1].jel[i] = 0;
-                                                        }
-                                                        *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
+                                                    if(szimulacioteszt == true){
                                                         *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
-                                                        
+                                                        if(*&lapvaltozo[hovasor1-1][hovaoszlop1].elet == true ||
+                                                           *&lapvaltozo[hovasor1][hovaoszlop1-1].elet == true ||
+                                                           *&lapvaltozo[hovasor1+1][hovaoszlop1].elet == true ||
+                                                           *&lapvaltozo[hovasor1][hovaoszlop1+1].elet == true ) {
+                                                            
+                                                            szomszedos = true;
+                                                            for(int i = 0; i<=3; i++){
+                                                                *&lapvaltozo[hovasor1][hovaoszlop1].jel[i] = *&lapvaltozo[mitsor1][mitoszlop1].jel[i];
+                                                                *&lapvaltozo[mitsor1][mitoszlop1].jel[i] = 0;
+                                                            }
+                                                            *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
+                                                            *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
+                                                            
+                                                        }else{
+                                                            cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n\n";
+                                                            szomszedos = false;
+                                                            *&lapvaltozo[mitsor1][mitoszlop1].elet = true;
+                                                        }
                                                     }else{
-                                                        cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n\n";
+                                                        cout << "Sajnos igy nem lenne osszefuggo a palya. Probald ujra!";
                                                         szomszedos = false;
-                                                        *&lapvaltozo[mitsor1][mitoszlop1].elet = true;
                                                     }
                                                 }else{
                                                     szomszedos = false;
@@ -2289,80 +2717,137 @@ int main() {
                                                     mitoszlop1 += 1;
                                                     
                                                 }
-                                                //3. 4. 5.
-                                                //-  X  -
-                                                //   -
-                                                //Vizsgálat az X körül (szomszédkeresés), ha stimmel minden, mozgathatjuk
-                                                if(hovasor1 == 0 && hovaoszlop1 != 0){
-                                                    *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
-                                                    if(*&lapvaltozo[hovasor1][hovaoszlop1+1].elet == true ||
-                                                       *&lapvaltozo[hovasor1+1][hovaoszlop1].elet == true ||
-                                                       *&lapvaltozo[hovasor1][hovaoszlop1-1].elet == true) {
-                                                        
-                                                        szomszedos = true;
-                                                        for(int i = 0; i<=3; i++){
-                                                            *&lapvaltozo[hovasor1][hovaoszlop1].jel[i] = *&lapvaltozo[mitsor1][mitoszlop1].jel[i];
-                                                            *&lapvaltozo[mitsor1][mitoszlop1].jel[i] = 0;
-                                                        }
-                                                        *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
-                                                        *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
-                                                    }else{
-                                                        cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n\n";
-                                                        szomszedos = false;
-                                                        *&lapvaltozo[mitsor1][mitoszlop1].elet = true;
-                                                    }
-                                                    
-                                                }
                                                 
-                                                //5. |- -
-                                                //6. |X -
-                                                //7. |- -
-                                                //Vizsgálat az X körül (szomszédkeresés), ha stimmel minden, mozgathatjuk
-                                                if(hovaoszlop1 == 0 && hovasor1 != 0){
-                                                    *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
-                                                    if(*&lapvaltozo[hovasor1][hovaoszlop1+1].elet == true ||
-                                                       *&lapvaltozo[hovasor1+1][hovaoszlop1].elet == true ||
-                                                       *&lapvaltozo[hovasor1-1][hovaoszlop1].elet == true ) {
-                                                        
-                                                        szomszedos = true;
-                                                        for(int i = 0; i<=3; i++){
-                                                            *&lapvaltozo[hovasor1][hovaoszlop1].jel[i] = *&lapvaltozo[mitsor1][mitoszlop1].jel[i];
-                                                            *&lapvaltozo[mitsor1][mitoszlop1].jel[i] = 0;
+                                                bool szimulacioteszt = true;
+                                                *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
+                                                *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
+                                                for(int i = 0; i<=99; i++){
+                                                    for (int a = 0; a<=99; a++) {
+                                                        if(*&lapvaltozo[i][a].elet == true){
+                                                            if(szimulacioteszt == true){
+                                                                if(a == 0 && i != 0){
+                                                                    if(*&lapvaltozo[i+1][a].elet == true ||
+                                                                       *&lapvaltozo[i][a+1].elet == true ||
+                                                                       *&lapvaltozo[i-1][a].elet == true) {
+                                                                        szimulacioteszt = true;
+                                                                    }else{
+                                                                        szimulacioteszt = false;
+                                                                    }
+                                                                }
+                                                                if(i == 0 && a != 0){
+                                                                    if(*&lapvaltozo[i][a-1].elet == true ||
+                                                                       *&lapvaltozo[i+1][a].elet == true ||
+                                                                       *&lapvaltozo[i][a+1].elet == true) {
+                                                                        szimulacioteszt = true;
+                                                                    }else{
+                                                                        szimulacioteszt = false;
+                                                                    }
+                                                                }
+                                                                if(i == 0 && a==0){
+                                                                    if(*&lapvaltozo[i+1][a].elet == true ||
+                                                                       *&lapvaltozo[i][a+1].elet == true) {
+                                                                        szimulacioteszt = true;
+                                                                    }else{
+                                                                        szimulacioteszt = false;
+                                                                    }
+                                                                }
+                                                                if(i > 0 && a > 0){
+                                                                    if(*&lapvaltozo[i+1][a].elet == true ||
+                                                                       *&lapvaltozo[i][a-1].elet == true ||
+                                                                       *&lapvaltozo[i-1][a].elet == true ||
+                                                                       *&lapvaltozo[i][a+1].elet == true) {
+                                                                        szimulacioteszt = true;
+                                                                    }else{
+                                                                        szimulacioteszt = false;
+                                                                    }
+                                                                }
+                                                            }
+                                                            
                                                         }
-                                                        *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
-                                                        *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
-                                                    }else{
-                                                        cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n\n";
-                                                        szomszedos = false;
-                                                        *&lapvaltozo[mitsor1][mitoszlop1].elet = true;
-                                                    }
-                                                    
-                                                    
-                                                }
-                                                //    0. 1.
-                                                //0. |X  -
-                                                //1. |-  -
-                                                //
-                                                //Vizsgálat az X körül (szomszédkeresés), ha stimmel minden, mozgathatjuk
-                                                if(hovaoszlop1 == 0 && hovasor1 == 0){
-                                                    *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
-                                                    if(*&lapvaltozo[hovasor1][hovaoszlop1+1].elet == true ||
-                                                       *&lapvaltozo[hovasor1+1][hovaoszlop1].elet == true) {
-                                                        
-                                                        szomszedos = true;
-                                                        for(int i = 0; i<=3; i++){
-                                                            *&lapvaltozo[hovasor1][hovaoszlop1].jel[i] = *&lapvaltozo[mitsor1][mitoszlop1].jel[i];
-                                                            *&lapvaltozo[mitsor1][mitoszlop1].jel[i] = 0;
-                                                        }
-                                                        *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
-                                                        *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
-                                                    }else{
-                                                        cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n\n";
-                                                        szomszedos = false;
-                                                        *&lapvaltozo[mitsor1][mitoszlop1].elet = true;
                                                     }
                                                 }
+                                                *&lapvaltozo[hovasor1][hovaoszlop1].elet = false;
+                                                *&lapvaltozo[mitsor1][mitoszlop1].elet = true;
                                                 
+                                                if(szimulacioteszt == true){
+                                                    //3. 4. 5.
+                                                    //-  X  -
+                                                    //   -
+                                                    //Vizsgálat az X körül (szomszédkeresés), ha stimmel minden, mozgathatjuk
+                                                    if(hovasor1 == 0 && hovaoszlop1 != 0){
+                                                        *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
+                                                        if(*&lapvaltozo[hovasor1][hovaoszlop1+1].elet == true ||
+                                                           *&lapvaltozo[hovasor1+1][hovaoszlop1].elet == true ||
+                                                           *&lapvaltozo[hovasor1][hovaoszlop1-1].elet == true) {
+                                                            
+                                                            szomszedos = true;
+                                                            for(int i = 0; i<=3; i++){
+                                                                *&lapvaltozo[hovasor1][hovaoszlop1].jel[i] = *&lapvaltozo[mitsor1][mitoszlop1].jel[i];
+                                                                *&lapvaltozo[mitsor1][mitoszlop1].jel[i] = 0;
+                                                            }
+                                                            *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
+                                                            *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
+                                                        }else{
+                                                            cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n\n";
+                                                            szomszedos = false;
+                                                            *&lapvaltozo[mitsor1][mitoszlop1].elet = true;
+                                                        }
+                                                        
+                                                    }
+                                                    
+                                                    //5. |- -
+                                                    //6. |X -
+                                                    //7. |- -
+                                                    //Vizsgálat az X körül (szomszédkeresés), ha stimmel minden, mozgathatjuk
+                                                    if(hovaoszlop1 == 0 && hovasor1 != 0){
+                                                        *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
+                                                        if(*&lapvaltozo[hovasor1][hovaoszlop1+1].elet == true ||
+                                                           *&lapvaltozo[hovasor1+1][hovaoszlop1].elet == true ||
+                                                           *&lapvaltozo[hovasor1-1][hovaoszlop1].elet == true ) {
+                                                            
+                                                            szomszedos = true;
+                                                            for(int i = 0; i<=3; i++){
+                                                                *&lapvaltozo[hovasor1][hovaoszlop1].jel[i] = *&lapvaltozo[mitsor1][mitoszlop1].jel[i];
+                                                                *&lapvaltozo[mitsor1][mitoszlop1].jel[i] = 0;
+                                                            }
+                                                            *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
+                                                            *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
+                                                        }else{
+                                                            cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n\n";
+                                                            szomszedos = false;
+                                                            *&lapvaltozo[mitsor1][mitoszlop1].elet = true;
+                                                        }
+                                                        
+                                                        
+                                                    }
+                                                    //    0. 1.
+                                                    //0. |X  -
+                                                    //1. |-  -
+                                                    //
+                                                    //Vizsgálat az X körül (szomszédkeresés), ha stimmel minden, mozgathatjuk
+                                                    if(hovaoszlop1 == 0 && hovasor1 == 0){
+                                                        *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
+                                                        if(*&lapvaltozo[hovasor1][hovaoszlop1+1].elet == true ||
+                                                           *&lapvaltozo[hovasor1+1][hovaoszlop1].elet == true) {
+                                                            
+                                                            szomszedos = true;
+                                                            for(int i = 0; i<=3; i++){
+                                                                *&lapvaltozo[hovasor1][hovaoszlop1].jel[i] = *&lapvaltozo[mitsor1][mitoszlop1].jel[i];
+                                                                *&lapvaltozo[mitsor1][mitoszlop1].jel[i] = 0;
+                                                            }
+                                                            *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
+                                                            *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
+                                                        }else{
+                                                            cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n\n";
+                                                            szomszedos = false;
+                                                            *&lapvaltozo[mitsor1][mitoszlop1].elet = true;
+                                                        }
+                                                    }
+                                                }else{
+                                                    cout << "Sajnos igy nem lenne osszefuggo a palya. Probald ujra!\n";
+                                                    szomszedos = false;
+                                                    koordinatalap(*&lapvaltozo);
+                                                }
                                             }
                                         }while(szomszedos == false);
                                         koordinatalap(*&lapvaltozo);
