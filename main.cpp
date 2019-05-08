@@ -638,10 +638,21 @@ int main() {
     cout <<  "Kerlek rakj le egy lapot kezdesnek, barmely poziciora!\n";
     int kezdosor=0;
     int kezdooszlop=0;
-    cout << "Sor: ";
-    cin >> kezdosor;
-    cout << "Oszlop: ";
-    cin >> kezdooszlop;
+    do{
+        cout << "Sor: ";
+        cin >> kezdosor;
+        if(!cin){
+            cin.clear();
+            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        }
+        cout << "Oszlop: ";
+        cin >> kezdooszlop;
+        if(!cin){
+            cin.clear();
+            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        }
+        cout << endl;
+    }while(!cin);
     bool hibamentes = true;
     do{
     if(kezdosor >= 0 && kezdooszlop >= 0){
@@ -696,11 +707,22 @@ int main() {
                                         cout << "(A SZAMOZAS 0-TOL INDULNAK!) \n";
                                         
                                         do{
-                                            cout << "Sor: ";
-                                            cin >> simbesor1;
-                                            cout << "Oszlop: ";
-                                            cin >> simbeoszlop1;
-                                            cout << endl;
+                                            do{
+                                                cout << "Sor: ";
+                                                cin >> simbesor1;
+                                                if(!cin){
+                                                    cin.clear();
+                                                    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                                                }
+                                                cout << "Oszlop: ";
+                                                cin >> simbeoszlop1;
+                                                if(!cin){
+                                                    cin.clear();
+                                                    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                                                }
+                                                cout << endl;
+                                                
+                                            }while(!cin);
                                             int simszamlalo = 0;
                                             bool megtelt = false;
                                             if(simbesor1 > 0 && simbeoszlop1 > 0){
@@ -906,7 +928,13 @@ int main() {
                                             kartyamegjelenites(*&lapvaltozo, simbesor1, simbeoszlop1);
                                             do{
                                                 cout << "Ird be azt a szamot, amely helyere szeretned a szimbolumot: ";
-                                                cin >> simsorszam;
+                                                do{
+                                                    cin >> simsorszam;
+                                                    if(!cin){
+                                                        cin.clear();
+                                                        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                                                    }
+                                                }while(!cin);
                                                 if(simsorszam >= 0 && simsorszam < 4){
                                                     if(*&lapvaltozo[simbesor1][simbeoszlop1].jel[simsorszam]!=1 &&
                                                        *&lapvaltozo[simbesor1][simbeoszlop1].jel[simsorszam]!=2){
@@ -957,10 +985,25 @@ int main() {
                                             koordinatalap(*&lapvaltozo);
                                             lapmegtekintes(*&lapvaltozo);
                                             do{
-                                                cout << "Melyik lapot szeretned mozgatni?\nSor: ";
-                                                cin >> mitsor1;
-                                                cout << "Oszlop: ";
-                                                cin >> mitoszlop1;
+                                                
+                                               
+                                                
+                                                do{
+                                                    cout << "Melyik lapot szeretned mozgatni?\nSor: ";
+                                                    cin >> mitsor1;
+                                                    if(!cin){
+                                                        cin.clear();
+                                                        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                                                    }
+                                                    cout << "Oszlop: ";
+                                                    cin >> mitoszlop1;
+                                                    if(!cin){
+                                                        cin.clear();
+                                                        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                                                    }
+                                                    cout << endl;
+                                                    
+                                                }while(!cin);
                                                 
                                                 
                                                 if(mitsor1 > 99 || mitoszlop1 > 99){
@@ -996,10 +1039,28 @@ int main() {
                                                 }
                                             }while(vaneelet == false);
                                             
-                                            cout << "Melyik poziciora szeretned rakni a kivalasztott kartyat?\nSor: ";
-                                            cin >> hovasor1;
-                                            cout << "Oszlop: ";
-                                            cin >> hovaoszlop1;
+                                            
+                                            
+                                            
+                                            do{
+                                                cout << "Melyik poziciora szeretned rakni a kivalasztott kartyat?\nSor: ";
+                                                cin >> hovasor1;
+                                                if(!cin){
+                                                    cin.clear();
+                                                    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                                                }
+                                                cout << "Oszlop: ";
+                                                cin >> hovaoszlop1;
+                                                if(!cin){
+                                                    cin.clear();
+                                                    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                                                }
+                                                cout << endl;
+                                                
+                                            }while(!cin);
+                                            
+                                            
+                                            
                                             //HA POZITÍV IRÁNYBA TÖRTÉNIK A MOZGATÁS
                                             if(hovasor1 > 0 && hovaoszlop1 > 0){
                                                 if(hovasor1 < 99 && hovaoszlop1 < 99){
@@ -1216,10 +1277,27 @@ int main() {
                                             koordinatalap(*&lapvaltozo);
                                             lapmegtekintes(*&lapvaltozo);
                                             do{
-                                                cout << "Melyik lapot szeretned mozgatni?\nSor: ";
-                                                cin >> mitsor1;
-                                                cout << "Oszlop: ";
-                                                cin >> mitoszlop1;
+                                                
+                                                
+                                                
+                                                do{
+                                                    cout << "Melyik lapot szeretned mozgatni?\nSor: ";
+                                                    cin >> mitsor1;
+                                                    if(!cin){
+                                                        cin.clear();
+                                                        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                                                    }
+                                                    cout << "Oszlop: ";
+                                                    cin >> mitoszlop1;
+                                                    if(!cin){
+                                                        cin.clear();
+                                                        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                                                    }
+                                                    cout << endl;
+                                                    
+                                                }while(!cin);
+                                                
+                                                
                                                 if(mitsor1 < 0 || mitoszlop1 < 0){
                                                     vaneelet = false;
                                                     cout << "Itt nincs kartya:(\n\n";
@@ -1247,10 +1325,27 @@ int main() {
                                                 }
                                             }while(vaneelet == false);
                                             
-                                            cout << "Melyik poziciora szeretned rakni a kivalasztott kartyat?\nSor: ";
-                                            cin >> hovasor1;
-                                            cout << "Oszlop: ";
-                                            cin >> hovaoszlop1;
+                                            
+                                            
+                                            
+                                            do{
+                                                cout << "Melyik poziciora szeretned rakni a kivalasztott kartyat?\nSor: ";
+                                                cin >> hovasor1;
+                                                if(!cin){
+                                                    cin.clear();
+                                                    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                                                }
+                                                cout << "Oszlop: ";
+                                                cin >> hovaoszlop1;
+                                                if(!cin){
+                                                    cin.clear();
+                                                    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                                                }
+                                                cout << endl;
+                                                
+                                            }while(!cin);
+                                            
+                                            
                                             //HA POZITÍV IRÁNYBA TÖRTÉNIK A MOZGATÁS
                                             if(hovasor1 > 0 && hovaoszlop1 > 0){
                                                 if(hovasor1 < 99 && hovaoszlop1 < 99){
@@ -1498,11 +1593,28 @@ int main() {
                                         cout << "(A SZAMOZAS 0-TOL INDULNAK!) \n";
                                         
                                         do{
-                                            cout << "Sor: ";
-                                            cin >> simbesor1;
-                                            cout << "Oszlop: ";
-                                            cin >> simbeoszlop1;
-                                            cout << endl;
+                                            
+                                            
+                                            
+                                            do{
+                                                cout << "Sor: ";
+                                                cin >> simbesor1;
+                                                if(!cin){
+                                                    cin.clear();
+                                                    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                                                }
+                                                cout << "Oszlop: ";
+                                                cin >> simbeoszlop1;
+                                                cout << endl;
+                                                if(!cin){
+                                                    cin.clear();
+                                                    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                                                }
+                                                cout << endl;
+                                                
+                                            }while(!cin);
+                                            
+                                            
                                             int simszamlalo = 0;
                                             bool megtelt = false;
                                             if(simbesor1 > 0 && simbeoszlop1 > 0){
@@ -1525,7 +1637,6 @@ int main() {
                                                 if(simbesor1 < 99 || simbeoszlop1 < 99){
                                                     
                                                     if(simbesor1 < 0 || simbeoszlop1 < 0){
-                                                        cout << "Csak -1 iranyba fog lerakodni a lap!\n";
                                                         if(simbesor1 < 0){
                                                             //Lefele toljuk a komplett palyat
                                                             for(int i=0; i<=99; i++){
@@ -1713,8 +1824,17 @@ int main() {
                                         if(*&lapvaltozo[simbesor1][simbeoszlop1].elet == true){
                                             kartyamegjelenites(*&lapvaltozo, simbesor1, simbeoszlop1);
                                             do{
-                                                cout << "Ird be azt a szamot, amely helyere szeretned a szimbolumot: ";
-                                                cin >> simsorszam;
+                                                
+                                                do{
+                                                    cout << "Ird be azt a szamot, amely helyere szeretned a szimbolumot: ";
+                                                    cin >> simsorszam;
+                                                    if(!cin){
+                                                        cin.clear();
+                                                        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                                                    }
+                                                }while(!cin);
+                                                
+                                                
                                                 if(simsorszam >= 0 && simsorszam < 4){
                                                     if(*&lapvaltozo[simbesor1][simbeoszlop1].jel[simsorszam]!=1 &&
                                                        *&lapvaltozo[simbesor1][simbeoszlop1].jel[simsorszam]!=2){
@@ -1760,10 +1880,24 @@ int main() {
                                             koordinatalap(*&lapvaltozo);
                                             lapmegtekintes(*&lapvaltozo);
                                             do{
-                                                cout << "Melyik lapot szeretned mozgatni?\nSor: ";
-                                                cin >> mitsor1;
-                                                cout << "Oszlop: ";
-                                                cin >> mitoszlop1;
+                                                
+                                                
+                                                
+                                                do{
+                                                    cout << "Melyik lapot szeretned mozgatni?\nSor: ";
+                                                    cin >> mitsor1;
+                                                    if(!cin){
+                                                        cin.clear();
+                                                        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                                                    }
+                                                    cout << "Oszlop: ";
+                                                    cin >> mitoszlop1;
+                                                    if(!cin){
+                                                        cin.clear();
+                                                        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                                                    }
+                                                }while(!cin);
+                                                
                                                 if(mitsor1 > 99 || mitoszlop1 > 99){
                                                     vaneelet = false;
                                                     cout << "Tul nagy szamot adtal meg. \n";
@@ -1797,10 +1931,25 @@ int main() {
                                                 }
                                             }while(vaneelet == false);
                                             
-                                            cout << "Melyik poziciora szeretned rakni a kivalasztott kartyat?\nSor: ";
-                                            cin >> hovasor1;
-                                            cout << "Oszlop: ";
-                                            cin >> hovaoszlop1;
+                                            
+                                            
+                                            
+                                            do{
+                                                cout << "Melyik poziciora szeretned rakni a kivalasztott kartyat?\nSor: ";
+                                                cin >> hovasor1;
+                                                if(!cin){
+                                                    cin.clear();
+                                                    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                                                }
+                                                cout << "Oszlop: ";
+                                                cin >> hovaoszlop1;
+                                                if(!cin){
+                                                    cin.clear();
+                                                    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                                                }
+                                            }while(!cin);
+                                            
+                                            
                                             //HA POZITÍV IRÁNYBA TÖRTÉNIK A MOZGATÁS
                                             if(hovasor1 > 0 && hovaoszlop1 > 0){
                                                 if(hovasor1 < 99 && hovaoszlop1 < 99){
@@ -1993,10 +2142,25 @@ int main() {
                                             koordinatalap(*&lapvaltozo);
                                             lapmegtekintes(*&lapvaltozo);
                                             do{
-                                                cout << "Melyik lapot szeretned mozgatni?\nSor: ";
-                                                cin >> mitsor1;
-                                                cout << "Oszlop: ";
-                                                cin >> mitoszlop1;
+                                                
+                                                
+                                                
+                                                do{
+                                                    cout << "Melyik lapot szeretned mozgatni?\nSor: ";
+                                                    cin >> mitsor1;
+                                                    if(!cin){
+                                                        cin.clear();
+                                                        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                                                    }
+                                                    cout << "Oszlop: ";
+                                                    cin >> mitoszlop1;
+                                                    if(!cin){
+                                                        cin.clear();
+                                                        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                                                    }
+                                                }while(!cin);
+                                                
+                                                
                                                 if(mitsor1 > 99 || mitoszlop1 > 99){
                                                     vaneelet = false;
                                                     cout << "Tul nagy szamot adtal meg. \n";
@@ -2029,10 +2193,24 @@ int main() {
                                                 }
                                             }while(vaneelet == false);
                                             
-                                            cout << "Melyik poziciora szeretned rakni a kivalasztott kartyat?\nSor: ";
-                                            cin >> hovasor1;
-                                            cout << "Oszlop: ";
-                                            cin >> hovaoszlop1;
+                                            
+                                            
+                                            
+                                            do{
+                                                cout << "Melyik poziciora szeretned rakni a kivalasztott kartyat?\nSor: ";
+                                                cin >> hovasor1;
+                                                if(!cin){
+                                                    cin.clear();
+                                                    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                                                }
+                                                cout << "Oszlop: ";
+                                                cin >> hovaoszlop1;
+                                                if(!cin){
+                                                    cin.clear();
+                                                    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                                                }
+                                            }while(!cin);
+                                            
                                             //HA POZITÍV IRÁNYBA TÖRTÉNIK A MOZGATÁS
                                             if(hovasor1 > 0 && hovaoszlop1 > 0){
                                                 if(hovasor1 < 99 && hovaoszlop1 < 99){
