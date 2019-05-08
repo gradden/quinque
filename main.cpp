@@ -14,7 +14,7 @@
 #include <math.h>
 #include <iomanip>
 #include <string>
-#define ARRAY_SIZE(x) (sizeof((x)) / sizeof((x)[0]))
+#include <algorithm>
 
 using namespace std;
 
@@ -842,7 +842,7 @@ int main() {
                                                         
                                                     }else{
                                                         //Ha a lappal szomszédos, csak akkor lehet új lapot létrehozni.
-                                                        if(simbesor1 != 0 && simbeoszlop1 != 0){
+                                                        if(simbesor1 > 0 || simbeoszlop1 > 0){
                                                             if(*&lapvaltozo[simbesor1][simbeoszlop1].elet == false){
                                                                 if(*&lapvaltozo[simbesor1][simbeoszlop1-1].elet == true ||
                                                                    *&lapvaltozo[simbesor1-1][simbeoszlop1].elet == true ||
@@ -862,7 +862,8 @@ int main() {
                                                             }else{
                                                                 szomszedos = true;
                                                             }
-                                                        }else{
+                                                        }
+                                                        if(simbesor1 == 0 || simbeoszlop1 == 0){
                                                             if(*&lapvaltozo[simbesor1][simbeoszlop1].elet == false){
                                                                 if(*&lapvaltozo[simbesor1+1][simbeoszlop1].elet == true ||
                                                                    *&lapvaltozo[simbesor1][simbeoszlop1+1].elet == true ||
@@ -874,6 +875,8 @@ int main() {
                                                                     cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n";
                                                                     szomszedos = false;
                                                                 }
+                                                            }else{
+                                                                szomszedos = true;
                                                             }
                                                         }
                                                     }
@@ -1641,7 +1644,7 @@ int main() {
                                                         
                                                     }else{
                                                         //Ha a lappal szomszédos, csak akkor lehet új lapot létrehozni.
-                                                        if(simbesor1 != 0 && simbeoszlop1 != 0){
+                                                        if(simbesor1 > 0 || simbeoszlop1 > 0){
                                                             if(*&lapvaltozo[simbesor1][simbeoszlop1].elet == false){
                                                                 if(*&lapvaltozo[simbesor1][simbeoszlop1-1].elet == true ||
                                                                    *&lapvaltozo[simbesor1-1][simbeoszlop1].elet == true ||
@@ -1661,7 +1664,8 @@ int main() {
                                                             }else{
                                                                 szomszedos = true;
                                                             }
-                                                        }else{
+                                                        }
+                                                        if(simbesor1 == 0 || simbeoszlop1 == 0){
                                                             if(*&lapvaltozo[simbesor1][simbeoszlop1].elet == false){
                                                                 if(*&lapvaltozo[simbesor1+1][simbeoszlop1].elet == true ||
                                                                    *&lapvaltozo[simbesor1][simbeoszlop1+1].elet == true ||
@@ -1673,6 +1677,8 @@ int main() {
                                                                     cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n";
                                                                     szomszedos = false;
                                                                 }
+                                                            }else{
+                                                                szomszedos = true;
                                                             }
                                                         }
                                                     }
