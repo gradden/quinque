@@ -633,40 +633,8 @@ int main() {
     cout << "A kartyalapok pozicioit lepesenkent lehetoseg lesz megtekinteni, illetve azon beluli lapok szimbolumait.\n";
     cout << "A megtekintett kartyalapokon ha szamokat latsz, akkor nincs rajta szimbolum!\n";
     cout << "Kezdodjek a jatek!!\n\n";
-    
-    koordinatalap(*&lapvaltozo);
-    cout <<  "Kerlek rakj le egy lapot kezdesnek, barmely poziciora!\n";
-    int kezdosor=0;
-    int kezdooszlop=0;
-    do{
-        cout << "Sor: ";
-        cin >> kezdosor;
-        if(!cin){
-            cin.clear();
-            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        }
-        cout << "Oszlop: ";
-        cin >> kezdooszlop;
-        if(!cin){
-            cin.clear();
-            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        }
-        cout << endl;
-    }while(!cin);
-    bool hibamentes = true;
-    do{
-    if(kezdosor >= 0 && kezdooszlop >= 0){
-        if(kezdooszlop <= 97 && kezdosor <= 97){
-            *&lapvaltozo[kezdosor][kezdooszlop].elet = true;
-            *&lapvaltozo[kezdosor][kezdooszlop].jeloltlap = false;
-            hibamentes = true;
-        }else{
-            cout << "Tul nagy szamot adtal meg.\n";
-        }
-    }else{
-        cout << "Tul kicsi szamot adtal meg.\n";
-    }
-    }while(hibamentes == false);
+
+    bool kezdes = true;
     
     int simbesor1 = NULL;
     int simbeoszlop1 = NULL;
@@ -684,9 +652,14 @@ int main() {
                             simbesor1 = NULL;
                             simbeoszlop1 = NULL;
                             int simsorszam = NULL;
-                            cout << "1. bekeres, 1. jatekos "<< endl <<"Jeloles (J) vagy Mozgatas (M)?: ";
-                            cin >> bekert1_1;
-                            std::transform(bekert1_1.begin(), bekert1_1.end(),bekert1_1.begin(), ::toupper);
+                            if(kezdes == true){
+                                cout << "Az 1. jatekos kezd jelolessel.\n";
+                                bekert1_1 = "J";
+                            }else{
+                                cout << "1. bekeres, 1. jatekos "<< endl <<"Jeloles (J) vagy Mozgatas (M)?: ";
+                                cin >> bekert1_1;
+                                std::transform(bekert1_1.begin(), bekert1_1.end(),bekert1_1.begin(), ::toupper);
+                            }
                             
                             if(bekert1_1 == "J" || bekert1_1 == "M"){
                                 
@@ -883,37 +856,47 @@ int main() {
                                                     }else{
                                                         //Ha a lappal szomszédos, csak akkor lehet új lapot létrehozni.
                                                         if(simbesor1 > 0 && simbeoszlop1 > 0){
-                                                            if(*&lapvaltozo[simbesor1][simbeoszlop1].elet == false){
-                                                                if(*&lapvaltozo[simbesor1][simbeoszlop1-1].elet == true ||
-                                                                   *&lapvaltozo[simbesor1-1][simbeoszlop1].elet == true ||
-                                                                   *&lapvaltozo[simbesor1+1][simbeoszlop1].elet == true ||
-                                                                   *&lapvaltozo[simbesor1][simbeoszlop1+1].elet == true) {
-                                                                    
-                                                                    *&lapvaltozo[simbesor1][simbeoszlop1].elet = true;
-                                                                    szomszedos = true;
+                                                            if(kezdes == false){
+                                                                if(*&lapvaltozo[simbesor1][simbeoszlop1].elet == false){
+                                                                    if(*&lapvaltozo[simbesor1][simbeoszlop1-1].elet == true ||
+                                                                       *&lapvaltozo[simbesor1-1][simbeoszlop1].elet == true ||
+                                                                       *&lapvaltozo[simbesor1+1][simbeoszlop1].elet == true ||
+                                                                       *&lapvaltozo[simbesor1][simbeoszlop1+1].elet == true) {
+                                                                        
+                                                                        *&lapvaltozo[simbesor1][simbeoszlop1].elet = true;
+                                                                        szomszedos = true;
+                                                                    }else{
+                                                                        cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n";
+                                                                        szomszedos = false;
+                                                                    }
                                                                 }else{
-                                                                    cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n";
-                                                                    szomszedos = false;
+                                                                    szomszedos = true;
                                                                 }
                                                             }else{
+                                                                *&lapvaltozo[simbesor1][simbeoszlop1].elet = true;
                                                                 szomszedos = true;
                                                             }
                                                         }
                                                         if(simbesor1 == 0 || simbeoszlop1 == 0){
-                                                            if(*&lapvaltozo[simbesor1][simbeoszlop1].elet == false){
-                                                                if(*&lapvaltozo[simbesor1+1][simbeoszlop1].elet == true ||
-                                                                   *&lapvaltozo[simbesor1][simbeoszlop1+1].elet == true ||
-                                                                   *&lapvaltozo[simbesor1][simbeoszlop1-1].elet == true ||
-                                                                   *&lapvaltozo[simbesor1-1][simbeoszlop1].elet == true) {
-                                                                    
-                                                                    *&lapvaltozo[simbesor1][simbeoszlop1].elet = true;
-                                                                    szomszedos = true;
+                                                            if(kezdes == false){
+                                                                if(*&lapvaltozo[simbesor1][simbeoszlop1].elet == false){
+                                                                    if(*&lapvaltozo[simbesor1+1][simbeoszlop1].elet == true ||
+                                                                       *&lapvaltozo[simbesor1][simbeoszlop1+1].elet == true ||
+                                                                       *&lapvaltozo[simbesor1][simbeoszlop1-1].elet == true ||
+                                                                       *&lapvaltozo[simbesor1-1][simbeoszlop1].elet == true) {
+                                                                        
+                                                                        *&lapvaltozo[simbesor1][simbeoszlop1].elet = true;
+                                                                        szomszedos = true;
+                                                                    }else{
+                                                                        koordinatalap(*&lapvaltozo);
+                                                                        cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n";
+                                                                        szomszedos = false;
+                                                                    }
                                                                 }else{
-                                                                    koordinatalap(*&lapvaltozo);
-                                                                    cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n";
-                                                                    szomszedos = false;
+                                                                    szomszedos = true;
                                                                 }
                                                             }else{
+                                                                *&lapvaltozo[simbesor1][simbeoszlop1].elet = true;
                                                                 szomszedos = true;
                                                             }
                                                         }
@@ -969,7 +952,7 @@ int main() {
                                         cout << "Sajnalom, de elfogyott a jelolesi lehetosegeid! (" << player1sim << ")\n";
                                     }
                                 }
-                                
+                                kezdes = false;
                                 
                                 
                                 
@@ -1064,6 +1047,12 @@ int main() {
                                             
                                             //Szimuláció, hogy összefüggő marad-e a pálya!
                                             bool szimulacioteszt = true;
+                                            bool voltott = false;
+                                            if(*&lapvaltozo[mitsor1][mitoszlop1].elet == false){
+                                                voltott = false;
+                                            }else{
+                                                voltott = true;
+                                            }
                                             *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
                                             *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
                                             if(hovasor1 > 0 && hovaoszlop1 > 0){
@@ -1115,8 +1104,12 @@ int main() {
                                                     }
                                                 }
                                             }
+                                            if(voltott == false){
+                                                *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
+                                            }else{
+                                                *&lapvaltozo[mitsor1][mitoszlop1].elet = true;
+                                            }
                                             *&lapvaltozo[hovasor1][hovaoszlop1].elet = false;
-                                            *&lapvaltozo[mitsor1][mitoszlop1].elet = true;
                                             
                                             
                                             //HA POZITÍV IRÁNYBA TÖRTÉNIK A MOZGATÁS
@@ -1232,6 +1225,12 @@ int main() {
                                                 
                                                 
                                                 bool szimulacioteszt = true;
+                                                bool voltott = false;
+                                                if(*&lapvaltozo[mitsor1][mitoszlop1].elet == false){
+                                                    voltott = false;
+                                                }else{
+                                                    voltott = true;
+                                                }
                                                 *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
                                                 *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
                                                 for(int i = 0; i<=99; i++){
@@ -1279,8 +1278,12 @@ int main() {
                                                         }
                                                     }
                                                 }
+                                                if(voltott == false){
+                                                    *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
+                                                }else{
+                                                    *&lapvaltozo[mitsor1][mitoszlop1].elet = true;
+                                                }
                                                 *&lapvaltozo[hovasor1][hovaoszlop1].elet = false;
-                                                *&lapvaltozo[mitsor1][mitoszlop1].elet = true;
                                                 
                                                 
                                                 if(szimulacioteszt == true){
@@ -1444,8 +1447,6 @@ int main() {
                                                 if(*&lapvaltozo[mitsor1][mitoszlop1].jeloltlap == true){
                                                     vaneelet = false;
                                                     cout << "Ezt a lapot jelolted ebben a korben. Sajnos ezt nem lehet mozgatni.";
-                                                }else{
-                                                    vaneelet = true;
                                                 }
                                             }while(vaneelet == false);
                                             
@@ -1472,6 +1473,12 @@ int main() {
                                             
                                             //Szimuláció, hogy összefüggő marad-e a pálya!
                                             bool szimulacioteszt = true;
+                                            bool voltott = false;
+                                            if(*&lapvaltozo[mitsor1][mitoszlop1].elet == false){
+                                                voltott = false;
+                                            }else{
+                                                voltott = true;
+                                            }
                                             *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
                                             *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
                                             if(hovasor1 > 0 && hovaoszlop1 > 0){
@@ -1523,8 +1530,12 @@ int main() {
                                                     }
                                                 }
                                             }
+                                            if(voltott == false){
+                                                *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
+                                            }else{
+                                                *&lapvaltozo[mitsor1][mitoszlop1].elet = true;
+                                            }
                                             *&lapvaltozo[hovasor1][hovaoszlop1].elet = false;
-                                            *&lapvaltozo[mitsor1][mitoszlop1].elet = true;
                                             
                                             
                                             //HA POZITÍV IRÁNYBA TÖRTÉNIK A MOZGATÁS
@@ -1645,6 +1656,12 @@ int main() {
                                                 }
                                                 
                                                 bool szimulacioteszt = true;
+                                                bool voltott = false;
+                                                if(*&lapvaltozo[mitsor1][mitoszlop1].elet == false){
+                                                    voltott = false;
+                                                }else{
+                                                    voltott = true;
+                                                }
                                                 *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
                                                 *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
                                                 for(int i = 0; i<=99; i++){
@@ -1692,8 +1709,12 @@ int main() {
                                                         }
                                                     }
                                                 }
+                                                if(voltott == false){
+                                                    *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
+                                                }else{
+                                                    *&lapvaltozo[mitsor1][mitoszlop1].elet = true;
+                                                }
                                                 *&lapvaltozo[hovasor1][hovaoszlop1].elet = false;
-                                                *&lapvaltozo[mitsor1][mitoszlop1].elet = true;
                                                 
                                                 if(szimulacioteszt == true){
                                                     if(hovasor1 == 0 && hovaoszlop1 != 0){
@@ -2171,8 +2192,6 @@ int main() {
                                                 if(*&lapvaltozo[mitsor1][mitoszlop1].jeloltlap == true){
                                                     vaneelet = false;
                                                     cout << "Ezt a lapot jelolted ebben a korben. Sajnos ezt nem lehet mozgatni.";
-                                                }else{
-                                                    vaneelet = true;
                                                 }
                                             }while(vaneelet == false);
                                             
@@ -2197,6 +2216,12 @@ int main() {
                                             
                                             //Szimuláció, hogy összefüggő marad-e a pálya!
                                             bool szimulacioteszt = true;
+                                            bool voltott = false;
+                                            if(*&lapvaltozo[mitsor1][mitoszlop1].elet == false){
+                                                voltott = false;
+                                            }else{
+                                                voltott = true;
+                                            }
                                             *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
                                             *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
                                             if(hovasor1 > 0 && hovaoszlop1 > 0){
@@ -2248,8 +2273,12 @@ int main() {
                                                     }
                                                 }
                                             }
+                                            if(voltott == false){
+                                                *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
+                                            }else{
+                                                *&lapvaltozo[mitsor1][mitoszlop1].elet = true;
+                                            }
                                             *&lapvaltozo[hovasor1][hovaoszlop1].elet = false;
-                                            *&lapvaltozo[mitsor1][mitoszlop1].elet = true;
                                             
                                             
                                             //HA POZITÍV IRÁNYBA TÖRTÉNIK A MOZGATÁS
@@ -2337,6 +2366,12 @@ int main() {
                                                 }
                                                 
                                                 bool szimulacioteszt = true;
+                                                bool voltott = false;
+                                                if(*&lapvaltozo[mitsor1][mitoszlop1].elet == false){
+                                                    voltott = false;
+                                                }else{
+                                                    voltott = true;
+                                                }
                                                 *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
                                                 *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
                                                 for(int i = 0; i<=99; i++){
@@ -2384,8 +2419,12 @@ int main() {
                                                         }
                                                     }
                                                 }
+                                                if(voltott == false){
+                                                    *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
+                                                }else{
+                                                    *&lapvaltozo[mitsor1][mitoszlop1].elet = true;
+                                                }
                                                 *&lapvaltozo[hovasor1][hovaoszlop1].elet = false;
-                                                *&lapvaltozo[mitsor1][mitoszlop1].elet = true;
                                                 
                                                 if(szimulacioteszt == true){
                                                     //3. 4. 5.
@@ -2553,8 +2592,6 @@ int main() {
                                                 if(*&lapvaltozo[mitsor1][mitoszlop1].jeloltlap == true){
                                                     vaneelet = false;
                                                     cout << "Ezt a lapot jelolted ebben a korben. Sajnos ezt nem lehet mozgatni.";
-                                                }else{
-                                                    vaneelet = true;
                                                 }
                                             }while(vaneelet == false);
                                             
@@ -2580,6 +2617,12 @@ int main() {
                                             
                                             //Szimuláció, hogy összefüggő marad-e a pálya!
                                             bool szimulacioteszt = true;
+                                            bool voltott = false;
+                                            if(*&lapvaltozo[mitsor1][mitoszlop1].elet == false){
+                                                voltott = false;
+                                            }else{
+                                                voltott = true;
+                                            }
                                             *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
                                             *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
                                             if(hovasor1 > 0 && hovaoszlop1 > 0){
@@ -2631,8 +2674,12 @@ int main() {
                                                     }
                                                 }
                                             }
+                                            if(voltott == false){
+                                                *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
+                                            }else{
+                                                *&lapvaltozo[mitsor1][mitoszlop1].elet = true;
+                                            }
                                             *&lapvaltozo[hovasor1][hovaoszlop1].elet = false;
-                                            *&lapvaltozo[mitsor1][mitoszlop1].elet = true;
                                             
                                             //HA POZITÍV IRÁNYBA TÖRTÉNIK A MOZGATÁS
                                             if(hovasor1 > 0 && hovaoszlop1 > 0){
@@ -2719,6 +2766,12 @@ int main() {
                                                 }
                                                 
                                                 bool szimulacioteszt = true;
+                                                bool voltott = false;
+                                                if(*&lapvaltozo[mitsor1][mitoszlop1].elet == false){
+                                                    voltott = false;
+                                                }else{
+                                                    voltott = true;
+                                                }
                                                 *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
                                                 *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
                                                 for(int i = 0; i<=99; i++){
@@ -2766,8 +2819,12 @@ int main() {
                                                         }
                                                     }
                                                 }
+                                                if(voltott == false){
+                                                    *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
+                                                }else{
+                                                    *&lapvaltozo[mitsor1][mitoszlop1].elet = true;
+                                                }
                                                 *&lapvaltozo[hovasor1][hovaoszlop1].elet = false;
-                                                *&lapvaltozo[mitsor1][mitoszlop1].elet = true;
                                                 
                                                 if(szimulacioteszt == true){
                                                     //3. 4. 5.
