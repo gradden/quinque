@@ -1091,6 +1091,15 @@ int main() {
                                                             if(*&lapvaltozo[i][a+1].elet == true){
                                                                 athelyezettpontszam+=1;
                                                             }
+                                                            if(i > 0 && a > 0){
+                                                                if(*&lapvaltozo[i+1][a].elet == false &&
+                                                                   *&lapvaltozo[i][a-1].elet == false &&
+                                                                   *&lapvaltozo[i-1][a].elet == false &&
+                                                                   *&lapvaltozo[i][a+1].elet == false) {
+                                                                    szimulacioteszt = false;
+                                                                    athelyezettpontszam = 0;
+                                                                }
+                                                            }
                                                         }
                                                     }
                                                 }
@@ -1325,6 +1334,15 @@ int main() {
                                                                 }
                                                                 if(*&lapvaltozo[i][a+1].elet == true){
                                                                     athelyezettpontszam+=1;
+                                                                }
+                                                                if(i > 0 && a > 0){
+                                                                    if(*&lapvaltozo[i+1][a].elet == false &&
+                                                                       *&lapvaltozo[i][a-1].elet == false &&
+                                                                       *&lapvaltozo[i-1][a].elet == false &&
+                                                                       *&lapvaltozo[i][a+1].elet == false) {
+                                                                        szimulacioteszt = false;
+                                                                        athelyezettpontszam = 0;
+                                                                    }
                                                                 }
                                                             }
                                                         }
@@ -1653,6 +1671,15 @@ int main() {
                                                             if(*&lapvaltozo[i][a+1].elet == true){
                                                                 athelyezettpontszam+=1;
                                                             }
+                                                            if(i > 0 && a > 0){
+                                                                if(*&lapvaltozo[i+1][a].elet == false &&
+                                                                   *&lapvaltozo[i][a-1].elet == false &&
+                                                                   *&lapvaltozo[i-1][a].elet == false &&
+                                                                   *&lapvaltozo[i][a+1].elet == false) {
+                                                                    szimulacioteszt = false;
+                                                                    athelyezettpontszam = 0;
+                                                                }
+                                                            }
                                                         }
                                                     }
                                                 }
@@ -1885,6 +1912,15 @@ int main() {
                                                             }
                                                             if(*&lapvaltozo[i][a+1].elet == true){
                                                                 athelyezettpontszam+=1;
+                                                            }
+                                                            if(i > 0 && a > 0){
+                                                                if(*&lapvaltozo[i+1][a].elet == false &&
+                                                                   *&lapvaltozo[i][a-1].elet == false &&
+                                                                   *&lapvaltozo[i-1][a].elet == false &&
+                                                                   *&lapvaltozo[i][a+1].elet == false) {
+                                                                    szimulacioteszt = false;
+                                                                    athelyezettpontszam = 0;
+                                                                }
                                                             }
                                                         }
                                                     }
@@ -2517,6 +2553,15 @@ int main() {
                                                             if(*&lapvaltozo[i][a+1].elet == true){
                                                                 athelyezettpontszam+=1;
                                                             }
+                                                            if(i > 0 && a > 0){
+                                                                if(*&lapvaltozo[i+1][a].elet == false &&
+                                                                   *&lapvaltozo[i][a-1].elet == false &&
+                                                                   *&lapvaltozo[i-1][a].elet == false &&
+                                                                   *&lapvaltozo[i][a+1].elet == false) {
+                                                                    szimulacioteszt = false;
+                                                                    athelyezettpontszam = 0;
+                                                                }
+                                                            }
                                                         }
                                                     }
                                                 }
@@ -2719,6 +2764,15 @@ int main() {
                                                             }
                                                             if(*&lapvaltozo[i][a+1].elet == true){
                                                                 athelyezettpontszam+=1;
+                                                            }
+                                                            if(i > 0 && a > 0){
+                                                                if(*&lapvaltozo[i+1][a].elet == false &&
+                                                                   *&lapvaltozo[i][a-1].elet == false &&
+                                                                   *&lapvaltozo[i-1][a].elet == false &&
+                                                                   *&lapvaltozo[i][a+1].elet == false) {
+                                                                    szimulacioteszt = false;
+                                                                    athelyezettpontszam = 0;
+                                                                }
                                                             }
                                                         }
                                                     }
@@ -3047,6 +3101,16 @@ int main() {
                                                             if(*&lapvaltozo[i][a+1].elet == true){
                                                                 athelyezettpontszam+=1;
                                                             }
+                                                            
+                                                            if(i > 0 && a > 0){
+                                                                if(*&lapvaltozo[i+1][a].elet == false &&
+                                                                   *&lapvaltozo[i][a-1].elet == false &&
+                                                                   *&lapvaltozo[i-1][a].elet == false &&
+                                                                   *&lapvaltozo[i][a+1].elet == false) {
+                                                                    szimulacioteszt = false;
+                                                                    athelyezettpontszam = 0;
+                                                                }
+                                                            }
                                                         }
                                                     }
                                                 }
@@ -3246,6 +3310,15 @@ int main() {
                                                             }
                                                             if(*&lapvaltozo[i][a+1].elet == true){
                                                                 athelyezettpontszam+=1;
+                                                            }
+                                                            if(i > 0 && a > 0){
+                                                                if(*&lapvaltozo[i+1][a].elet == false &&
+                                                                   *&lapvaltozo[i][a-1].elet == false &&
+                                                                   *&lapvaltozo[i-1][a].elet == false &&
+                                                                   *&lapvaltozo[i][a+1].elet == false) {
+                                                                    szimulacioteszt = false;
+                                                                    athelyezettpontszam = 0;
+                                                                }
                                                             }
                                                         }
                                                     }
