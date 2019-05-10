@@ -15,19 +15,19 @@ Megtekintened valamelyik lapot? Igen (I) vagy Nem (N): n
 
 Melyik lapra szeretned jelolni a szimbolumot?
 (A SZAMOZAS 0-TOL INDULNAK!)
-Sor: 1
-Oszlop: 1
+Sor: 0
+Oszlop: 0
 
  __
 |01|
 |23|
  --
 
-Ird be azt a szamot, amely helyere szeretned a szimbolumot: 1
+Ird be azt a szamot, amely helyere szeretned a szimbolumot: 0
 Jeloleseid szama meg: 17
 Kesz!
  __
-|0X|
+|X1|
 |23|
  --
 
@@ -37,10 +37,9 @@ Passzolva..
 1. bekeres, 2. jatekos
 Jeloles (J) vagy Mozgatas (M)?: j
 A lapok az alabbi helyen helyezkednek el (X = kartyalap)
-0.      - - - -
-1.      - X - -
-2.      - - - -
-3.      - - - -
+0.      X - -
+1.      - - -
+2.      - - -
 Jelolesi lehetosegeid szama: 18
 Megtekintened valamelyik lapot? Igen (I) vagy Nem (N): n
 
@@ -66,169 +65,45 @@ Kesz!
 2. bekeres, 2. jatekos
 Mozgatas (M) vagy Passz (P)?: p
 1. bekeres, 1. jatekos
-Jeloles (J) vagy Mozgatas (M)?: j
+Jeloles (J) vagy Mozgatas (M)?: m
 A lapok az alabbi helyen helyezkednek el (X = kartyalap)
-0.      - - - -
-1.      X X - -
+0.      X - - -
+1.      X - - -
 2.      - - - -
 3.      - - - -
-Jelolesi lehetosegeid szama: 17
 Megtekintened valamelyik lapot? Igen (I) vagy Nem (N): n
+Melyik lapot szeretned mozgatni?
+Sor: 1
+Oszlop: 0
 
-Melyik lapra szeretned jelolni a szimbolumot?
-(A SZAMOZAS 0-TOL INDULNAK!)
-Sor: 0
-Oszlop: 1
+Melyik poziciora szeretned rakni a kivalasztott kartyat?
+Sor: -1
+Oszlop: 0
 
- __
-|01|
-|23|
- --
-
-Ird be azt a szamot, amely helyere szeretned a szimbolumot: 2
-Jeloleseid szama meg: 16
-Kesz!
- __
-|01|
-|X3|
- --
+// CRASH
+...
+// UJ JATEK:
 
 2. bekeres, 1. jatekos
 Mozgatas (M) vagy Passz (P)?: p
 Passzolva..
 1. bekeres, 2. jatekos
-Jeloles (J) vagy Mozgatas (M)?: j
-A lapok az alabbi helyen helyezkednek el (X = kartyalap)
-0.      - X - -
-1.      X X - -
-2.      - - - -
-3.      - - - -
-Jelolesi lehetosegeid szama: 17
-Megtekintened valamelyik lapot? Igen (I) vagy Nem (N): n
-
-Melyik lapra szeretned jelolni a szimbolumot?
-(A SZAMOZAS 0-TOL INDULNAK!)
-Sor: 1
-Oszlop: -1
-
-
- __
-|01|
-|23|
- --
-
-Ird be azt a szamot, amely helyere szeretned a szimbolumot: 3
-Jeloleseid szama meg: 16
-Kesz!
- __
-|01|
-|2O|
- --
-
-2. bekeres, 2. jatekos
-Mozgatas (M) vagy Passz (P)?: p
-1. bekeres, 1. jatekos
-Jeloles (J) vagy Mozgatas (M)?: j
-A lapok az alabbi helyen helyezkednek el (X = kartyalap)
-0.      - - X - -
-1.      X X X - -
-2.      - - - - -
-3.      - - - - -
-4.      - - - - -
-Jelolesi lehetosegeid szama: 16
-Megtekintened valamelyik lapot? Igen (I) vagy Nem (N): n
-
-Melyik lapra szeretned jelolni a szimbolumot?
-(A SZAMOZAS 0-TOL INDULNAK!)
-Sor: 0
-Oszlop: 1
-
- __
-|01|
-|23|
- --
-
-Ird be azt a szamot, amely helyere szeretned a szimbolumot: 1
-Jeloleseid szama meg: 15
-Kesz!
- __
-|0X|
-|23|
- --
-
-2. bekeres, 1. jatekos
-Mozgatas (M) vagy Passz (P)?: m
-A lapok az alabbi helyen helyezkednek el (X = kartyalap)
-0.      - X X - -
-1.      X X X - -
-2.      - - - - -
-3.      - - - - -
-4.      - - - - -
-Megtekintened valamelyik lapot? Igen (I) vagy Nem (N): n
-Melyik lapot szeretned mozgatni?
-Sor: 1
-Oszlop: 2
-
-Melyik poziciora szeretned rakni a kivalasztott kartyat?
-Sor: 0
-Oszlop: 0
-
-00
-10
-20
-A lapok az alabbi helyen helyezkednek el (X = kartyalap)
-0.      X X X - -
-1.      X X - - -
-2.      - - - - -
-3.      - - - - -
-4.      - - - - -
-Megtekintened valamelyik lapot? Igen (I) vagy Nem (N): n
-1. bekeres, 2. jatekos
 Jeloles (J) vagy Mozgatas (M)?: m
 A lapok az alabbi helyen helyezkednek el (X = kartyalap)
 0.      X X X - -
-1.      X X - - -
+1.      - - - - -
 2.      - - - - -
 3.      - - - - -
 4.      - - - - -
 Megtekintened valamelyik lapot? Igen (I) vagy Nem (N): n
 Melyik lapot szeretned mozgatni?
 Sor: 0
-Oszlop: 1
-Melyik poziciora szeretned rakni a kivalasztott kartyat?
-Sor: 1
 Oszlop: 2
-00
-20
-A lapok az alabbi helyen helyezkednek el (X = kartyalap)
-0.      X - X - -
-1.      X X X - -
-2.      - - - - -
-3.      - - - - -
-4.      - - - - -
-Megtekintened valamelyik lapot? Igen (I) vagy Nem (N): n
-2. bekeres, 2. jatekos
-Mozgatas (M) vagy Passz (P)?: m
-A lapok az alabbi helyen helyezkednek el (X = kartyalap)
-0.      X - X - -
-1.      X X X - -
-2.      - - - - -
-3.      - - - - -
-4.      - - - - -
-Megtekintened valamelyik lapot? Igen (I) vagy Nem (N): n
-Melyik lapot szeretned mozgatni?
-Sor: 1
-Oszlop: 1
 Melyik poziciora szeretned rakni a kivalasztott kartyat?
 Sor: 1
-Oszlop: 3
-00
-20
+Oszlop: 0
 A lapok az alabbi helyen helyezkednek el (X = kartyalap)
-0.      X - X - - -
-1.      X - X X - -
-2.      - - - - - -
-3.      - - - - - -
-4.      - - - - - -
-5.      - - - - - -
-Megtekintened valamelyik lapot? Igen (I) vagy Nem (N):
+0.      X X - -
+1.      X - - -
+2.      - - - -
+3.      - - - -
