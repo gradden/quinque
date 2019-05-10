@@ -1010,10 +1010,11 @@ int main() {
                                                         }
                                                     }
                                                 }
-                                                
-                                                if(*&lapvaltozo[mitsor1][mitoszlop1].jeloltlap == true){
-                                                    vaneelet = false;
-                                                    cout << "Erre a lapra jeloltel szimbolumot! Ezt nem lehet mozgatni.";
+                                                if(mitsor1 >= 0 && mitoszlop1 >= 0){
+                                                    if(*&lapvaltozo[mitsor1][mitoszlop1].jeloltlap == true){
+                                                        vaneelet = false;
+                                                        cout << "Erre a lapra jeloltel szimbolumot! Ezt nem lehet mozgatni.";
+                                                    }
                                                 }
                                             }while(vaneelet == false);
                                             
@@ -1036,13 +1037,17 @@ int main() {
                                                     }
                                                     cout << endl;
                                                 }while(!cin);
-                                                
-                                                if(*&lapvaltozo[hovasor1][hovaoszlop1].elet == true){
-                                                    cout << "Itt mar letezik egy lap. Valassz masikat.\n";
-                                                    helybev = false;
+                                                if(hovasor1>=0 && hovaoszlop1 >=0){
+                                                    if(*&lapvaltozo[hovasor1][hovaoszlop1].elet == true){
+                                                        cout << "Itt mar letezik egy lap. Valassz masikat.\n";
+                                                        helybev = false;
+                                                    }else{
+                                                        helybev = true;
+                                                    }
                                                 }else{
                                                     helybev = true;
                                                 }
+                                                
                                             }while(helybev == false);
                                             
                                             
@@ -1555,31 +1560,48 @@ int main() {
                                                         vaneelet = false;
                                                     }
                                                 }
-                                                if(*&lapvaltozo[mitsor1][mitoszlop1].jeloltlap == true){
-                                                    vaneelet = false;
-                                                    cout << "Ezt a lapot jelolted ebben a korben. Sajnos ezt nem lehet mozgatni.";
+                                                if(mitsor1 >= 0 && mitoszlop1 >= 0){
+                                                    if(*&lapvaltozo[mitsor1][mitoszlop1].jeloltlap == true){
+                                                        vaneelet = false;
+                                                        cout << "Erre a lapra jeloltel szimbolumot! Ezt nem lehet mozgatni.";
+                                                    }
                                                 }
                                             }while(vaneelet == false);
                                             
                                             
                                             
                                             
+                                            bool helybev = false;
                                             do{
-                                                cout << "Melyik poziciora szeretned rakni a kivalasztott kartyat?\nSor: ";
-                                                cin >> hovasor1;
-                                                if(!cin){
-                                                    cin.clear();
-                                                    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                                                do{
+                                                    
+                                                    cout << "Melyik poziciora szeretned rakni a kivalasztott kartyat?\nSor: ";
+                                                    cin >> hovasor1;
+                                                    if(!cin){
+                                                        cin.clear();
+                                                        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                                                    }
+                                                    cout << "Oszlop: ";
+                                                    cin >> hovaoszlop1;
+                                                    if(!cin){
+                                                        cin.clear();
+                                                        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                                                    }
+                                                    cout << endl;
+                                                }while(!cin);
+                                                if(hovasor1>=0 || hovaoszlop1 >=0){
+                                                    if(*&lapvaltozo[hovasor1][hovaoszlop1].elet == true){
+                                                        cout << "Itt mar letezik egy lap. Valassz masikat.\n";
+                                                        helybev = false;
+                                                    }else{
+                                                        helybev = true;
+                                                    }
+                                                }else{
+                                                    helybev = true;
                                                 }
-                                                cout << "Oszlop: ";
-                                                cin >> hovaoszlop1;
-                                                if(!cin){
-                                                    cin.clear();
-                                                    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                                                }
-                                                cout << endl;
                                                 
-                                            }while(!cin);
+                                            }while(helybev == false);
+
                                             
                                             
                                             int hanylapvanapalyan = 0;
@@ -2404,30 +2426,48 @@ int main() {
                                                     }
                                                 }
                                                 
-                                                if(*&lapvaltozo[mitsor1][mitoszlop1].jeloltlap == true){
-                                                    vaneelet = false;
-                                                    cout << "Ezt a lapot jelolted ebben a korben. Sajnos ezt nem lehet mozgatni.";
+                                                if(mitsor1 >= 0 && mitoszlop1 >= 0){
+                                                    if(*&lapvaltozo[mitsor1][mitoszlop1].jeloltlap == true){
+                                                        vaneelet = false;
+                                                        cout << "Erre a lapra jeloltel szimbolumot! Ezt nem lehet mozgatni.";
+                                                    }
                                                 }
                                             }while(vaneelet == false);
                                             
                                             
                                             
                                             
+                                            bool helybev = false;
                                             do{
-                                                cout << "Melyik poziciora szeretned rakni a kivalasztott kartyat?\nSor: ";
-                                                cin >> hovasor1;
-                                                if(!cin){
-                                                    cin.clear();
-                                                    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                                                do{
+                                                    
+                                                    cout << "Melyik poziciora szeretned rakni a kivalasztott kartyat?\nSor: ";
+                                                    cin >> hovasor1;
+                                                    if(!cin){
+                                                        cin.clear();
+                                                        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                                                    }
+                                                    cout << "Oszlop: ";
+                                                    cin >> hovaoszlop1;
+                                                    if(!cin){
+                                                        cin.clear();
+                                                        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                                                    }
+                                                    cout << endl;
+                                                }while(!cin);
+                                                if(hovasor1>=0 && hovaoszlop1 >=0){
+                                                    if(*&lapvaltozo[hovasor1][hovaoszlop1].elet == true){
+                                                        cout << "Itt mar letezik egy lap. Valassz masikat.\n";
+                                                        helybev = false;
+                                                    }else{
+                                                        helybev = true;
+                                                    }
+                                                }else{
+                                                    helybev = true;
                                                 }
-                                                cout << "Oszlop: ";
-                                                cin >> hovaoszlop1;
-                                                if(!cin){
-                                                    cin.clear();
-                                                    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                                                }
-                                            }while(!cin);
-                                            
+                                                
+                                            }while(helybev == false);
+
                                             
                                             //Szimuláció, hogy összefüggő marad-e a pálya!
                                             bool szimulacioteszt = true;
@@ -2912,29 +2952,48 @@ int main() {
                                                         }
                                                     }
                                                 }
-                                                if(*&lapvaltozo[mitsor1][mitoszlop1].jeloltlap == true){
-                                                    vaneelet = false;
-                                                    cout << "Ezt a lapot jelolted ebben a korben. Sajnos ezt nem lehet mozgatni.";
+                                                if(mitsor1 >= 0 && mitoszlop1 >= 0){
+                                                    if(*&lapvaltozo[mitsor1][mitoszlop1].jeloltlap == true){
+                                                        vaneelet = false;
+                                                        cout << "Erre a lapra jeloltel szimbolumot! Ezt nem lehet mozgatni.";
+                                                    }
                                                 }
                                             }while(vaneelet == false);
                                             
                                             
                                             
                                             
+                                            bool helybev = false;
                                             do{
-                                                cout << "Melyik poziciora szeretned rakni a kivalasztott kartyat?\nSor: ";
-                                                cin >> hovasor1;
-                                                if(!cin){
-                                                    cin.clear();
-                                                    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                                                do{
+                                                    
+                                                    cout << "Melyik poziciora szeretned rakni a kivalasztott kartyat?\nSor: ";
+                                                    cin >> hovasor1;
+                                                    if(!cin){
+                                                        cin.clear();
+                                                        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                                                    }
+                                                    cout << "Oszlop: ";
+                                                    cin >> hovaoszlop1;
+                                                    if(!cin){
+                                                        cin.clear();
+                                                        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                                                    }
+                                                    cout << endl;
+                                                }while(!cin);
+                                                if(hovasor1>=0 && hovaoszlop1 >=0){
+                                                    if(*&lapvaltozo[hovasor1][hovaoszlop1].elet == true){
+                                                        cout << "Itt mar letezik egy lap. Valassz masikat.\n";
+                                                        helybev = false;
+                                                    }else{
+                                                        helybev = true;
+                                                    }
+                                                }else{
+                                                    helybev = true;
                                                 }
-                                                cout << "Oszlop: ";
-                                                cin >> hovaoszlop1;
-                                                if(!cin){
-                                                    cin.clear();
-                                                    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                                                }
-                                            }while(!cin);
+                                                
+                                            }while(helybev == false);
+
                                             
                                             
                                             
