@@ -19,8 +19,8 @@
 using namespace std;
 
 struct lap{
-    short *jel = new short[4];
-    short *tarolo = new short[4];
+    short jel[4];
+    short tarolo[4];
     bool elet = false;
     bool mozgatva = false;
     bool jeloltlap = false;
@@ -29,9 +29,10 @@ struct lap{
 
 float jatekvege = 0;
 float playersorszam = 0;
-int ossz = 99;
+
 int player1sim = 18;
 int player2sim = 18;
+int index1 = 10;
 int fuggpontszam1jobb = 0;
 int fuggpontszam1bal = 0;
 int fuggpontszam2jobb = 0;
@@ -52,8 +53,8 @@ void vizsgalat(lap* lapvaltozo[]){
     }
     
     //Függőleges lap és szimbólumvizsgálás PLAYER 1NEK!!!!!!
-    for(int i=0; i<=99; i++){
-        for (int a=0; a<=99; a++) {
+    for(int i=0; i<=index1; i++){
+        for (int a=0; a<=index1; a++) {
             //PLAYER1
             //Függőleges bal
             if(*&lapvaltozo[a][i].jel[0] == 1){
@@ -140,8 +141,8 @@ void vizsgalat(lap* lapvaltozo[]){
     //Átlós vizsgálat
     int pos1;
     int pos1ures = false;
-    for(int a = 0; a<=99; a++){
-        for(int i =0; i<=99; i++) {
+    for(int a = 0; a<=index1; a++){
+        for(int i =0; i<=index1; i++) {
             if(*&lapvaltozo[a][i].jel[0] == 1 || *&lapvaltozo[a][i].jel[3] == 1 ){
                 if(pos1ures == false){
                     atlopont1_1 = 0;
@@ -150,8 +151,8 @@ void vizsgalat(lap* lapvaltozo[]){
                 pos1ures = false;
                 
                 //cout << "pos: "<< pos1 << "\n";
-                for(int j=0; j<=99; j++){
-                    if((j+pos1) < 99 && (j+pos1) < 99){
+                for(int j=0; j<=index1; j++){
+                    if((j+pos1) < index1 && (j+pos1) < index1){
                         if(*&lapvaltozo[(j+pos1)][(j+pos1)].jel[0] == 1) {
                             atlopont1_1 +=1;
                             if(atlopont1_1 == 5){
@@ -182,8 +183,8 @@ void vizsgalat(lap* lapvaltozo[]){
     }
     
     //Átlós vizsgálat
-    for(int a = 0; a<=99; a++){
-        for(int i =0; i<=99; i++) {
+    for(int a = 0; a<=index1; a++){
+        for(int i =0; i<=index1; i++) {
             if(*&lapvaltozo[a][i].jel[1] == 1 || *&lapvaltozo[a][i].jel[2] == 1 ){
                 if(pos1ures == false){
                     atlopont1_1 = 0;
@@ -192,7 +193,7 @@ void vizsgalat(lap* lapvaltozo[]){
                 pos1ures = false;
                 
                 //cout << "pos: "<< pos1 << "\n";
-                for(int j=0; j<=99; j++){
+                for(int j=0; j<=index1; j++){
                     if((pos1-j) >=0){
                         if(*&lapvaltozo[j][(pos1-j)].jel[1] == 1) {
                             atlopont1_1 +=1;
@@ -225,8 +226,8 @@ void vizsgalat(lap* lapvaltozo[]){
     
     
     //Függőleges lap és szimbólumvizsgálás PLAYER2NEK!!!!!!
-    for(int i=0; i<=99; i++){
-        for (int a=0; a<=99; a++) {
+    for(int i=0; i<=index1; i++){
+        for (int a=0; a<=index1; a++) {
             //PLAYER1
             //Függőleges bal
             if(*&lapvaltozo[a][i].jel[0] == 2){
@@ -311,8 +312,8 @@ void vizsgalat(lap* lapvaltozo[]){
     }
     
     //Átlós vizsgálat
-    for(int a = 0; a<=99; a++){
-        for(int i =0; i<=99; i++) {
+    for(int a = 0; a<=index1; a++){
+        for(int i =0; i<=index1; i++) {
             if(*&lapvaltozo[a][i].jel[0] == 2 || *&lapvaltozo[a][i].jel[3] == 2 ){
                 if(pos1ures == false){
                     atlopont2_1 = 0;
@@ -321,8 +322,8 @@ void vizsgalat(lap* lapvaltozo[]){
                 pos1ures = false;
                 
                 //cout << "pos: "<< pos1 << "\n";
-                for(int j=0; j<=99; j++){
-                    if((j+pos1) < 99 && (j+pos1) < 99){
+                for(int j=0; j<=index1; j++){
+                    if((j+pos1) < index1 && (j+pos1) < index1){
                         if(*&lapvaltozo[(j+pos1)][(j+pos1)].jel[0] == 2) {
                             atlopont2_1 +=1;
                             if(atlopont2_1 == 5){
@@ -353,8 +354,8 @@ void vizsgalat(lap* lapvaltozo[]){
     }
     
     //Átlós vizsgálat
-    for(int a = 0; a<=99; a++){
-        for(int i =0; i<=99; i++) {
+    for(int a = 0; a<=index1; a++){
+        for(int i =0; i<=index1; i++) {
             if(*&lapvaltozo[a][i].jel[1] == 2 || *&lapvaltozo[a][i].jel[2] == 2 ){
                 if(pos1ures == false){
                     atlopont2_1 = 0;
@@ -363,7 +364,7 @@ void vizsgalat(lap* lapvaltozo[]){
                 pos1ures = false;
                 
                 //cout << "pos: "<< pos1 << "\n";
-                for(int j=0; j<=99; j++){
+                for(int j=0; j<=index1; j++){
                     if((pos1-j) >=0){
                         if(*&lapvaltozo[j][(pos1-j)].jel[1] == 2) {
                             atlopont2_1 +=1;
@@ -412,46 +413,66 @@ int nagyobb(int a, int b){
     return nagy;
 }
 
-void dinamikusnovekves(lap* lapvaltozo[], lap* lapcache[], int ujmeret){
-    for(size_t s = 0; s<=ossz; s++){
-        for(size_t i = 0; i<=ossz; i++){
-            *&lapcache[s][i].elet = *&lapvaltozo[s][i].elet;
+lap** dinamikusnovekves(lap* lapvaltozo[], int ujmeret){
+    lap **lapcache;
+    lapcache = new lap*[ujmeret+2];
+    for(int i=0; i<ujmeret+2; i++){
+        lapcache[i] = new lap[ujmeret+2];
+    }
+    
+    for (size_t i=0; i<=index1; i++) {
+        for (size_t a=0; a<=index1; a++) {
+            for (int s = 0; s<4; s++){
+                *&lapcache[i][a].jel[s] = 0;
+            }
+        }
+    }
+    
+    for(size_t s = 0; s<=index1; s++){
+        for(size_t i = 0; i<=index1; i++){
+            *&lapcache[s][i].elet =
+            *&lapvaltozo[s][i].elet;
             for(int a=0; a<=3; a++){
                 *&lapcache[s][i].jel[a] = *&lapvaltozo[s][i].jel[a];
             }
         }
     }
-    for(int i=0; i<=ossz; i++){
+    for(int i=0; i<=index1; i++){
         delete [] lapvaltozo[i];
     }
     delete [] lapvaltozo;
     
-    lapvaltozo = new lap*[ujmeret];
-    for(int i=0; i<ujmeret; i++){
-        lapvaltozo[i] = new lap[ujmeret];
+    lapvaltozo = new lap*[ujmeret+2];
+    for(int i=0; i<ujmeret+2; i++){
+        lapvaltozo[i] = new lap[ujmeret+2];
     }
     
-    for(size_t s = 0; s<=ossz; s++){
-        for(size_t i = 0; i<=ossz; i++){
-            *&lapcache[s][i].elet = *&lapvaltozo[s][i].elet;
+    for (size_t i=0; i<=index1; i++) {
+        for (size_t a=0; a<=index1; a++) {
+            for (int s = 0; s<4; s++){
+                *&lapvaltozo[i][a].jel[s] = 0;
+            }
+        }
+    }
+    
+    for(size_t s = 0; s<=ujmeret+1; s++){
+        for(size_t i = 0; i<=ujmeret+1; i++){
+            *&lapvaltozo[s][i].elet = *&lapcache[s][i].elet;
             for(int a=0; a<=3; a++){
                 *&lapvaltozo[s][i].jel[a] = *&lapcache[s][i].jel[a];
             }
         }
     }
     
-    for(int i=0; i<=ossz; i++){
+    
+    for(int i=0; i<=ujmeret; i++){
         delete [] lapcache[i];
     }
     delete [] lapcache;
     
-    lapcache = new lap*[ujmeret];
-    for(int i=0; i<ujmeret; i++){
-        lapcache[i] = new lap[ujmeret];
-    }
+    index1 = ujmeret;
     
-    ossz = ujmeret;
-    
+    return *&lapvaltozo;
 }
 
 void kartyamegjelenites(lap* lapvaltozo[], int sor, int oszlop){
@@ -493,30 +514,10 @@ void kartyamegjelenites(lap* lapvaltozo[], int sor, int oszlop){
 
 void koordinatalap(lap* lapvaltozo[]){
     cout << "A lapok az alabbi helyen helyezkednek el (X = kartyalap)\n";
-    int eletbenlap = 0;
-    int maxpos = 0;
-    for(size_t s = 0; s<=99; s++){
-        for(size_t i = 0; i<=99; i++){
-            if(*&lapvaltozo[s][i].elet == true){
-                if(i>s){
-                    eletbenlap = (int)i+1;
-                }
-                if(s>i){
-                    eletbenlap = (int)s+1;
-                }
-                if(s==i){
-                    eletbenlap = (int)s+1;
-                }
-                if(maxpos <= eletbenlap){
-                    maxpos = eletbenlap;
-                }
-            }
-        }
-    }
     
-    for(size_t i=0; i<maxpos+2; i++){
+    for(size_t i=0; i<=index1; i++){
         cout << i << ".\t";
-        for(size_t a=0; a<maxpos+2; a++){
+        for(size_t a=0; a<=index1; a++){
             if(*&lapvaltozo[i][a].elet == true){
                 cout << "X ";
             }else{
@@ -561,34 +562,22 @@ void lapmegtekintes(lap* lapvaltozo[]){
 
 int main() {
     
+    
     lap **lapvaltozo;
-    lap **lapcache;
-    lapvaltozo = new lap*[100];
-    for(int i=0; i<100; i++){
-        lapvaltozo[i] = new lap[100];
+    
+    lapvaltozo = new lap*[index1+1];
+    for(int i=0; i<=index1; i++){
+        lapvaltozo[i] = new lap[index1+1];
     }
     
-    for (size_t i=0; i<99; i++) {
-        for (size_t a=0; a<=99; a++) {
+    for (size_t i=0; i<=index1; i++) {
+        for (size_t a=0; a<=index1; a++) {
             for (int s = 0; s<4; s++){
                 *&lapvaltozo[i][a].jel[s] = 0;
             }
         }
     }
     
-    
-    lapcache = new lap*[100];
-    for(int i=0; i<100; i++){
-        lapcache[i] = new lap[100];
-    }
-    
-    for (size_t i=0; i<99; i++) {
-        for (size_t a=0; a<=99; a++) {
-            for (int s = 0; s<4; s++){
-                *&lapcache[i][a].jel[s] = 0;
-            }
-        }
-    }
     
     
     string bekert1_1;
@@ -600,21 +589,15 @@ int main() {
         cerr << "Sikertelen memoriafoglalas";
         return 1;
     }
-    
-    for(size_t s = 0; s<=99; s++){
-        for(size_t i = 0; i<=99; i++){
-            *&lapvaltozo[s][i].jel[1] = 0;
-        }
-    }
     playersorszam = 1;
     
     
     
     /**&lapvaltozo[0][0].elet = true;
-    *&lapvaltozo[1][0].elet = true;
-    *&lapvaltozo[1][1].elet = true;
-    *&lapvaltozo[1][2].elet = true;
-    *&lapvaltozo[0][2].elet = true;*/
+     *&lapvaltozo[1][0].elet = true;
+     *&lapvaltozo[1][1].elet = true;
+     *&lapvaltozo[1][2].elet = true;
+     *&lapvaltozo[0][2].elet = true;*/
     
     
     
@@ -624,7 +607,7 @@ int main() {
     cout << "A kartyalapok pozicioit lepesenkent lehetoseg lesz megtekinteni, illetve azon beluli lapok szimbolumait.\n";
     cout << "A megtekintett kartyalapokon ha szamokat latsz, akkor nincs rajta szimbolum!\n";
     cout << "Kezdodjek a jatek!!\n\n";
-
+    
     bool kezdes = true;
     
     int simbesor1 = NULL;
@@ -687,6 +670,11 @@ int main() {
                                                 cout << endl;
                                                 
                                             }while(!cin);
+                                            
+                                            if(index1 < nagyobb(simbesor1, simbeoszlop1)){
+                                                *&lapvaltozo = dinamikusnovekves(*&lapvaltozo, nagyobb(simbesor1, simbeoszlop1));
+                                                
+                                            }
                                             int simszamlalo = 0;
                                             bool megtelt = false;
                                             if(simbesor1 > 0 && simbeoszlop1 > 0){
@@ -705,195 +693,206 @@ int main() {
                                             }
                                             
                                             if(megtelt == false){
-                                                if(simbesor1 < 99 || simbeoszlop1 < 99){
                                                 
-                                                    if(simbesor1 < 0 || simbeoszlop1 < 0){
-                                                        if(simbesor1 < 0){
-                                                            //Lefele toljuk a komplett palyat
-                                                            for(int i=0; i<=99; i++){
-                                                                for(int a=0; a<=99; a++){
-                                                                    if(*&lapvaltozo[i][a].elet == true && *&lapvaltozo[i][a].mozgatva == false){
-                                                                        for(int s = 0; s<=4; s++){
-                                                                                /**&lapvaltozo[i+1][a].jel[s] = *&lapvaltozo[i][a].jel[s];
-                                                                                *&lapvaltozo[i][a].jel[s] = 0;*/
-                                                                            *&lapvaltozo[i][a].tarolo[s] = *&lapvaltozo[i][a].jel[s];
-                                                                            *&lapvaltozo[i][a].jel[s] = 0;
-                                                                            
-                                                                            //*&lapvaltozo[i+1][a].jel[s] = *&lapvaltozo[i][a].tarolo[s];
-                                                                        }
-                                                                        *&lapvaltozo[i][a].elet = false;
-                                                                        *&lapvaltozo[i][a].mozgatva = true;
+                                                if(simbesor1 < 0 || simbeoszlop1 < 0){
+                                                    if(simbesor1 < 0){
+                                                        //Lefele toljuk a komplett palyat
+                                                        for(int i=0; i<=index1; i++){
+                                                            for(int a=0; a<=index1; a++){
+                                                                if(*&lapvaltozo[i][a].elet == true && *&lapvaltozo[i][a].mozgatva == false){
+                                                                    for(int s = 0; s<=4; s++){
+                                                                        /**&lapvaltozo[i+1][a].jel[s] = *&lapvaltozo[i][a].jel[s];
+                                                                         *&lapvaltozo[i][a].jel[s] = 0;*/
+                                                                        *&lapvaltozo[i][a].tarolo[s] = *&lapvaltozo[i][a].jel[s];
+                                                                        *&lapvaltozo[i][a].jel[s] = 0;
                                                                         
+                                                                        //*&lapvaltozo[i+1][a].jel[s] = *&lapvaltozo[i][a].tarolo[s];
                                                                     }
-                                                                }
-                                                            }
-                                                            for(int i=0; i<=99; i++){
-                                                                for(int a=0; a<=99; a++){
-                                                                    if(*&lapvaltozo[i][a].mozgatva == true){
-                                                                        for(int s = 0; s<=4; s++){
-                                                                            *&lapvaltozo[i+1][a].jel[s] = *&lapvaltozo[i][a].tarolo[s];
-                                                                        }
+                                                                    *&lapvaltozo[i][a].elet = false;
+                                                                    *&lapvaltozo[i][a].mozgatva = true;
                                                                     
-                                                                        *&lapvaltozo[i+1][a].elet = true;
+                                                                }
+                                                            }
+                                                        }
+                                                        for(int i=0; i<=index1; i++){
+                                                            for(int a=0; a<=index1; a++){
+                                                                if(*&lapvaltozo[i][a].mozgatva == true){
+                                                                    for(int s = 0; s<=4; s++){
+                                                                        *&lapvaltozo[i+1][a].jel[s] = *&lapvaltozo[i][a].tarolo[s];
                                                                     }
+                                                                    
+                                                                    *&lapvaltozo[i+1][a].elet = true;
                                                                 }
                                                             }
-                                                            
-                                                            for(int i=0; i<=99; i++){
-                                                                for(int a=0; a<=99; a++){
-                                                                    *&lapvaltozo[i][a].mozgatva = false;
-                                                                }
-                                                            }
-                                                            simbesor1 = 0;
                                                         }
                                                         
-                                                        
-                                                        if(simbeoszlop1 < 0){
-                                                            //Oldalra toljuk a komplett palyat
-                                                            for(int i=0; i<=99; i++){
-                                                                for(int a=0; a<=99; a++){
-                                                                    if(*&lapvaltozo[i][a].elet == true && *&lapvaltozo[i][a].mozgatva == false){
-                                                                        for(int s = 0; s<=4; s++){
-                                                                            *&lapvaltozo[i][a].tarolo[s] = *&lapvaltozo[i][a].jel[s];
-                                                                            *&lapvaltozo[i][a].jel[s] = 0;
-                                                                        }
-                                                                        *&lapvaltozo[i][a].elet = false;
-                                                                        *&lapvaltozo[i][a].mozgatva = true;
-                                                                        
+                                                        for(int i=0; i<=index1; i++){
+                                                            for(int a=0; a<=index1; a++){
+                                                                *&lapvaltozo[i][a].mozgatva = false;
+                                                            }
+                                                        }
+                                                        simbesor1 = 0;
+                                                    }
+                                                    
+                                                    
+                                                    if(simbeoszlop1 < 0){
+                                                        //Oldalra toljuk a komplett palyat
+                                                        for(int i=0; i<=index1; i++){
+                                                            for(int a=0; a<=index1; a++){
+                                                                if(*&lapvaltozo[i][a].elet == true && *&lapvaltozo[i][a].mozgatva == false){
+                                                                    for(int s = 0; s<=4; s++){
+                                                                        *&lapvaltozo[i][a].tarolo[s] = *&lapvaltozo[i][a].jel[s];
+                                                                        *&lapvaltozo[i][a].jel[s] = 0;
                                                                     }
+                                                                    *&lapvaltozo[i][a].elet = false;
+                                                                    *&lapvaltozo[i][a].mozgatva = true;
+                                                                    
                                                                 }
                                                             }
-                                                            for(int i=0; i<=99; i++){
-                                                                for(int a=0; a<=99; a++){
-                                                                    if(*&lapvaltozo[i][a].mozgatva == true){
-                                                                        for(int s = 0; s<=4; s++){
-                                                                            *&lapvaltozo[i][a+1].jel[s] = *&lapvaltozo[i][a].tarolo[s];
-                                                                        }
-                                                                        
-                                                                        *&lapvaltozo[i][a+1].elet = true;
+                                                        }
+                                                        for(int i=0; i<=index1; i++){
+                                                            for(int a=0; a<=index1; a++){
+                                                                if(*&lapvaltozo[i][a].mozgatva == true){
+                                                                    for(int s = 0; s<=4; s++){
+                                                                        *&lapvaltozo[i][a+1].jel[s] = *&lapvaltozo[i][a].tarolo[s];
                                                                     }
+                                                                    
+                                                                    *&lapvaltozo[i][a+1].elet = true;
                                                                 }
                                                             }
-                                                            
-                                                            for(int i=0; i<=99; i++){
-                                                                for(int a=0; a<=99; a++){
-                                                                    *&lapvaltozo[i][a].mozgatva = false;
-                                                                }
+                                                        }
+                                                        
+                                                        for(int i=0; i<=index1; i++){
+                                                            for(int a=0; a<=index1; a++){
+                                                                *&lapvaltozo[i][a].mozgatva = false;
                                                             }
-                                                            simbeoszlop1 = 0;
+                                                        }
+                                                        simbeoszlop1 = 0;
+                                                    }
+                                                    
+                                                    
+                                                    //3. 4. 5.
+                                                    //-  X  -
+                                                    //   -
+                                                    //Vizsgálat az X körül (szomszédkeresés), ha stimmel minden, mozgathatjuk
+                                                    if(simbesor1 == 0 && simbeoszlop1 != 0){
+                                                        if(*&lapvaltozo[simbesor1][simbeoszlop1+1].elet == true ||
+                                                           *&lapvaltozo[simbesor1+1][simbeoszlop1].elet == true ||
+                                                           *&lapvaltozo[simbesor1][simbeoszlop1-1].elet == true) {
+                                                            
+                                                            *&lapvaltozo[simbesor1][simbeoszlop1].elet = true;
+                                                            szomszedos = true;
+                                                        }else{
+                                                            cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n";
+                                                            szomszedos = false;
                                                         }
                                                         
                                                         
-                                                        //3. 4. 5.
-                                                        //-  X  -
-                                                        //   -
-                                                        //Vizsgálat az X körül (szomszédkeresés), ha stimmel minden, mozgathatjuk
-                                                        if(simbesor1 == 0 && simbeoszlop1 != 0){
-                                                            if(*&lapvaltozo[simbesor1][simbeoszlop1+1].elet == true ||
-                                                               *&lapvaltozo[simbesor1+1][simbeoszlop1].elet == true ||
-                                                               *&lapvaltozo[simbesor1][simbeoszlop1-1].elet == true) {
-                                                                
-                                                                *&lapvaltozo[simbesor1][simbeoszlop1].elet = true;
-                                                                szomszedos = true;
-                                                            }else{
-                                                                cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n";
-                                                                szomszedos = false;
-                                                            }
+                                                    }
+                                                    
+                                                    
+                                                    //5. |-
+                                                    //6. |X -
+                                                    //7. |-
+                                                    //Vizsgálat az X körül (szomszédkeresés), ha stimmel minden, mozgathatjuk
+                                                    if(simbeoszlop1 == 0 && simbesor1 != 0){
+                                                        if(*&lapvaltozo[simbesor1][simbeoszlop1+1].elet == true ||
+                                                           *&lapvaltozo[simbesor1+1][simbeoszlop1].elet == true ||
+                                                           *&lapvaltozo[simbesor1-1][simbeoszlop1].elet == true ) {
                                                             
-                                                            
+                                                            *&lapvaltozo[simbesor1][simbeoszlop1].elet = true;
+                                                            szomszedos = true;
+                                                        }else{
+                                                            cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n";
+                                                            szomszedos = false;
                                                         }
                                                         
                                                         
-                                                        //5. |-
-                                                        //6. |X -
-                                                        //7. |-
-                                                        //Vizsgálat az X körül (szomszédkeresés), ha stimmel minden, mozgathatjuk
-                                                        if(simbeoszlop1 == 0 && simbesor1 != 0){
-                                                            if(*&lapvaltozo[simbesor1][simbeoszlop1+1].elet == true ||
-                                                               *&lapvaltozo[simbesor1+1][simbeoszlop1].elet == true ||
-                                                               *&lapvaltozo[simbesor1-1][simbeoszlop1].elet == true ) {
-                                                                
-                                                                *&lapvaltozo[simbesor1][simbeoszlop1].elet = true;
-                                                                szomszedos = true;
-                                                            }else{
-                                                                cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n";
-                                                                szomszedos = false;
-                                                            }
+                                                    }
+                                                    
+                                                    
+                                                    //    0. 1.
+                                                    //0. |X  -
+                                                    //1. |-
+                                                    //
+                                                    //Vizsgálat az X körül (szomszédkeresés), ha stimmel minden, mozgathatjuk
+                                                    if(simbesor1 == 0 && simbeoszlop1 == 0){
+                                                        if(*&lapvaltozo[simbesor1][simbeoszlop1+1].elet == true ||
+                                                           *&lapvaltozo[simbesor1+1][simbeoszlop1].elet == true) {
                                                             
-                                                            
+                                                            *&lapvaltozo[simbesor1][simbeoszlop1].elet = true;
+                                                            szomszedos = true;
+                                                        }else{
+                                                            cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n";
+                                                            szomszedos = false;
                                                         }
                                                         
                                                         
-                                                        //    0. 1.
-                                                        //0. |X  -
-                                                        //1. |-
-                                                        //
-                                                        //Vizsgálat az X körül (szomszédkeresés), ha stimmel minden, mozgathatjuk
-                                                        if(simbesor1 == 0 && simbeoszlop1 == 0){
-                                                            if(*&lapvaltozo[simbesor1][simbeoszlop1+1].elet == true ||
-                                                               *&lapvaltozo[simbesor1+1][simbeoszlop1].elet == true) {
-                                                                
-                                                                *&lapvaltozo[simbesor1][simbeoszlop1].elet = true;
-                                                                szomszedos = true;
-                                                            }else{
-                                                                cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n";
-                                                                szomszedos = false;
-                                                            }
-                                                            
-                                                            
-                                                        }
-                                                        
-                                                        
-                                                    }else{
-                                                        //Ha a lappal szomszédos, csak akkor lehet új lapot létrehozni.
-                                                        if(simbesor1 > 0 && simbeoszlop1 > 0){
-                                                            if(kezdes == false){
-                                                                if(*&lapvaltozo[simbesor1][simbeoszlop1].elet == false){
-                                                                    if(*&lapvaltozo[simbesor1][simbeoszlop1-1].elet == true ||
-                                                                       *&lapvaltozo[simbesor1-1][simbeoszlop1].elet == true ||
-                                                                       *&lapvaltozo[simbesor1+1][simbeoszlop1].elet == true ||
-                                                                       *&lapvaltozo[simbesor1][simbeoszlop1+1].elet == true) {
-                                                                        
-                                                                        *&lapvaltozo[simbesor1][simbeoszlop1].elet = true;
-                                                                        szomszedos = true;
-                                                                    }else{
-                                                                        cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n";
-                                                                        szomszedos = false;
-                                                                    }
-                                                                }else{
-                                                                    szomszedos = true;
-                                                                }
-                                                            }else{
-                                                                *&lapvaltozo[simbesor1][simbeoszlop1].elet = true;
-                                                                szomszedos = true;
-                                                            }
-                                                        }
-                                                        if(simbesor1 == 0 || simbeoszlop1 == 0){
-                                                            if(kezdes == false){
-                                                                if(*&lapvaltozo[simbesor1][simbeoszlop1].elet == false){
-                                                                    if(*&lapvaltozo[simbesor1+1][simbeoszlop1].elet == true ||
-                                                                       *&lapvaltozo[simbesor1][simbeoszlop1+1].elet == true ||
-                                                                       *&lapvaltozo[simbesor1][simbeoszlop1-1].elet == true ||
-                                                                       *&lapvaltozo[simbesor1-1][simbeoszlop1].elet == true) {
-                                                                        
-                                                                        *&lapvaltozo[simbesor1][simbeoszlop1].elet = true;
-                                                                        szomszedos = true;
-                                                                    }else{
-                                                                        koordinatalap(*&lapvaltozo);
-                                                                        cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n";
-                                                                        szomszedos = false;
-                                                                    }
-                                                                }else{
-                                                                    szomszedos = true;
-                                                                }
-                                                            }else{
-                                                                *&lapvaltozo[simbesor1][simbeoszlop1].elet = true;
-                                                                szomszedos = true;
-                                                            }
-                                                        }
                                                     }
                                                 }else{
-                                                    cout << "Tul nagy szam!\n";
+                                                    //Ha a lappal szomszédos, csak akkor lehet új lapot létrehozni.
+                                                    if(simbesor1 > 0 && simbeoszlop1 > 0){
+                                                        if(kezdes == false){
+                                                            if(*&lapvaltozo[simbesor1][simbeoszlop1].elet == false){
+                                                                if(*&lapvaltozo[simbesor1][simbeoszlop1-1].elet == true ||
+                                                                   *&lapvaltozo[simbesor1-1][simbeoszlop1].elet == true ||
+                                                                   *&lapvaltozo[simbesor1+1][simbeoszlop1].elet == true ||
+                                                                   *&lapvaltozo[simbesor1][simbeoszlop1+1].elet == true) {
+                                                                    
+                                                                    *&lapvaltozo[simbesor1][simbeoszlop1].elet = true;
+                                                                    szomszedos = true;
+                                                                }else{
+                                                                    koordinatalap(*&lapvaltozo);
+                                                                    cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n";
+                                                                    szomszedos = false;
+                                                                }
+                                                            }else{
+                                                                szomszedos = true;
+                                                            }
+                                                        }else{
+                                                            *&lapvaltozo[simbesor1][simbeoszlop1].elet = true;
+                                                            szomszedos = true;
+                                                        }
+                                                    }
+                                                    if(simbesor1 == 0 || simbeoszlop1 == 0){
+                                                        if(kezdes == false){
+                                                            if(*&lapvaltozo[simbesor1][simbeoszlop1].elet == false){
+                                                                if(*&lapvaltozo[simbesor1+1][simbeoszlop1].elet == true ||
+                                                                   *&lapvaltozo[simbesor1][simbeoszlop1+1].elet == true ||
+                                                                   *&lapvaltozo[simbesor1][simbeoszlop1-1].elet == true ||
+                                                                   *&lapvaltozo[simbesor1-1][simbeoszlop1].elet == true) {
+                                                                    
+                                                                    *&lapvaltozo[simbesor1][simbeoszlop1].elet = true;
+                                                                    szomszedos = true;
+                                                                }else{
+                                                                    koordinatalap(*&lapvaltozo);
+                                                                    cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n";
+                                                                    szomszedos = false;
+                                                                }
+                                                            }else{
+                                                                szomszedos = true;
+                                                            }
+                                                        }else{
+                                                            *&lapvaltozo[simbesor1][simbeoszlop1].elet = true;
+                                                            szomszedos = true;
+                                                        }
+                                                    }
+                                                    if(simbesor1 == 0 && simbeoszlop1 == 0){
+                                                        if(*&lapvaltozo[simbesor1][simbeoszlop1].elet == false){
+                                                            if(*&lapvaltozo[simbesor1+1][simbeoszlop1].elet == true ||
+                                                               *&lapvaltozo[simbesor1][simbeoszlop1+1].elet == true) {
+                                                                
+                                                                *&lapvaltozo[simbesor1][simbeoszlop1].elet = true;
+                                                                szomszedos = true;
+                                                            }else{
+                                                                koordinatalap(*&lapvaltozo);
+                                                                cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n";
+                                                                szomszedos = false;
+                                                            }
+                                                        }else{
+                                                            szomszedos = true;
+                                                        }
+                                                    }
                                                 }
                                             }
                                         }while(szomszedos == false);
@@ -962,7 +961,7 @@ int main() {
                                             lapmegtekintes(*&lapvaltozo);
                                             do{
                                                 
-                                               
+                                                
                                                 
                                                 do{
                                                     cout << "Melyik lapot szeretned mozgatni?\nSor: ";
@@ -981,10 +980,9 @@ int main() {
                                                     
                                                 }while(!cin);
                                                 
-                                                
-                                                if(mitsor1 > 99 || mitoszlop1 > 99){
+                                                if(mitsor1 > index1 || mitoszlop1 > index1){
                                                     vaneelet = false;
-                                                    cout << "Tul nagy szamot adtal meg. \n";
+                                                    cout << "Itt nem letezik lap!";
                                                 }else{
                                                     if(mitsor1 < 0 || mitoszlop1 < 0){
                                                         vaneelet = false;
@@ -1037,6 +1035,12 @@ int main() {
                                                     }
                                                     cout << endl;
                                                 }while(!cin);
+                                                
+                                                if(index1 < nagyobb(hovasor1, hovaoszlop1)){
+                                                    *&lapvaltozo = dinamikusnovekves(*&lapvaltozo, nagyobb(hovasor1, hovaoszlop1));
+                                                    
+                                                }
+                                                
                                                 if(hovasor1>=0 && hovaoszlop1 >=0){
                                                     if(*&lapvaltozo[hovasor1][hovaoszlop1].elet == true){
                                                         cout << "Itt mar letezik egy lap. Valassz masikat.\n";
@@ -1057,8 +1061,8 @@ int main() {
                                             //Mielőtt tesztből átpakoljuk a jeleket, előtte összeszámoljuk a lapokat amik szomszédosak.
                                             int eredetipontszam = 0;
                                             int hanylapvan = 0;
-                                            for (int i = 0; i<=99; i++) {
-                                                for (int a = 0; a<=99; a++) {
+                                            for (int i = 0; i<=index1; i++) {
+                                                for (int a = 0; a<=index1; a++) {
                                                     if(*&lapvaltozo[i][a].elet == true){
                                                         hanylapvan+=1;
                                                         if(*&lapvaltozo[i+1][a].elet == true){
@@ -1082,8 +1086,8 @@ int main() {
                                                 *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
                                                 //Miután tesztből átpakoljuk a jeleket, összeszámoljuk a lapokat amik szomszédosak.
                                                 int athelyezettpontszam = 0;
-                                                for (int i = 0; i<=99; i++) {
-                                                    for (int a = 0; a<=99; a++) {
+                                                for (int i = 0; i<=index1; i++) {
+                                                    for (int a = 0; a<=index1; a++) {
                                                         if(*&lapvaltozo[i][a].elet == true){
                                                             if(*&lapvaltozo[i+1][a].elet == true){
                                                                 athelyezettpontszam+=1;
@@ -1105,9 +1109,9 @@ int main() {
                                                 }
                                                 
                                                 koordinatalap(*&lapvaltozo);
-                                                if(hovasor1 < 99 && hovaoszlop1 < 99){
-                                                    for(int i = 0; i<=99; i++){
-                                                        for (int a = 0; a<=99; a++) {
+                                                if(hovasor1 < index1 && hovaoszlop1 < index1){
+                                                    for(int i = 0; i<=index1; i++){
+                                                        for (int a = 0; a<=index1; a++) {
                                                             if(*&lapvaltozo[i][a].elet == true){
                                                                 if(szimulacioteszt == true){
                                                                     if(a == 0 && i != 0){
@@ -1166,32 +1170,31 @@ int main() {
                                                 }
                                                 *&lapvaltozo[hovasor1][hovaoszlop1].elet = false;
                                             }
-
+                                            
                                             
                                             
                                             //HA POZITÍV IRÁNYBA TÖRTÉNIK A MOZGATÁS
                                             if(hovasor1 > 0 && hovaoszlop1 > 0){
-                                                if(hovasor1 < 99 && hovaoszlop1 < 99){
                                                     if(szimulacioteszt == true){
                                                         if(hovasor1 != 0 && hovaoszlop1 !=0){
-                                                                if(*&lapvaltozo[hovasor1-1][hovaoszlop1].elet == true ||
-                                                                   *&lapvaltozo[hovasor1][hovaoszlop1-1].elet == true ||
-                                                                   *&lapvaltozo[hovasor1+1][hovaoszlop1].elet == true ||
-                                                                   *&lapvaltozo[hovasor1][hovaoszlop1+1].elet == true) {
-                                                                    
-                                                                    szomszedos = true;
-                                                                    for(int i = 0; i<=3; i++){
-                                                                        *&lapvaltozo[hovasor1][hovaoszlop1].jel[i] = *&lapvaltozo[mitsor1][mitoszlop1].jel[i];
-                                                                        *&lapvaltozo[mitsor1][mitoszlop1].jel[i] = 0;
-                                                                    }
-                                                                    *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
-                                                                    *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
-                                                                    
-                                                                }else{
-                                                                    cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n\n";
-                                                                    szomszedos = false;
+                                                            if(*&lapvaltozo[hovasor1-1][hovaoszlop1].elet == true ||
+                                                               *&lapvaltozo[hovasor1][hovaoszlop1-1].elet == true ||
+                                                               *&lapvaltozo[hovasor1+1][hovaoszlop1].elet == true ||
+                                                               *&lapvaltozo[hovasor1][hovaoszlop1+1].elet == true) {
+                                                                
+                                                                szomszedos = true;
+                                                                for(int i = 0; i<=3; i++){
+                                                                    *&lapvaltozo[hovasor1][hovaoszlop1].jel[i] = *&lapvaltozo[mitsor1][mitoszlop1].jel[i];
+                                                                    *&lapvaltozo[mitsor1][mitoszlop1].jel[i] = 0;
                                                                 }
+                                                                *&lapvaltozo[hovasor1][hovaoszlop1].elet = true;
+                                                                *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
+                                                                
+                                                            }else{
+                                                                cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n\n";
+                                                                szomszedos = false;
                                                             }
+                                                        }
                                                         if(hovasor1 == 0 && hovaoszlop1 != 0){
                                                             
                                                         }
@@ -1203,16 +1206,12 @@ int main() {
                                                         szomszedos = false;
                                                         
                                                     }
-                                                }else{
-                                                    szomszedos = false;
-                                                    cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n\n";
-                                                }
                                             }else{
                                                 //HA NEGATÍV IRÁNYBAN TÖRTÉNIK A MOZGATÁS
                                                 if(hovasor1 < 0){
                                                     //Lefele toljuk a komplett palyat
-                                                    for(int i=0; i<=99; i++){
-                                                        for(int a=0; a<=99; a++){
+                                                    for(int i=0; i<=index1; i++){
+                                                        for(int a=0; a<=index1; a++){
                                                             if(*&lapvaltozo[i][a].elet == true && *&lapvaltozo[i][a].mozgatva == false){
                                                                 for(int s = 0; s<=4; s++){
                                                                     *&lapvaltozo[i][a].tarolo[s] = *&lapvaltozo[i][a].jel[s];
@@ -1224,8 +1223,8 @@ int main() {
                                                             }
                                                         }
                                                     }
-                                                    for(int i=0; i<=99; i++){
-                                                        for(int a=0; a<=99; a++){
+                                                    for(int i=0; i<=index1; i++){
+                                                        for(int a=0; a<=index1; a++){
                                                             if(*&lapvaltozo[i][a].mozgatva == true){
                                                                 for(int s = 0; s<=4; s++){
                                                                     *&lapvaltozo[i+1][a].jel[s] = *&lapvaltozo[i][a].tarolo[s];
@@ -1236,8 +1235,8 @@ int main() {
                                                         }
                                                     }
                                                     
-                                                    for(int i=0; i<=99; i++){
-                                                        for(int a=0; a<=99; a++){
+                                                    for(int i=0; i<=index1; i++){
+                                                        for(int a=0; a<=index1; a++){
                                                             *&lapvaltozo[i][a].mozgatva = false;
                                                         }
                                                     }
@@ -1251,8 +1250,8 @@ int main() {
                                                     //Oldalra toljuk a komplett palyat
                                                     
                                                     //Először végigmegyünk, és lementjük egy tárolóban a szimbolumokat
-                                                    for(int i=0; i<=99; i++){
-                                                        for(int a=0; a<=99; a++){
+                                                    for(int i=0; i<=index1; i++){
+                                                        for(int a=0; a<=index1; a++){
                                                             if(*&lapvaltozo[i][a].elet == true && *&lapvaltozo[i][a].mozgatva == false){
                                                                 for(int s = 0; s<=4; s++){
                                                                     *&lapvaltozo[i][a].tarolo[s] = *&lapvaltozo[i][a].jel[s];
@@ -1266,8 +1265,8 @@ int main() {
                                                     }
                                                     
                                                     //Majd egyel csusztatva visszarakjuk
-                                                    for(int i=0; i<=99; i++){
-                                                        for(int a=0; a<=99; a++){
+                                                    for(int i=0; i<=index1; i++){
+                                                        for(int a=0; a<=index1; a++){
                                                             if(*&lapvaltozo[i][a].mozgatva == true){
                                                                 for(int s = 0; s<=4; s++){
                                                                     *&lapvaltozo[i][a+1].jel[s] = *&lapvaltozo[i][a].tarolo[s];
@@ -1278,8 +1277,8 @@ int main() {
                                                         }
                                                     }
                                                     
-                                                    for(int i=0; i<=99; i++){
-                                                        for(int a=0; a<=99; a++){
+                                                    for(int i=0; i<=index1; i++){
+                                                        for(int a=0; a<=index1; a++){
                                                             *&lapvaltozo[i][a].mozgatva = false;
                                                         }
                                                     }
@@ -1289,8 +1288,8 @@ int main() {
                                                 }
                                                 
                                                 int hanylapvanapalyan = 0;
-                                                for(int i = 0; i<=99; i++){
-                                                    for(int a = 0; a<=99; a++){
+                                                for(int i = 0; i<=index1; i++){
+                                                    for(int a = 0; a<=index1; a++){
                                                         if(*&lapvaltozo[i][a].elet == true){
                                                             hanylapvanapalyan++;
                                                         }
@@ -1302,8 +1301,8 @@ int main() {
                                                 //Mielőtt tesztből átpakoljuk a jeleket, előtte összeszámoljuk a lapokat amik szomszédosak.
                                                 int eredetipontszam = 0;
                                                 int hanylapvan = 0;
-                                                for (int i = 0; i<=99; i++) {
-                                                    for (int a = 0; a<=99; a++) {
+                                                for (int i = 0; i<=index1; i++) {
+                                                    for (int a = 0; a<=index1; a++) {
                                                         if(*&lapvaltozo[i][a].elet == true){
                                                             hanylapvan+=1;
                                                             if(*&lapvaltozo[i+1][a].elet == true){
@@ -1326,8 +1325,8 @@ int main() {
                                                     *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
                                                     //Miután tesztből átpakoljuk a jeleket, összeszámoljuk a lapokat amik szomszédosak.
                                                     int athelyezettpontszam = 0;
-                                                    for (int i = 0; i<=99; i++) {
-                                                        for (int a = 0; a<=99; a++) {
+                                                    for (int i = 0; i<=index1; i++) {
+                                                        for (int a = 0; a<=index1; a++) {
                                                             if(*&lapvaltozo[i][a].elet == true){
                                                                 if(*&lapvaltozo[i+1][a].elet == true){
                                                                     athelyezettpontszam+=1;
@@ -1350,8 +1349,8 @@ int main() {
                                                     
                                                     koordinatalap(*&lapvaltozo);
                                                     if(hovasor1 >= 0 && hovaoszlop1 >= 0){
-                                                        for(int i = 0; i<=99; i++){
-                                                            for (int a = 0; a<=99; a++) {
+                                                        for(int i = 0; i<=index1; i++){
+                                                            for (int a = 0; a<=index1; a++) {
                                                                 if(*&lapvaltozo[i][a].elet == true){
                                                                     if(szimulacioteszt == true){
                                                                         cout << endl;
@@ -1555,27 +1554,32 @@ int main() {
                                                 }while(!cin);
                                                 
                                                 
-                                                if(mitsor1 < 0 || mitoszlop1 < 0){
+                                                if(mitsor1 > index1 || mitoszlop1 > index1){
                                                     vaneelet = false;
-                                                    cout << "Itt nincs kartya:(\n\n";
+                                                    cout << "Itt nem letezik lap!";
                                                 }else{
-                                                    if(*&lapvaltozo[mitsor1][mitoszlop1].elet == true){
-                                                        if(mitsor1 != 0 && mitoszlop1 != 0){
-                                                            if(*&lapvaltozo[mitsor1+1][mitoszlop1].elet == true &&
-                                                               *&lapvaltozo[mitsor1][mitoszlop1+1].elet == true &&
-                                                               *&lapvaltozo[mitsor1-1][mitoszlop1].elet == true &&
-                                                               *&lapvaltozo[mitsor1][mitoszlop1-1].elet == true){
-                                                                vaneelet = false;
-                                                                cout << "Sajnos ennek a lapnak mind a 4 oldalan van szomszedja.\n";
+                                                    if(mitsor1 < 0 || mitoszlop1 < 0){
+                                                        vaneelet = false;
+                                                        cout << "Itt nincs kartya:(\n\n";
+                                                    }else{
+                                                        if(*&lapvaltozo[mitsor1][mitoszlop1].elet == true){
+                                                            if(mitsor1 != 0 && mitoszlop1 != 0){
+                                                                if(*&lapvaltozo[mitsor1+1][mitoszlop1].elet == true &&
+                                                                   *&lapvaltozo[mitsor1][mitoszlop1+1].elet == true &&
+                                                                   *&lapvaltozo[mitsor1-1][mitoszlop1].elet == true &&
+                                                                   *&lapvaltozo[mitsor1][mitoszlop1-1].elet == true){
+                                                                    vaneelet = false;
+                                                                    cout << "Sajnos ennek a lapnak mind a 4 oldalan van szomszedja.\n";
+                                                                }else{
+                                                                    vaneelet = true;
+                                                                }
                                                             }else{
                                                                 vaneelet = true;
                                                             }
                                                         }else{
-                                                            vaneelet = true;
+                                                            cout << "Itt nincs kartya!:(\n\n";
+                                                            vaneelet = false;
                                                         }
-                                                    }else{
-                                                        cout << "Itt nincs kartya!:(\n\n";
-                                                        vaneelet = false;
                                                     }
                                                 }
                                                 if(mitsor1 >= 0 && mitoszlop1 >= 0){
@@ -1607,6 +1611,12 @@ int main() {
                                                     }
                                                     cout << endl;
                                                 }while(!cin);
+                                                
+                                                if(index1 < nagyobb(hovasor1, hovaoszlop1)){
+                                                    *&lapvaltozo = dinamikusnovekves(*&lapvaltozo, nagyobb(hovasor1, hovaoszlop1));
+                                                    
+                                                }
+                                                
                                                 if(hovasor1>=0 || hovaoszlop1 >=0){
                                                     if(*&lapvaltozo[hovasor1][hovaoszlop1].elet == true){
                                                         cout << "Itt mar letezik egy lap. Valassz masikat.\n";
@@ -1619,12 +1629,12 @@ int main() {
                                                 }
                                                 
                                             }while(helybev == false);
-
+                                            
                                             
                                             
                                             int hanylapvanapalyan = 0;
-                                            for(int i = 0; i<=99; i++){
-                                                for(int a = 0; a<=99; a++){
+                                            for(int i = 0; i<=index1; i++){
+                                                for(int a = 0; a<=index1; a++){
                                                     if(*&lapvaltozo[i][a].elet == true){
                                                         hanylapvanapalyan++;
                                                     }
@@ -1636,8 +1646,8 @@ int main() {
                                             //Mielőtt tesztből átpakoljuk a jeleket, előtte összeszámoljuk a lapokat amik szomszédosak.
                                             int eredetipontszam = 0;
                                             int hanylapvan = 0;
-                                            for (int i = 0; i<=99; i++) {
-                                                for (int a = 0; a<=99; a++) {
+                                            for (int i = 0; i<=index1; i++) {
+                                                for (int a = 0; a<=index1; a++) {
                                                     if(*&lapvaltozo[i][a].elet == true){
                                                         hanylapvan+=1;
                                                         if(*&lapvaltozo[i+1][a].elet == true){
@@ -1662,8 +1672,8 @@ int main() {
                                                 *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
                                                 //Miután tesztből átpakoljuk a jeleket, összeszámoljuk a lapokat amik szomszédosak.
                                                 int athelyezettpontszam = 0;
-                                                for (int i = 0; i<=99; i++) {
-                                                    for (int a = 0; a<=99; a++) {
+                                                for (int i = 0; i<=index1; i++) {
+                                                    for (int a = 0; a<=index1; a++) {
                                                         if(*&lapvaltozo[i][a].elet == true){
                                                             if(*&lapvaltozo[i+1][a].elet == true){
                                                                 athelyezettpontszam+=1;
@@ -1685,9 +1695,9 @@ int main() {
                                                 }
                                                 
                                                 
-                                                if(hovasor1 < 99 && hovaoszlop1 < 99){
-                                                    for(int i = 0; i<=99; i++){
-                                                        for (int a = 0; a<=99; a++) {
+                                                if(hovasor1 < index1 && hovaoszlop1 < index1){
+                                                    for(int i = 0; i<=index1; i++){
+                                                        for (int a = 0; a<=index1; a++) {
                                                             if(*&lapvaltozo[i][a].elet == true){
                                                                 if(szimulacioteszt == true){
                                                                     if(a == 0 && i != 0){
@@ -1746,14 +1756,13 @@ int main() {
                                                 }
                                                 *&lapvaltozo[hovasor1][hovaoszlop1].elet = false;
                                             }
-
+                                            
                                             
                                             
                                             //HA POZITÍV IRÁNYBA TÖRTÉNIK A MOZGATÁS
                                             if(hovasor1 > 0 && hovaoszlop1 > 0){
-                                                if(hovasor1 < 99 && hovaoszlop1 < 99){
                                                     if(szimulacioteszt == true){
-                                                    *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
+                                                        *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
                                                         if(*&lapvaltozo[hovasor1-1][hovaoszlop1].elet == true ||
                                                            *&lapvaltozo[hovasor1][hovaoszlop1-1].elet == true ||
                                                            *&lapvaltozo[hovasor1+1][hovaoszlop1].elet == true ||
@@ -1776,17 +1785,13 @@ int main() {
                                                         cout << "Sajnos igy nem lenne osszefuggo a palya. Probald ujra!\n";
                                                         szomszedos = false;
                                                     }
-                                                }else{
-                                                    cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n\n";
-                                                    szomszedos = false;
-                                                }
                                             }else{
                                                 //HA NEGATÍV IRÁNYBAN TÖRTÉNIK A MOZGATÁS
                                                 if(hovasor1 < 0){
                                                     
                                                     //Lefele toljuk a komplett palyat
-                                                    for(int i=0; i<=99; i++){
-                                                        for(int a=0; a<=99; a++){
+                                                    for(int i=0; i<=index1; i++){
+                                                        for(int a=0; a<=index1; a++){
                                                             if(*&lapvaltozo[i][a].elet == true && *&lapvaltozo[i][a].mozgatva == false){
                                                                 for(int s = 0; s<=4; s++){
                                                                     /**&lapvaltozo[i+1][a].jel[s] = *&lapvaltozo[i][a].jel[s];
@@ -1802,8 +1807,8 @@ int main() {
                                                             }
                                                         }
                                                     }
-                                                    for(int i=0; i<=99; i++){
-                                                        for(int a=0; a<=99; a++){
+                                                    for(int i=0; i<=index1; i++){
+                                                        for(int a=0; a<=index1; a++){
                                                             if(*&lapvaltozo[i][a].mozgatva == true){
                                                                 for(int s = 0; s<=4; s++){
                                                                     *&lapvaltozo[i+1][a].jel[s] = *&lapvaltozo[i][a].tarolo[s];
@@ -1814,8 +1819,8 @@ int main() {
                                                         }
                                                     }
                                                     
-                                                    for(int i=0; i<=99; i++){
-                                                        for(int a=0; a<=99; a++){
+                                                    for(int i=0; i<=index1; i++){
+                                                        for(int a=0; a<=index1; a++){
                                                             *&lapvaltozo[i][a].mozgatva = false;
                                                         }
                                                     }
@@ -1827,8 +1832,8 @@ int main() {
                                                 
                                                 if(hovaoszlop1 < 0){
                                                     //Lefele toljuk a komplett palyat
-                                                    for(int i=0; i<=99; i++){
-                                                        for(int a=0; a<=99; a++){
+                                                    for(int i=0; i<=index1; i++){
+                                                        for(int a=0; a<=index1; a++){
                                                             if(*&lapvaltozo[i][a].elet == true && *&lapvaltozo[i][a].mozgatva == false){
                                                                 for(int s = 0; s<=4; s++){
                                                                     /**&lapvaltozo[i+1][a].jel[s] = *&lapvaltozo[i][a].jel[s];
@@ -1844,8 +1849,8 @@ int main() {
                                                             }
                                                         }
                                                     }
-                                                    for(int i=0; i<=99; i++){
-                                                        for(int a=0; a<=99; a++){
+                                                    for(int i=0; i<=index1; i++){
+                                                        for(int a=0; a<=index1; a++){
                                                             if(*&lapvaltozo[i][a].mozgatva == true){
                                                                 for(int s = 0; s<=4; s++){
                                                                     *&lapvaltozo[i][a+1].jel[s] = *&lapvaltozo[i][a].tarolo[s];
@@ -1856,8 +1861,8 @@ int main() {
                                                         }
                                                     }
                                                     
-                                                    for(int i=0; i<=99; i++){
-                                                        for(int a=0; a<=99; a++){
+                                                    for(int i=0; i<=index1; i++){
+                                                        for(int a=0; a<=index1; a++){
                                                             *&lapvaltozo[i][a].mozgatva = false;
                                                         }
                                                     }
@@ -1867,9 +1872,9 @@ int main() {
                                                 }
                                                 
                                                 int hanylapvanapalyan = 0;
-
-                                                for(int i = 0; i<=99; i++){
-                                                    for(int a = 0; a<=99; a++){
+                                                
+                                                for(int i = 0; i<=index1; i++){
+                                                    for(int a = 0; a<=index1; a++){
                                                         if(*&lapvaltozo[i][a].elet == true){
                                                             hanylapvanapalyan++;
                                                         }
@@ -1881,8 +1886,8 @@ int main() {
                                                 //Mielőtt tesztből átpakoljuk a jeleket, előtte összeszámoljuk a lapokat amik szomszédosak.
                                                 int eredetipontszam = 0;
                                                 int hanylapvan = 0;
-                                                for (int i = 0; i<=99; i++) {
-                                                    for (int a = 0; a<=99; a++) {
+                                                for (int i = 0; i<=index1; i++) {
+                                                    for (int a = 0; a<=index1; a++) {
                                                         if(*&lapvaltozo[i][a].elet == true){
                                                             hanylapvan+=1;
                                                             if(*&lapvaltozo[i+1][a].elet == true){
@@ -1904,8 +1909,8 @@ int main() {
                                                 *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
                                                 //Miután tesztből átpakoljuk a jeleket, összeszámoljuk a lapokat amik szomszédosak.
                                                 int athelyezettpontszam = 0;
-                                                for (int i = 0; i<=99; i++) {
-                                                    for (int a = 0; a<=99; a++) {
+                                                for (int i = 0; i<=index1; i++) {
+                                                    for (int a = 0; a<=index1; a++) {
                                                         if(*&lapvaltozo[i][a].elet == true){
                                                             if(*&lapvaltozo[i+1][a].elet == true){
                                                                 athelyezettpontszam+=1;
@@ -1926,9 +1931,9 @@ int main() {
                                                     }
                                                 }
                                                 
-
-                                                for(int i = 0; i<=99; i++){
-                                                    for (int a = 0; a<=99; a++) {
+                                                
+                                                for(int i = 0; i<=index1; i++){
+                                                    for (int a = 0; a<=index1; a++) {
                                                         if(*&lapvaltozo[i][a].elet == true){
                                                             if(szimulacioteszt == true){
                                                                 if(a == 0 && i != 0){
@@ -1954,7 +1959,7 @@ int main() {
                                                                     if(*&lapvaltozo[i+1][a].elet == true ||
                                                                        *&lapvaltozo[i][a+1].elet == true) {
                                                                         szimulacioteszt = true;
-                                                                       
+                                                                        
                                                                     }else{
                                                                         szimulacioteszt = false;
                                                                     }
@@ -1965,7 +1970,7 @@ int main() {
                                                                        *&lapvaltozo[i-1][a].elet == true ||
                                                                        *&lapvaltozo[i][a+1].elet == true) {
                                                                         szimulacioteszt = true;
-                                                                       
+                                                                        
                                                                     }else{
                                                                         szimulacioteszt = false;
                                                                     }
@@ -2086,8 +2091,8 @@ int main() {
                 }
             }
             
-            for (int i=0; i<=99; i++) {
-                for (int a = 0; a<=99; a++) {
+            for (int i=0; i<=index1; i++) {
+                for (int a = 0; a<=index1; a++) {
                     *&lapvaltozo[i][a].jeloltlap = false;
                 }
             }
@@ -2147,6 +2152,11 @@ int main() {
                                                 
                                             }while(!cin);
                                             
+                                            if(index1 < nagyobb(simbesor1, simbeoszlop1)){
+                                                *&lapvaltozo = dinamikusnovekves(*&lapvaltozo, nagyobb(simbesor1, simbeoszlop1));
+                                                
+                                            }
+                                            
                                             
                                             int simszamlalo = 0;
                                             bool megtelt = false;
@@ -2167,189 +2177,202 @@ int main() {
                                             
                                             
                                             if(megtelt == false){
-                                                if(simbesor1 < 99 || simbeoszlop1 < 99){
+                                                
+                                                if(simbesor1 < 0 || simbeoszlop1 < 0){
+                                                    if(simbesor1 < 0){
+                                                        //Lefele toljuk a komplett palyat
+                                                        for(int i=0; i<=index1; i++){
+                                                            for(int a=0; a<=index1; a++){
+                                                                if(*&lapvaltozo[i][a].elet == true && *&lapvaltozo[i][a].mozgatva == false){
+                                                                    for(int s = 0; s<=4; s++){
+                                                                        /**&lapvaltozo[i+1][a].jel[s] = *&lapvaltozo[i][a].jel[s];
+                                                                         *&lapvaltozo[i][a].jel[s] = 0;*/
+                                                                        *&lapvaltozo[i][a].tarolo[s] = *&lapvaltozo[i][a].jel[s];
+                                                                        *&lapvaltozo[i][a].jel[s] = 0;
+                                                                        
+                                                                        //*&lapvaltozo[i+1][a].jel[s] = *&lapvaltozo[i][a].tarolo[s];
+                                                                    }
+                                                                    *&lapvaltozo[i][a].elet = false;
+                                                                    *&lapvaltozo[i][a].mozgatva = true;
+                                                                    
+                                                                }
+                                                            }
+                                                        }
+                                                        for(int i=0; i<=index1; i++){
+                                                            for(int a=0; a<=index1; a++){
+                                                                if(*&lapvaltozo[i][a].mozgatva == true){
+                                                                    for(int s = 0; s<=4; s++){
+                                                                        *&lapvaltozo[i+1][a].jel[s] = *&lapvaltozo[i][a].tarolo[s];
+                                                                    }
+                                                                    
+                                                                    *&lapvaltozo[i+1][a].elet = true;
+                                                                }
+                                                            }
+                                                        }
+                                                        
+                                                        for(int i=0; i<=index1; i++){
+                                                            for(int a=0; a<=index1; a++){
+                                                                *&lapvaltozo[i][a].mozgatva = false;
+                                                            }
+                                                        }
+                                                        simbesor1 = 0;
+                                                    }
                                                     
-                                                    if(simbesor1 < 0 || simbeoszlop1 < 0){
-                                                        if(simbesor1 < 0){
-                                                            //Lefele toljuk a komplett palyat
-                                                            for(int i=0; i<=99; i++){
-                                                                for(int a=0; a<=99; a++){
-                                                                    if(*&lapvaltozo[i][a].elet == true && *&lapvaltozo[i][a].mozgatva == false){
-                                                                        for(int s = 0; s<=4; s++){
-                                                                            /**&lapvaltozo[i+1][a].jel[s] = *&lapvaltozo[i][a].jel[s];
-                                                                             *&lapvaltozo[i][a].jel[s] = 0;*/
-                                                                            *&lapvaltozo[i][a].tarolo[s] = *&lapvaltozo[i][a].jel[s];
-                                                                            *&lapvaltozo[i][a].jel[s] = 0;
-                                                                            
-                                                                            //*&lapvaltozo[i+1][a].jel[s] = *&lapvaltozo[i][a].tarolo[s];
-                                                                        }
-                                                                        *&lapvaltozo[i][a].elet = false;
-                                                                        *&lapvaltozo[i][a].mozgatva = true;
+                                                    
+                                                    if(simbeoszlop1 < 0){
+                                                        //Lefele toljuk a komplett palyat
+                                                        for(int i=0; i<=index1; i++){
+                                                            for(int a=0; a<=index1; a++){
+                                                                if(*&lapvaltozo[i][a].elet == true && *&lapvaltozo[i][a].mozgatva == false){
+                                                                    for(int s = 0; s<=4; s++){
+                                                                        /**&lapvaltozo[i+1][a].jel[s] = *&lapvaltozo[i][a].jel[s];
+                                                                         *&lapvaltozo[i][a].jel[s] = 0;*/
+                                                                        *&lapvaltozo[i][a].tarolo[s] = *&lapvaltozo[i][a].jel[s];
+                                                                        *&lapvaltozo[i][a].jel[s] = 0;
                                                                         
+                                                                        //*&lapvaltozo[i+1][a].jel[s] = *&lapvaltozo[i][a].tarolo[s];
                                                                     }
+                                                                    *&lapvaltozo[i][a].elet = false;
+                                                                    *&lapvaltozo[i][a].mozgatva = true;
+                                                                    
                                                                 }
                                                             }
-                                                            for(int i=0; i<=99; i++){
-                                                                for(int a=0; a<=99; a++){
-                                                                    if(*&lapvaltozo[i][a].mozgatva == true){
-                                                                        for(int s = 0; s<=4; s++){
-                                                                            *&lapvaltozo[i+1][a].jel[s] = *&lapvaltozo[i][a].tarolo[s];
-                                                                        }
-                                                                        
-                                                                        *&lapvaltozo[i+1][a].elet = true;
+                                                        }
+                                                        for(int i=0; i<=index1; i++){
+                                                            for(int a=0; a<=index1; a++){
+                                                                if(*&lapvaltozo[i][a].mozgatva == true){
+                                                                    for(int s = 0; s<=4; s++){
+                                                                        *&lapvaltozo[i][a+1].jel[s] = *&lapvaltozo[i][a].tarolo[s];
                                                                     }
+                                                                    
+                                                                    *&lapvaltozo[i][a+1].elet = true;
                                                                 }
                                                             }
+                                                        }
+                                                        
+                                                        for(int i=0; i<=index1; i++){
+                                                            for(int a=0; a<=index1; a++){
+                                                                *&lapvaltozo[i][a].mozgatva = false;
+                                                            }
+                                                        }
+                                                        simbeoszlop1 = 0;
+                                                    }
+                                                    
+                                                    
+                                                    //3. 4. 5.
+                                                    //-  X  -
+                                                    //   -
+                                                    //Vizsgálat az X körül (szomszédkeresés), ha stimmel minden, mozgathatjuk
+                                                    if(simbesor1 == 0 && simbeoszlop1 != 0){
+                                                        if(*&lapvaltozo[simbesor1][simbeoszlop1+1].elet == true ||
+                                                           *&lapvaltozo[simbesor1+1][simbeoszlop1].elet == true ||
+                                                           *&lapvaltozo[simbesor1][simbeoszlop1-1].elet == true) {
                                                             
-                                                            for(int i=0; i<=99; i++){
-                                                                for(int a=0; a<=99; a++){
-                                                                    *&lapvaltozo[i][a].mozgatva = false;
-                                                                }
-                                                            }
-                                                            simbesor1 = 0;
+                                                            *&lapvaltozo[simbesor1][simbeoszlop1].elet = true;
+                                                            szomszedos = true;
+                                                        }else{
+                                                            cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n";
+                                                            szomszedos = false;
                                                         }
                                                         
                                                         
-                                                        if(simbeoszlop1 < 0){
-                                                            //Lefele toljuk a komplett palyat
-                                                            for(int i=0; i<=99; i++){
-                                                                for(int a=0; a<=99; a++){
-                                                                    if(*&lapvaltozo[i][a].elet == true && *&lapvaltozo[i][a].mozgatva == false){
-                                                                        for(int s = 0; s<=4; s++){
-                                                                            /**&lapvaltozo[i+1][a].jel[s] = *&lapvaltozo[i][a].jel[s];
-                                                                             *&lapvaltozo[i][a].jel[s] = 0;*/
-                                                                            *&lapvaltozo[i][a].tarolo[s] = *&lapvaltozo[i][a].jel[s];
-                                                                            *&lapvaltozo[i][a].jel[s] = 0;
-                                                                            
-                                                                            //*&lapvaltozo[i+1][a].jel[s] = *&lapvaltozo[i][a].tarolo[s];
-                                                                        }
-                                                                        *&lapvaltozo[i][a].elet = false;
-                                                                        *&lapvaltozo[i][a].mozgatva = true;
-                                                                        
-                                                                    }
-                                                                }
-                                                            }
-                                                            for(int i=0; i<=99; i++){
-                                                                for(int a=0; a<=99; a++){
-                                                                    if(*&lapvaltozo[i][a].mozgatva == true){
-                                                                        for(int s = 0; s<=4; s++){
-                                                                            *&lapvaltozo[i][a+1].jel[s] = *&lapvaltozo[i][a].tarolo[s];
-                                                                        }
-                                                                        
-                                                                        *&lapvaltozo[i][a+1].elet = true;
-                                                                    }
-                                                                }
-                                                            }
+                                                    }
+                                                    
+                                                    
+                                                    //5. |-
+                                                    //6. |X -
+                                                    //7. |-
+                                                    //Vizsgálat az X körül (szomszédkeresés), ha stimmel minden, mozgathatjuk
+                                                    if(simbeoszlop1 == 0 && simbesor1 != 0){
+                                                        if(*&lapvaltozo[simbesor1][simbeoszlop1+1].elet == true ||
+                                                           *&lapvaltozo[simbesor1+1][simbeoszlop1].elet == true ||
+                                                           *&lapvaltozo[simbesor1-1][simbeoszlop1].elet == true) {
                                                             
-                                                            for(int i=0; i<=99; i++){
-                                                                for(int a=0; a<=99; a++){
-                                                                    *&lapvaltozo[i][a].mozgatva = false;
-                                                                }
-                                                            }
-                                                            simbeoszlop1 = 0;
+                                                            *&lapvaltozo[simbesor1][simbeoszlop1].elet = true;
+                                                            szomszedos = true;
+                                                        }else{
+                                                            cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n";
+                                                            szomszedos = false;
                                                         }
                                                         
                                                         
-                                                        //3. 4. 5.
-                                                        //-  X  -
-                                                        //   -
-                                                        //Vizsgálat az X körül (szomszédkeresés), ha stimmel minden, mozgathatjuk
-                                                        if(simbesor1 == 0 && simbeoszlop1 != 0){
-                                                            if(*&lapvaltozo[simbesor1][simbeoszlop1+1].elet == true ||
+                                                    }
+                                                    
+                                                    
+                                                    //    0. 1.
+                                                    //0. |X  -
+                                                    //1. |-  -
+                                                    //
+                                                    //Vizsgálat az X körül (szomszédkeresés), ha stimmel minden, mozgathatjuk
+                                                    if(simbesor1 == 0 && simbeoszlop1 == 0){
+                                                        if(*&lapvaltozo[simbesor1][simbeoszlop1+1].elet == true ||
+                                                           *&lapvaltozo[simbesor1+1][simbeoszlop1].elet == true) {
+                                                            
+                                                            *&lapvaltozo[simbesor1][simbeoszlop1].elet = true;
+                                                            szomszedos = true;
+                                                        }else{
+                                                            cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n";
+                                                            szomszedos = false;
+                                                        }
+                                                        
+                                                        
+                                                    }
+                                                    
+                                                    
+                                                }else{
+                                                    //Ha a lappal szomszédos, csak akkor lehet új lapot létrehozni.
+                                                    if(simbesor1 > 0 && simbeoszlop1 > 0){
+                                                        if(*&lapvaltozo[simbesor1][simbeoszlop1].elet == false){
+                                                            if(*&lapvaltozo[simbesor1][simbeoszlop1-1].elet == true ||
+                                                               *&lapvaltozo[simbesor1-1][simbeoszlop1].elet == true ||
                                                                *&lapvaltozo[simbesor1+1][simbeoszlop1].elet == true ||
-                                                               *&lapvaltozo[simbesor1][simbeoszlop1-1].elet == true) {
+                                                               *&lapvaltozo[simbesor1][simbeoszlop1+1].elet == true ) {
                                                                 
                                                                 *&lapvaltozo[simbesor1][simbeoszlop1].elet = true;
                                                                 szomszedos = true;
                                                             }else{
+                                                                koordinatalap(*&lapvaltozo);
                                                                 cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n";
                                                                 szomszedos = false;
                                                             }
-                                                            
-                                                            
+                                                        }else{
+                                                            szomszedos = true;
                                                         }
-                                                        
-                                                        
-                                                        //5. |-
-                                                        //6. |X -
-                                                        //7. |-
-                                                        //Vizsgálat az X körül (szomszédkeresés), ha stimmel minden, mozgathatjuk
-                                                        if(simbeoszlop1 == 0 && simbesor1 != 0){
-                                                            if(*&lapvaltozo[simbesor1][simbeoszlop1+1].elet == true ||
-                                                               *&lapvaltozo[simbesor1+1][simbeoszlop1].elet == true ||
+                                                    }
+                                                    if(simbesor1 == 0 || simbeoszlop1 == 0){
+                                                        if(*&lapvaltozo[simbesor1][simbeoszlop1].elet == false){
+                                                            if(*&lapvaltozo[simbesor1+1][simbeoszlop1].elet == true ||
+                                                               *&lapvaltozo[simbesor1][simbeoszlop1+1].elet == true ||
+                                                               *&lapvaltozo[simbesor1][simbeoszlop1-1].elet == true ||
                                                                *&lapvaltozo[simbesor1-1][simbeoszlop1].elet == true) {
                                                                 
                                                                 *&lapvaltozo[simbesor1][simbeoszlop1].elet = true;
                                                                 szomszedos = true;
                                                             }else{
+                                                                koordinatalap(*&lapvaltozo);
                                                                 cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n";
                                                                 szomszedos = false;
                                                             }
-                                                            
-                                                            
+                                                        }else{
+                                                            szomszedos = true;
                                                         }
-                                                        
-                                                        
-                                                        //    0. 1.
-                                                        //0. |X  -
-                                                        //1. |-  -
-                                                        //
-                                                        //Vizsgálat az X körül (szomszédkeresés), ha stimmel minden, mozgathatjuk
-                                                        if(simbesor1 == 0 && simbeoszlop1 == 0){
-                                                            if(*&lapvaltozo[simbesor1][simbeoszlop1+1].elet == true ||
-                                                               *&lapvaltozo[simbesor1+1][simbeoszlop1].elet == true) {
+                                                    }
+                                                    if(simbesor1 == 0 && simbeoszlop1 == 0){
+                                                        if(*&lapvaltozo[simbesor1][simbeoszlop1].elet == false){
+                                                            if(*&lapvaltozo[simbesor1+1][simbeoszlop1].elet == true ||
+                                                               *&lapvaltozo[simbesor1][simbeoszlop1+1].elet == true) {
                                                                 
                                                                 *&lapvaltozo[simbesor1][simbeoszlop1].elet = true;
                                                                 szomszedos = true;
                                                             }else{
+                                                                koordinatalap(*&lapvaltozo);
                                                                 cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n";
                                                                 szomszedos = false;
                                                             }
-                                                            
-                                                            
-                                                        }
-                                                        
-                                                        
-                                                    }else{
-                                                        //Ha a lappal szomszédos, csak akkor lehet új lapot létrehozni.
-                                                        if(simbesor1 > 0 && simbeoszlop1 > 0){
-                                                            if(*&lapvaltozo[simbesor1][simbeoszlop1].elet == false){
-                                                                if(*&lapvaltozo[simbesor1][simbeoszlop1-1].elet == true ||
-                                                                   *&lapvaltozo[simbesor1-1][simbeoszlop1].elet == true ||
-                                                                   *&lapvaltozo[simbesor1+1][simbeoszlop1].elet == true ||
-                                                                   *&lapvaltozo[simbesor1][simbeoszlop1+1].elet == true ) {
-                                                                    
-                                                                    *&lapvaltozo[simbesor1][simbeoszlop1].elet = true;
-                                                                    szomszedos = true;
-                                                                }else{
-                                                                    cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n";
-                                                                    szomszedos = false;
-                                                                }
-                                                            }else{
-                                                                szomszedos = true;
-                                                            }
-                                                        }
-                                                        if(simbesor1 == 0 || simbeoszlop1 == 0){
-                                                            if(*&lapvaltozo[simbesor1][simbeoszlop1].elet == false){
-                                                                if(*&lapvaltozo[simbesor1+1][simbeoszlop1].elet == true ||
-                                                                   *&lapvaltozo[simbesor1][simbeoszlop1+1].elet == true ||
-                                                                   *&lapvaltozo[simbesor1][simbeoszlop1-1].elet == true ||
-                                                                   *&lapvaltozo[simbesor1-1][simbeoszlop1].elet == true) {
-                                                                    
-                                                                    *&lapvaltozo[simbesor1][simbeoszlop1].elet = true;
-                                                                    szomszedos = true;
-                                                                }else{
-                                                                    koordinatalap(*&lapvaltozo);
-                                                                    cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n";
-                                                                    szomszedos = false;
-                                                                }
-                                                            }else{
-                                                                szomszedos = true;
-                                                            }
+                                                        }else{
+                                                            szomszedos = true;
                                                         }
                                                     }
-                                                }else{
-                                                    cout << "Tul nagy szam!\n";
                                                 }
                                             }
                                         }while(szomszedos == false);
@@ -2433,9 +2456,9 @@ int main() {
                                                     }
                                                 }while(!cin);
                                                 
-                                                if(mitsor1 > 99 || mitoszlop1 > 99){
+                                                if(mitsor1 > index1 || mitoszlop1 > index1){
                                                     vaneelet = false;
-                                                    cout << "Tul nagy szamot adtal meg. \n";
+                                                    cout << "Itt nem letezik lap!";
                                                 }else{
                                                     if(mitsor1 < 0 || mitoszlop1 < 0){
                                                         vaneelet = false;
@@ -2461,6 +2484,7 @@ int main() {
                                                         }
                                                     }
                                                 }
+                                                
                                                 
                                                 if(mitsor1 >= 0 && mitoszlop1 >= 0){
                                                     if(*&lapvaltozo[mitsor1][mitoszlop1].jeloltlap == true){
@@ -2491,6 +2515,12 @@ int main() {
                                                     }
                                                     cout << endl;
                                                 }while(!cin);
+                                                
+                                                if(index1 < nagyobb(hovasor1, hovaoszlop1)){
+                                                    *&lapvaltozo = dinamikusnovekves(*&lapvaltozo, nagyobb(hovasor1, hovaoszlop1));
+                                                    
+                                                }
+                                                
                                                 if(hovasor1>=0 && hovaoszlop1 >=0){
                                                     if(*&lapvaltozo[hovasor1][hovaoszlop1].elet == true){
                                                         cout << "Itt mar letezik egy lap. Valassz masikat.\n";
@@ -2503,15 +2533,15 @@ int main() {
                                                 }
                                                 
                                             }while(helybev == false);
-
+                                            
                                             
                                             //Szimuláció, hogy összefüggő marad-e a pálya!
                                             bool szimulacioteszt = true;
                                             //Mielőtt tesztből átpakoljuk a jeleket, előtte összeszámoljuk a lapokat amik szomszédosak.
                                             int eredetipontszam = 0;
                                             int hanylapvan = 0;
-                                            for (int i = 0; i<=99; i++) {
-                                                for (int a = 0; a<=99; a++) {
+                                            for (int i = 0; i<=index1; i++) {
+                                                for (int a = 0; a<=index1; a++) {
                                                     if(*&lapvaltozo[i][a].elet == true){
                                                         hanylapvan+=1;
                                                         if(*&lapvaltozo[i+1][a].elet == true){
@@ -2526,8 +2556,8 @@ int main() {
                                             if(hovasor1 >= 0 && hovaoszlop1 >= 0){
                                                 int hanylapvanapalyan = 0;
                                                 int counter = 0;
-                                                for(int i = 0; i<=99; i++){
-                                                    for(int a = 0; a<=99; a++){
+                                                for(int i = 0; i<=index1; i++){
+                                                    for(int a = 0; a<=index1; a++){
                                                         if(*&lapvaltozo[i][a].elet == true){
                                                             hanylapvanapalyan++;
                                                         }
@@ -2544,8 +2574,8 @@ int main() {
                                                 *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
                                                 //Miután tesztből átpakoljuk a jeleket, összeszámoljuk a lapokat amik szomszédosak.
                                                 int athelyezettpontszam = 0;
-                                                for (int i = 0; i<=99; i++) {
-                                                    for (int a = 0; a<=99; a++) {
+                                                for (int i = 0; i<=index1; i++) {
+                                                    for (int a = 0; a<=index1; a++) {
                                                         if(*&lapvaltozo[i][a].elet == true){
                                                             if(*&lapvaltozo[i+1][a].elet == true){
                                                                 athelyezettpontszam+=1;
@@ -2566,10 +2596,10 @@ int main() {
                                                     }
                                                 }
                                                 
-
-                                                if(hovasor1 < 99 && hovaoszlop1 < 99){
-                                                    for(int i = 0; i<=99; i++){
-                                                        for (int a = 0; a<=99; a++) {
+                                                
+                                                if(hovasor1 < index1 && hovaoszlop1 < index1){
+                                                    for(int i = 0; i<=index1; i++){
+                                                        for (int a = 0; a<=index1; a++) {
                                                             if(*&lapvaltozo[i][a].elet == true){
                                                                 if(szimulacioteszt == true){
                                                                     if(a == 0 && i != 0){
@@ -2635,9 +2665,8 @@ int main() {
                                             
                                             //HA POZITÍV IRÁNYBA TÖRTÉNIK A MOZGATÁS
                                             if(hovasor1 > 0 && hovaoszlop1 > 0){
-                                                if(hovasor1 < 99 && hovaoszlop1 < 99){
                                                     if(szimulacioteszt == true){
-                                                    *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
+                                                        *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
                                                         if(*&lapvaltozo[hovasor1-1][hovaoszlop1].elet == true ||
                                                            *&lapvaltozo[hovasor1][hovaoszlop1-1].elet == true ||
                                                            *&lapvaltozo[hovasor1+1][hovaoszlop1].elet == true ||
@@ -2660,16 +2689,12 @@ int main() {
                                                         cout << "Sajnos igy nem lenne osszefuggo a palya. Probald ujra!\n";
                                                         szomszedos = false;
                                                     }
-                                                }else{
-                                                    szomszedos = false;
-                                                    cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n\n";
-                                                }
                                             }else{
                                                 //HA NEGATÍV IRÁNYBAN TÖRTÉNIK A MOZGATÁS
                                                 if(hovasor1 < 0){
                                                     //Lefele toljuk a komplett palyat
-                                                    for(int i=0; i<=99; i++){
-                                                        for(int a=0; a<=99; a++){
+                                                    for(int i=0; i<=index1; i++){
+                                                        for(int a=0; a<=index1; a++){
                                                             if(*&lapvaltozo[i][a].elet == true && *&lapvaltozo[i][a].mozgatva == false){
                                                                 for(int s = 0; s<=4; s++){
                                                                     *&lapvaltozo[i+1][a].jel[s] = *&lapvaltozo[i][a].jel[s];
@@ -2681,8 +2706,8 @@ int main() {
                                                         }
                                                     }
                                                     
-                                                    for(int i=0; i<=99; i++){
-                                                        for(int a=0; a<=99; a++){
+                                                    for(int i=0; i<=index1; i++){
+                                                        for(int a=0; a<=index1; a++){
                                                             *&lapvaltozo[i][a].mozgatva = false;
                                                         }
                                                     }
@@ -2694,8 +2719,8 @@ int main() {
                                                 
                                                 if(hovaoszlop1 < 0){
                                                     //Oldalra toljuk a komplett palyat
-                                                    for(int i=0; i<=99; i++){
-                                                        for(int a=0; a<=99; a++){
+                                                    for(int i=0; i<=index1; i++){
+                                                        for(int a=0; a<=index1; a++){
                                                             if(*&lapvaltozo[i][a].elet == true && *&lapvaltozo[i][a].mozgatva == false){
                                                                 for(int s = 0; s<=4; s++){
                                                                     *&lapvaltozo[i][a+1].jel[s] = *&lapvaltozo[i][a].jel[s];
@@ -2707,8 +2732,8 @@ int main() {
                                                         }
                                                     }
                                                     
-                                                    for(int i=0; i<=99; i++){
-                                                        for(int a=0; a<=99; a++){
+                                                    for(int i=0; i<=index1; i++){
+                                                        for(int a=0; a<=index1; a++){
                                                             *&lapvaltozo[i][a].mozgatva = false;
                                                         }
                                                     }
@@ -2719,8 +2744,8 @@ int main() {
                                                 
                                                 int hanylapvanapalyan = 0;
                                                 int counter = 0;
-                                                for(int i = 0; i<=99; i++){
-                                                    for(int a = 0; a<=99; a++){
+                                                for(int i = 0; i<=index1; i++){
+                                                    for(int a = 0; a<=index1; a++){
                                                         if(*&lapvaltozo[i][a].elet == true){
                                                             hanylapvanapalyan++;
                                                         }
@@ -2732,8 +2757,8 @@ int main() {
                                                 //Mielőtt tesztből átpakoljuk a jeleket, előtte összeszámoljuk a lapokat amik szomszédosak.
                                                 int eredetipontszam = 0;
                                                 int hanylapvan = 0;
-                                                for (int i = 0; i<=99; i++) {
-                                                    for (int a = 0; a<=99; a++) {
+                                                for (int i = 0; i<=index1; i++) {
+                                                    for (int a = 0; a<=index1; a++) {
                                                         if(*&lapvaltozo[i][a].elet == true){
                                                             hanylapvan+=1;
                                                             if(*&lapvaltozo[i+1][a].elet == true){
@@ -2756,8 +2781,8 @@ int main() {
                                                 *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
                                                 //Miután tesztből átpakoljuk a jeleket, összeszámoljuk a lapokat amik szomszédosak.
                                                 int athelyezettpontszam = 0;
-                                                for (int i = 0; i<=99; i++) {
-                                                    for (int a = 0; a<=99; a++) {
+                                                for (int i = 0; i<=index1; i++) {
+                                                    for (int a = 0; a<=index1; a++) {
                                                         if(*&lapvaltozo[i][a].elet == true){
                                                             if(*&lapvaltozo[i+1][a].elet == true){
                                                                 athelyezettpontszam+=1;
@@ -2778,9 +2803,9 @@ int main() {
                                                     }
                                                 }
                                                 
-
-                                                for(int i = 0; i<=99; i++){
-                                                    for (int a = 0; a<=99; a++) {
+                                                
+                                                for(int i = 0; i<=index1; i++){
+                                                    for (int a = 0; a<=index1; a++) {
                                                         if(*&lapvaltozo[i][a].elet == true){
                                                             if(szimulacioteszt == true){
                                                                 if(a == 0 && i != 0){
@@ -2978,9 +3003,9 @@ int main() {
                                                 }while(!cin);
                                                 
                                                 
-                                                if(mitsor1 > 99 || mitoszlop1 > 99){
+                                                if(mitsor1 > index1 || mitoszlop1 > index1){
                                                     vaneelet = false;
-                                                    cout << "Tul nagy szamot adtal meg. \n";
+                                                    cout << "Itt nem letezik lap!";
                                                 }else{
                                                     if(mitsor1 < 0 || mitoszlop1 < 0){
                                                         vaneelet = false;
@@ -3006,6 +3031,7 @@ int main() {
                                                         }
                                                     }
                                                 }
+                                                
                                                 if(mitsor1 >= 0 && mitoszlop1 >= 0){
                                                     if(*&lapvaltozo[mitsor1][mitoszlop1].jeloltlap == true){
                                                         vaneelet = false;
@@ -3035,6 +3061,12 @@ int main() {
                                                     }
                                                     cout << endl;
                                                 }while(!cin);
+                                                
+                                                if(index1 < nagyobb(hovasor1, hovaoszlop1)){
+                                                    *&lapvaltozo = dinamikusnovekves(*&lapvaltozo, nagyobb(hovasor1, hovaoszlop1));
+                                                    
+                                                }
+                                                
                                                 if(hovasor1>=0 && hovaoszlop1 >=0){
                                                     if(*&lapvaltozo[hovasor1][hovaoszlop1].elet == true){
                                                         cout << "Itt mar letezik egy lap. Valassz masikat.\n";
@@ -3047,14 +3079,14 @@ int main() {
                                                 }
                                                 
                                             }while(helybev == false);
-
+                                            
                                             
                                             
                                             
                                             int hanylapvanapalyan = 0;
                                             int counter = 0;
-                                            for(int i = 0; i<=99; i++){
-                                                for(int a = 0; a<=99; a++){
+                                            for(int i = 0; i<=index1; i++){
+                                                for(int a = 0; a<=index1; a++){
                                                     if(*&lapvaltozo[i][a].elet == true){
                                                         hanylapvanapalyan++;
                                                     }
@@ -3066,8 +3098,8 @@ int main() {
                                             //Mielőtt tesztből átpakoljuk a jeleket, előtte összeszámoljuk a lapokat amik szomszédosak.
                                             int eredetipontszam = 0;
                                             int hanylapvan = 0;
-                                            for (int i = 0; i<=99; i++) {
-                                                for (int a = 0; a<=99; a++) {
+                                            for (int i = 0; i<=index1; i++) {
+                                                for (int a = 0; a<=index1; a++) {
                                                     if(*&lapvaltozo[i][a].elet == true){
                                                         hanylapvan+=1;
                                                         if(*&lapvaltozo[i+1][a].elet == true){
@@ -3092,8 +3124,8 @@ int main() {
                                                 *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
                                                 //Miután tesztből átpakoljuk a jeleket, összeszámoljuk a lapokat amik szomszédosak.
                                                 int athelyezettpontszam = 0;
-                                                for (int i = 0; i<=99; i++) {
-                                                    for (int a = 0; a<=99; a++) {
+                                                for (int i = 0; i<=index1; i++) {
+                                                    for (int a = 0; a<=index1; a++) {
                                                         if(*&lapvaltozo[i][a].elet == true){
                                                             if(*&lapvaltozo[i+1][a].elet == true){
                                                                 athelyezettpontszam+=1;
@@ -3115,10 +3147,10 @@ int main() {
                                                     }
                                                 }
                                                 
-
-                                                if(hovasor1 < 99 && hovaoszlop1 < 99){
-                                                    for(int i = 0; i<=99; i++){
-                                                        for (int a = 0; a<=99; a++) {
+                                                
+                                                if(hovasor1 < index1 && hovaoszlop1 < index1){
+                                                    for(int i = 0; i<=index1; i++){
+                                                        for (int a = 0; a<=index1; a++) {
                                                             if(*&lapvaltozo[i][a].elet == true){
                                                                 if(szimulacioteszt == true){
                                                                     if(a == 0 && i != 0){
@@ -3179,10 +3211,9 @@ int main() {
                                                 }
                                                 *&lapvaltozo[hovasor1][hovaoszlop1].elet = false;
                                             }
-
+                                            
                                             //HA POZITÍV IRÁNYBA TÖRTÉNIK A MOZGATÁS
                                             if(hovasor1 > 0 && hovaoszlop1 > 0){
-                                                if(hovasor1 < 99 && hovaoszlop1 < 99){
                                                     if(szimulacioteszt == true){
                                                         *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
                                                         if(*&lapvaltozo[hovasor1-1][hovaoszlop1].elet == true ||
@@ -3207,16 +3238,12 @@ int main() {
                                                         cout << "Sajnos igy nem lenne osszefuggo a palya. Probald ujra!";
                                                         szomszedos = false;
                                                     }
-                                                }else{
-                                                    szomszedos = false;
-                                                    cout << "Sajnalom, de erre a poziciora nem rakhat lapot\n\n";
-                                                }
                                             }else{
                                                 //HA NEGATÍV IRÁNYBAN TÖRTÉNIK A MOZGATÁS
                                                 if(hovasor1 < 0){
                                                     //Lefele toljuk a komplett palyat
-                                                    for(int i=0; i<=99; i++){
-                                                        for(int a=0; a<=99; a++){
+                                                    for(int i=0; i<=index1; i++){
+                                                        for(int a=0; a<=index1; a++){
                                                             if(*&lapvaltozo[i][a].elet == true && *&lapvaltozo[i][a].mozgatva == false){
                                                                 for(int s = 0; s<=4; s++){
                                                                     *&lapvaltozo[i+1][a].jel[s] = *&lapvaltozo[i][a].jel[s];
@@ -3228,8 +3255,8 @@ int main() {
                                                         }
                                                     }
                                                     
-                                                    for(int i=0; i<=99; i++){
-                                                        for(int a=0; a<=99; a++){
+                                                    for(int i=0; i<=index1; i++){
+                                                        for(int a=0; a<=index1; a++){
                                                             *&lapvaltozo[i][a].mozgatva = false;
                                                         }
                                                     }
@@ -3241,8 +3268,8 @@ int main() {
                                                 
                                                 if(hovaoszlop1 < 0){
                                                     //Oldalra toljuk a komplett palyat
-                                                    for(int i=0; i<=99; i++){
-                                                        for(int a=0; a<=99; a++){
+                                                    for(int i=0; i<=index1; i++){
+                                                        for(int a=0; a<=index1; a++){
                                                             if(*&lapvaltozo[i][a].elet == true && *&lapvaltozo[i][a].mozgatva == false){
                                                                 for(int s = 0; s<=4; s++){
                                                                     *&lapvaltozo[i][a+1].jel[s] = *&lapvaltozo[i][a].jel[s];
@@ -3254,8 +3281,8 @@ int main() {
                                                         }
                                                     }
                                                     
-                                                    for(int i=0; i<=99; i++){
-                                                        for(int a=0; a<=99; a++){
+                                                    for(int i=0; i<=index1; i++){
+                                                        for(int a=0; a<=index1; a++){
                                                             *&lapvaltozo[i][a].mozgatva = false;
                                                         }
                                                     }
@@ -3266,8 +3293,8 @@ int main() {
                                                 
                                                 int hanylapvanapalyan = 0;
                                                 int counter = 0;
-                                                for(int i = 0; i<=99; i++){
-                                                    for(int a = 0; a<=99; a++){
+                                                for(int i = 0; i<=index1; i++){
+                                                    for(int a = 0; a<=index1; a++){
                                                         if(*&lapvaltozo[i][a].elet == true){
                                                             hanylapvanapalyan++;
                                                         }
@@ -3279,8 +3306,8 @@ int main() {
                                                 //Mielőtt tesztből átpakoljuk a jeleket, előtte összeszámoljuk a lapokat amik szomszédosak.
                                                 int eredetipontszam = 0;
                                                 int hanylapvan = 0;
-                                                for (int i = 0; i<=99; i++) {
-                                                    for (int a = 0; a<=99; a++) {
+                                                for (int i = 0; i<=index1; i++) {
+                                                    for (int a = 0; a<=index1; a++) {
                                                         if(*&lapvaltozo[i][a].elet == true){
                                                             hanylapvan+=1;
                                                             if(*&lapvaltozo[i+1][a].elet == true){
@@ -3302,8 +3329,8 @@ int main() {
                                                 *&lapvaltozo[mitsor1][mitoszlop1].elet = false;
                                                 //Miután tesztből átpakoljuk a jeleket, összeszámoljuk a lapokat amik szomszédosak.
                                                 int athelyezettpontszam = 0;
-                                                for (int i = 0; i<=99; i++) {
-                                                    for (int a = 0; a<=99; a++) {
+                                                for (int i = 0; i<=index1; i++) {
+                                                    for (int a = 0; a<=index1; a++) {
                                                         if(*&lapvaltozo[i][a].elet == true){
                                                             if(*&lapvaltozo[i+1][a].elet == true){
                                                                 athelyezettpontszam+=1;
@@ -3324,9 +3351,9 @@ int main() {
                                                     }
                                                 }
                                                 
-
-                                                for(int i = 0; i<=99; i++){
-                                                    for (int a = 0; a<=99; a++) {
+                                                
+                                                for(int i = 0; i<=index1; i++){
+                                                    for (int a = 0; a<=index1; a++) {
                                                         if(*&lapvaltozo[i][a].elet == true){
                                                             if(szimulacioteszt == true){
                                                                 if(a == 0 && i != 0){
@@ -3481,8 +3508,8 @@ int main() {
                 }
             }
             
-            for (int i=0; i<=99; i++) {
-                for (int a = 0; a<=99; a++) {
+            for (int i=0; i<=index1; i++) {
+                for (int a = 0; a<=index1; a++) {
                     *&lapvaltozo[i][a].jeloltlap = false;
                 }
             }
