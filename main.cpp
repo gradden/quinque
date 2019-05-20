@@ -695,6 +695,7 @@ int main() {
                                             if(megtelt == false){
                                                 
                                                 if(simbesor1 < 0 || simbeoszlop1 < 0){
+                                                    *&lapvaltozo = dinamikusnovekves(*&lapvaltozo, index1+1);
                                                     if(simbesor1 < 0){
                                                         //Lefele toljuk a komplett palyat
                                                         for(int i=0; i<=index1; i++){
@@ -2179,6 +2180,7 @@ int main() {
                                             if(megtelt == false){
                                                 
                                                 if(simbesor1 < 0 || simbeoszlop1 < 0){
+                                                    *&lapvaltozo = dinamikusnovekves(*&lapvaltozo, index1+1);
                                                     if(simbesor1 < 0){
                                                         //Lefele toljuk a komplett palyat
                                                         for(int i=0; i<=index1; i++){
