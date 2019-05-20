@@ -413,66 +413,34 @@ int nagyobb(int a, int b){
     return nagy;
 }
 
-lap** dinamikusnovekves(lap* lapvaltozo[], int ujmeret){
-    lap **lapcache;
-    lapcache = new lap*[ujmeret+2];
-    for(int i=0; i<ujmeret+2; i++){
-        lapcache[i] = new lap[ujmeret+2];
-    }
-    
-    for (size_t i=0; i<=index1; i++) {
-        for (size_t a=0; a<=index1; a++) {
-            for (int s = 0; s<4; s++){
-                *&lapcache[i][a].jel[s] = 0;
-            }
-        }
-    }
-    
-    for(size_t s = 0; s<=index1; s++){
-        for(size_t i = 0; i<=index1; i++){
-            *&lapcache[s][i].elet =
-            *&lapvaltozo[s][i].elet;
-            for(int a=0; a<=3; a++){
-                *&lapcache[s][i].jel[a] = *&lapvaltozo[s][i].jel[a];
-            }
-        }
-    }
-    for(int i=0; i<=index1; i++){
-        delete [] lapvaltozo[i];
-    }
-    delete [] lapvaltozo;
+lap** dinamikusnovekves(lap* lapvaltozoregi[], lap* lapvaltozo[], int ujmeret){
     
     lapvaltozo = new lap*[ujmeret+2];
     for(int i=0; i<ujmeret+2; i++){
         lapvaltozo[i] = new lap[ujmeret+2];
     }
     
-    for (size_t i=0; i<=index1; i++) {
-        for (size_t a=0; a<=index1; a++) {
-            for (int s = 0; s<4; s++){
-                *&lapvaltozo[i][a].jel[s] = 0;
+    for (int i=0; i<=index1; i++) {
+        for (int a=0; a<=index1; a++) {
+            if(lapvaltozoregi[i][a].elet == true){
+                lapvaltozo[i][a].elet = lapvaltozoregi[i][a].elet;
+                for(int s=0;s<=3;s++){
+                    lapvaltozo[i][a].jel[s] = lapvaltozoregi[i][a].jel[s];
+                }
             }
         }
     }
     
-    for(size_t s = 0; s<=ujmeret+1; s++){
-        for(size_t i = 0; i<=ujmeret+1; i++){
-            *&lapvaltozo[s][i].elet = *&lapcache[s][i].elet;
-            for(int a=0; a<=3; a++){
-                *&lapvaltozo[s][i].jel[a] = *&lapcache[s][i].jel[a];
-            }
-        }
+    for(int i=0; i<=index1; i++){
+        delete [] lapvaltozoregi[i];
     }
-    
-    
-    for(int i=0; i<=ujmeret; i++){
-        delete [] lapcache[i];
-    }
-    delete [] lapcache;
+    delete [] lapvaltozoregi;
+
     
     index1 = ujmeret;
     
     return *&lapvaltozo;
+    
 }
 
 void kartyamegjelenites(lap* lapvaltozo[], int sor, int oszlop){
@@ -672,7 +640,7 @@ int main() {
                                             }while(!cin);
                                             
                                             if(index1 < nagyobb(simbesor1, simbeoszlop1)){
-                                                *&lapvaltozo = dinamikusnovekves(*&lapvaltozo, nagyobb(simbesor1, simbeoszlop1));
+                                                *&lapvaltozo = dinamikusnovekves(*&lapvaltozo, *&lapvaltozo, nagyobb(simbesor1, simbeoszlop1));
                                                 
                                             }
                                             int simszamlalo = 0;
@@ -695,6 +663,7 @@ int main() {
                                             if(megtelt == false){
                                                 
                                                 if(simbesor1 < 0 || simbeoszlop1 < 0){
+                                                    *&lapvaltozo = dinamikusnovekves(*&lapvaltozo, *&lapvaltozo, index1+1);
                                                     if(simbesor1 < 0){
                                                         //Lefele toljuk a komplett palyat
                                                         for(int i=0; i<=index1; i++){
@@ -1037,7 +1006,7 @@ int main() {
                                                 }while(!cin);
                                                 
                                                 if(index1 < nagyobb(hovasor1, hovaoszlop1)){
-                                                    *&lapvaltozo = dinamikusnovekves(*&lapvaltozo, nagyobb(hovasor1, hovaoszlop1));
+                                                    *&lapvaltozo = dinamikusnovekves(*&lapvaltozo,*&lapvaltozo, nagyobb(hovasor1, hovaoszlop1));
                                                     
                                                 }
                                                 
@@ -1207,8 +1176,10 @@ int main() {
                                                         
                                                     }
                                             }else{
+                                                *&lapvaltozo = dinamikusnovekves(*&lapvaltozo, *&lapvaltozo, index1+1);
                                                 //HA NEGATÍV IRÁNYBAN TÖRTÉNIK A MOZGATÁS
                                                 if(hovasor1 < 0){
+                                                    
                                                     //Lefele toljuk a komplett palyat
                                                     for(int i=0; i<=index1; i++){
                                                         for(int a=0; a<=index1; a++){
@@ -1613,7 +1584,7 @@ int main() {
                                                 }while(!cin);
                                                 
                                                 if(index1 < nagyobb(hovasor1, hovaoszlop1)){
-                                                    *&lapvaltozo = dinamikusnovekves(*&lapvaltozo, nagyobb(hovasor1, hovaoszlop1));
+                                                    *&lapvaltozo = dinamikusnovekves(*&lapvaltozo,*&lapvaltozo, nagyobb(hovasor1, hovaoszlop1));
                                                     
                                                 }
                                                 
@@ -1786,6 +1757,7 @@ int main() {
                                                         szomszedos = false;
                                                     }
                                             }else{
+                                                *&lapvaltozo = dinamikusnovekves(*&lapvaltozo, *&lapvaltozo, index1+1);
                                                 //HA NEGATÍV IRÁNYBAN TÖRTÉNIK A MOZGATÁS
                                                 if(hovasor1 < 0){
                                                     
@@ -2153,7 +2125,7 @@ int main() {
                                             }while(!cin);
                                             
                                             if(index1 < nagyobb(simbesor1, simbeoszlop1)){
-                                                *&lapvaltozo = dinamikusnovekves(*&lapvaltozo, nagyobb(simbesor1, simbeoszlop1));
+                                                *&lapvaltozo = dinamikusnovekves(*&lapvaltozo,*&lapvaltozo, nagyobb(simbesor1, simbeoszlop1));
                                                 
                                             }
                                             
@@ -2179,6 +2151,7 @@ int main() {
                                             if(megtelt == false){
                                                 
                                                 if(simbesor1 < 0 || simbeoszlop1 < 0){
+                                                    *&lapvaltozo = dinamikusnovekves(*&lapvaltozo,*&lapvaltozo, index1+1);
                                                     if(simbesor1 < 0){
                                                         //Lefele toljuk a komplett palyat
                                                         for(int i=0; i<=index1; i++){
@@ -2517,7 +2490,7 @@ int main() {
                                                 }while(!cin);
                                                 
                                                 if(index1 < nagyobb(hovasor1, hovaoszlop1)){
-                                                    *&lapvaltozo = dinamikusnovekves(*&lapvaltozo, nagyobb(hovasor1, hovaoszlop1));
+                                                    *&lapvaltozo = dinamikusnovekves(*&lapvaltozo,*&lapvaltozo, nagyobb(hovasor1, hovaoszlop1));
                                                     
                                                 }
                                                 
@@ -2690,6 +2663,7 @@ int main() {
                                                         szomszedos = false;
                                                     }
                                             }else{
+                                                *&lapvaltozo = dinamikusnovekves(*&lapvaltozo, *&lapvaltozo, index1+1);
                                                 //HA NEGATÍV IRÁNYBAN TÖRTÉNIK A MOZGATÁS
                                                 if(hovasor1 < 0){
                                                     //Lefele toljuk a komplett palyat
@@ -3063,7 +3037,7 @@ int main() {
                                                 }while(!cin);
                                                 
                                                 if(index1 < nagyobb(hovasor1, hovaoszlop1)){
-                                                    *&lapvaltozo = dinamikusnovekves(*&lapvaltozo, nagyobb(hovasor1, hovaoszlop1));
+                                                    *&lapvaltozo = dinamikusnovekves(*&lapvaltozo,*&lapvaltozo, nagyobb(hovasor1, hovaoszlop1));
                                                     
                                                 }
                                                 
@@ -3239,6 +3213,7 @@ int main() {
                                                         szomszedos = false;
                                                     }
                                             }else{
+                                                *&lapvaltozo = dinamikusnovekves(*&lapvaltozo, *&lapvaltozo, index1+1);
                                                 //HA NEGATÍV IRÁNYBAN TÖRTÉNIK A MOZGATÁS
                                                 if(hovasor1 < 0){
                                                     //Lefele toljuk a komplett palyat
